@@ -9,21 +9,28 @@ from firm import db,bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
 import os, sys, subprocess, platform
 import pdfkit
-if platform.system() == "Windows":
-        pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
-else:
-        os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
-        WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
-            stdout=subprocess.PIPE).communicate()[0].strip()
-        pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
 def _get_pdfkit_config():
 
-     if platform.system() == 'Windows':
+    if platform.system() == 'Windows':
          return pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
-     else:
+    else:
          WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
          return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+wk_options = {
+        'page-size': 'Letter',
+        'orientation': 'landscape',
+        # In order to specify command-line options that are simple toggles
+        # using this dict format, we give the option the value None
+        'no-outline': None,
+        'disable-javascript': None,
+        'encoding': 'UTF-8',
+        'margin-left': '0.1cm',
+        'margin-right': '0.1cm',
+        'margin-top': '0.1cm',
+        'margin-bottom': '0.1cm',
+        'lowquality': None,
+}
 
 @app.route('/',methods=['GET', 'POST'])
 @app.route("/Login",methods=['GET', 'POST'])
@@ -107,7 +114,7 @@ def saved_invoice(inv_id):
 
 @app.route('/get_pdf/<inv_id>', methods=['POST'])
 @login_required
-def get_pdf(inv_id,options=None):
+def get_pdf(inv_id,options=wk_options):
     subtotal = 0
     VAT =0
     grandtotal =0
@@ -132,7 +139,7 @@ def get_pdf(inv_id,options=None):
 
 @app.route('/getProForma_pdf/<inv_id>', methods=['POST'])
 @login_required
-def getProForma_pdf(inv_id,options=None):
+def getProForma_pdf(inv_id,options=wk_options):
     subtotal = 0
     grandtotal =0
     if request.method =="POST":
