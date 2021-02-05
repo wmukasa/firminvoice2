@@ -7,8 +7,16 @@ from firm import app
 from sqlalchemy import desc
 from firm import db,bcrypt
 from flask_login import login_user,current_user,logout_user,login_required
-import os
+import os, sys, subprocess, platform
 import pdfkit
+if platform.system() == "Windows":
+        pdfkit_config = pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
+else:
+        os.environ['PATH'] += os.pathsep + os.path.dirname(sys.executable) 
+        WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], 
+            stdout=subprocess.PIPE).communicate()[0].strip()
+        pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+
 @app.route('/',methods=['GET', 'POST'])
 @app.route("/Login",methods=['GET', 'POST'])
 def index():
