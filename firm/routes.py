@@ -18,8 +18,7 @@ def _get_pdfkit_config():
          WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
          return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 wk_options = {
-        'page-size': 'Letter',
-        'orientation': 'landscape',
+
         # In order to specify command-line options that are simple toggles
         # using this dict format, we give the option the value None
         'no-outline': None,
