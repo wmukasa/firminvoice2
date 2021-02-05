@@ -132,7 +132,7 @@ def get_pdf(inv_id,options=None):
 
 @app.route('/getProForma_pdf/<inv_id>', methods=['POST'])
 @login_required
-def getProForma_pdf(inv_id):
+def getProForma_pdf(inv_id,options=None):
     subtotal = 0
     grandtotal =0
     if request.method =="POST":
