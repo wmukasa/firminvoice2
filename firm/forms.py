@@ -88,8 +88,8 @@ class MainForm(FlaskForm):
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('Due on Receipt', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
 
-    issue_date = StringField('Issue Date', validators=[validators.InputRequired(), validators.Length(max=20)])
-    due_date= StringField('Due Date',validators=[validators.InputRequired(), validators.Length(max=20)])
+    issue_date = StringField('Issue Date/MM/DD/YR', validators=[validators.InputRequired(), validators.Length(max=20)])
+    due_date= StringField('Due Date/MM/DD/YR',validators=[validators.InputRequired(), validators.Length(max=20)])
     vat = StringField('Percentage number only for tax Invoice')
     laps = FieldList(
         FormField(LapForm),
