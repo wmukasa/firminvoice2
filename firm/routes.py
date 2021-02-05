@@ -107,7 +107,7 @@ def saved_invoice(inv_id):
 
 @app.route('/get_pdf/<inv_id>', methods=['POST'])
 @login_required
-def get_pdf(inv_id):
+def get_pdf(inv_id,options=None):
     subtotal = 0
     VAT =0
     grandtotal =0
@@ -123,7 +123,7 @@ def get_pdf(inv_id):
         rendered=render_template('testing.html',
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
         css = ['firm/templates/testing.css']
-        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config())
+        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
         response.headers['Content-Disposition']='inline; filename='+inv_id+'.pdf'
@@ -144,7 +144,7 @@ def getProForma_pdf(inv_id):
         rendered=render_template('proForma.html',
                                     subtotal=subtotal,grandtotal=grandtotal,inv=inv,item=item,len=len)
         css = ['firm/templates/testing.css']
-        pdf = pdfkit.from_string(rendered,False,css=css)
+        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
         response.headers['Content-Disposition']='inline; filename='+inv_id+'.pdf'
