@@ -1,0 +1,64 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+    <main class="app-content">
+        <div class="app-title">
+            <div>
+              <h1><i class="fa fa-edit"></i> InvoiceItems</h1>
+              <p>Create,Downland,Print,Clink Link, Preview, Save</p>
+            </div>
+            <ul class="app-breadcrumb breadcrumb">
+              <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+              <li class="breadcrumb-item">Invoices</li>
+              <li class="breadcrumb-item"><a href="#">Invoice Items</a></li>
+            </ul>
+          </div>
+      <div class="row">
+        <div class="clearix"></div>
+        <div class="col-md-12">
+          <!--<div class="tile">-->
+            <h3 class="tile-title">Receipt</h3>
+            <div class="tile-body">
+              <form class="row">
+                <div class="col-sm-4">
+                    <label for="exampleInputFile">Law Firm Logo</label>
+                    <input class="form-control-file" id="exampleInputFile" type="file" aria-describedby="fileHelp"><small class="form-text text-muted" id="fileHelp">Upload a logo if any</small>
+                </div>
+                <div class="form-group col-md-4">
+                    <div class="input-group mb-3 input-group-sm">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Title*</span>
+                       </div>
+                       <input type="text" class="form-control">
+                     </div>
+                     <div class="input-group mb-6 input-group-sm">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Receipt Number</span>
+                       </div>
+                       <input type="text" class="form-control">
+                     </div>
+                     <div class="input-group mb-3 input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Receipt Date*</span>
+                       </div>
+                       <input type="text" class="form-control">
+                     </div>
+                     <div class="input-group mb-3 input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Due Date*</span>
+                       </div>
+                       <input type="text" class="form-control">
+                     </div>
+                     *&nbsp;&nbsp;&nbsp;&nbsp;<label>For Required</label>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-4 align-self-end">
+                  <button class="btn btn-primary" type="button"><i class="fa fa-fw fa-lg fa-check-circle"></i></button>
+                </div>
+              </form>
+            </div>
+          
+        </div>
+      </div>
+    </main>
+    {% endblock %}

@@ -1,0 +1,116 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          {% with messages = get_flashed_messages(with_categories = true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}">
+                  {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+          <h1><i class="fa fa-file-text"></i> Managing Invoices</h1>
+          <p>Printable invoice and receipt Format</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">Invoices</a></li>
+        </ul>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-12">
+      <div class="row d-print-none mt-2">
+        <div class="col-12 text-left"><a class="btn btn-primary" href="{{ url_for('create_invoice')}}" ><i class="fa fa-print"></i> CREATE NEW INVOICE</a></div>
+      </div>
+    </div>        
+          <div class="clearfix"></div>
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title"></h3>
+              <div class="table-responsive">
+                    <table class="table table-striped">
+                    <thead class="thead-dark"><!--
+                      <tr>
+                        <th>Search:</th>
+                      </tr>-->
+                      <tr>
+                      <th>Reference Number</th>
+                      <th>Date cashed</th>
+                      <th>Date Due</th>
+                      <th>Issued By</th>
+                      <th>View Tax Invoice</th>
+                      <th>View Pro Forma Invoice</th>
+                    </tr>
+
+                  </thead>
+                  <tbody>
+                    {% for inv in myInv.items %}
+                    <tr>
+                      <td>{{inv.ref_number}}</td>
+                      <td>{{inv.issue_date}}</td>
+                      <td>{{inv.due_date}}</td>
+                      <td>{{inv.author.username}}</td>
+                      <td><a href="{{url_for('saved_invoice',reference_num= inv.ref_number, inv_id = inv.id)}} ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</a></td>
+                      <td><a href="{{url_for('proform_invoice', inv_id = inv.id)}} ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</a></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>           
+                {% for page_num in myInv.iter_pages(left_edge=1, right_edge=1,left_current=1, right_current=2) %}
+                {% if page_num %}
+                    {% if myInv.page == page_num %}
+                      <a class="btn btn-info mb-4" href="{{url_for('dashboard',page=page_num)}}">{{ page_num }}</a>
+                    {% else %}
+                      <a class="btn btn-outline-info mb-4" href="{{url_for('dashboard',page=page_num)}}">{{ page_num }}</a>
+                    {% endif %}
+                {% else %}
+                  ...
+                {% endif%}
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+      <div class="col-md-12">
+      <div class="row d-print-none mt-2">
+        <div class="col-12 text-left"><a class="btn btn-primary" href="#" ><i class="fa fa-print"></i> CREATE NEW RECEIPT</a></div>
+      </div>
+      </div>        
+          <div class="clearfix"></div>
+          <div class="col-md-12">
+            <div class="tile">
+              <h3 class="tile-title"></h3>
+              <div class="table-responsive">
+                    <table class="table table-striped">
+                    <thead class="thead-dark"><!--
+                      <tr>
+                        <th>Search:</th>
+                      </tr>-->
+                      <tr>
+                      <th>Reference Number</th>
+                      <th>Date cashed</th>
+                      <th>Date Due</th>
+                      <th>Proof</th>
+                      <th>Action</th>
+                    </tr>
+
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>RCT-0001</td>
+                      <td>Wednesday, August 11th 2020</td>
+                      <td>Sunday,Augest 29th 2020</td>
+                      <td>no</td>
+                      <td><a href=" ">View</a></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+    </main>
+    {% endblock %}

@@ -1,0 +1,91 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tax Invoice</title><!--
+		<link rel="stylesheet" href="testing.css">-->
+	</head>
+	<body>
+		<header>
+			<h1>Tax Invoice</h1>
+			<address >
+				<p>Kamahoro,Kiboome & Kirunda Advocates</p>
+				<p>1st Floor Block A-UAP<br>Nakawa Business Park</p>
+				<p>Plot 3-5 Port Bell Road</p>
+				<p>P.O.Box:&nbsp;27892 Kampala</p>
+				<p>Office:&nbsp;&nbsp;(+256) 394-836-201</p>
+				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
+			</address>
+
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address >
+				<p>{{inv.name_to}}.</p>
+				<p>{{inv.address_to}}</p>
+				<p>Email:&nbsp;&nbsp;{{inv.email_to}}</p>
+				<p>Telephone:&nbsp;&nbsp;{{inv.telephone_to}}</p>
+
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span >Invoice #</span></th>
+					<td><span >{{ inv.ref_number }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Issue Date</span></th>
+					<td><span >{{ inv.issue_date }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Due Date</span></th>
+					<td><span > {{ inv.due_date }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Payment Terms</span></th>
+					<td><span >{{inv.terms }}</span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<th><span >Item</span></th>
+						<th><span >Description</span></th>
+						<th><span >Amount/Ugs.shs</span></th>
+
+					</tr>
+				</thead>
+				<tbody>
+				{% for myItem in item %}
+					<tr>
+						<td><a class="cut">-</a><span >{{ myItem.item_name }}</span></td>
+						<td><span >{{myItem.notes }}</span></td>
+						<td><span >{{ myItem.amount }}</span></td>
+						
+					</tr>
+				 {% endfor %}
+				</tbody>
+			</table>
+
+			<table class="balance">
+				<tr>
+					<th><span >SubTotal</span></th>
+					<td><span data-prefix>Ug.shs</span><span>{{subtotal}}</span></td>
+				</tr>
+				<tr>
+					<th><span >VAT(18%)</span></th>
+					<td><span data-prefix>Ug.shs</span><span >{{VAT}}</span></td>
+				</tr>
+				<tr>
+					<th><span >Grandtotal</span></th>
+					<td><span data-prefix>Ug.shs</span><span>{{grandtotal}}</span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span >ISSUED BY: MUKASA WILLY</span></h1>
+			<div >
+				<p></p>
+			</div>
+		</aside>
+	</body>
+</html>

@@ -1,0 +1,166 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+{% import "macros.html" as macros %}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-file-text-o"></i> Invoice</h1>
+          <p>A Printable Invoice Format</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">Invoice</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-14">
+        <nav class="navbar navbar-light bg-light">
+         <form>
+  
+        </form>
+              
+            <form class="form-inline" method="POST" action=""> 
+              <button class="btn btn-outline-success" type="button">Downland</button>
+              <button class="btn btn-outline-warning" type="button">Print</button>
+          
+              <!--<button class="btn btn-outline-secondary" type="submit" onclick="handleInvoice()">Preview</button>
+               <label for="submit-form" tabindex="0">Preview</label>-->
+            <a href="{{ url_for('create_invoice')}} " button class="btn btn-outline-secondary" type="submit" form="someForm">Preview</button></a> 
+            <button class="btn btn-outline-danger" type="submit" form="saveInvoice">Save</button> 
+            <a href="{{ url_for('invsecond_template')}}" class="btn btn-outline-secondary" type="button">Change Template</a>
+            
+          </form>
+        </nav>
+        </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+  
+            <form id="saveInvoice" method="POST" action="{{ url_for('save') }}">
+            <section class="invoice">
+              <div class="row mb-4">
+                <div class="col-6">
+                  <h2 class="page-header"><i class="fa fa-globe"></i> {{invoice_title}}</h2>
+                </div>
+                <div class="col-6">
+                  <h5 class="text-right">Date:  {{ today }} </h5>
+                </div>
+              </div>
+              <div class="row invoice-info">
+                <div class="col-4">From
+                  <address><strong>{{ name_from }}.</strong><br>{{address_from}}<br>Email:&nbsp;&nbsp;{{email_from}} <br>Telephone:&nbsp;&nbsp;{{telephone_from}}<br>Business Number:&nbsp;&nbsp;&nbsp;{{bus_number_from}}</address>
+                </div>
+                <div class="col-4">To
+                  <input type="hidden" name="name_to" value="{{name_to}}"><address><strong>{{ name_to }}.</strong><br><input type="hidden" name="address_to" value="{{address_to}}">{{address_to}}<br><input type="hidden" name="email_to" value="{{email_to}}">Email:&nbsp;&nbsp;{{email_to}} <br><input type="hidden" name="telephone_to" value="{{telephone_to}}">Telephone:&nbsp;&nbsp;{{telephone_to}}</address>
+                </div>
+                <div class="col-4"><b><input type="hidden" name="ref_number" value="{{ref_number}}">Invoice #{{ ref_number }}</b><br><br><b><input type="hidden" name="issue_date" value="{{issue_date}}">Issue Date:</b> {{ issue_date }}<br><b>Payment Due:</b><input type="hidden" name="due_date" value="{{due_date}}"> {{ due_date }}<br><b><input type="hidden" name="terms" value="{{terms}}">Account:</b> {{ terms }}</div>
+              </div>
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Item name</th>
+                        <th>Description</th><!--
+                        <th>Qty</th>
+                        <th>Unit Price</th>-->
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody><!--
+                      <tr>
+                        <td><input type="hidden" name="item_name" value="{{item_name}}">{{ item_name }}</td>
+                        <td><input type="hidden" name="description" value="{{description}}">{{ description }}</td>
+                        <td><input type="hidden" name="amount" value="{{amount}}">${{ amount }}</td>
+                      </tr>
+                      <tr>
+                        <td><input type="hidden" name="item_name2" value="{{item_name2}}">{{ item_name2 }}</td>
+                        <td><input type="hidden" name="description2" value="{{description2}}">{{ description2 }}</td>
+                        <td><input type="hidden" name="amount2" value="{{amount2}}">${{ amount2 }}</td>
+                      </tr>-->
+                      {% for item in invoice.Items %}
+                      <tr>
+                          <td>{{ item.item_name }}</td>
+                          <td>{{ item.notes }}</td>
+                          <td>{{ item.amount }}</td>
+                      </tr>
+                    {% endfor%}
+                    </tbody>
+                  </table>
+                </div>
+              </div><!--
+              <div class="row d-print-none mt-2">
+                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+              </div>-->
+              <div class="row mb-4">
+                <div class="col-5">
+                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
+                </div>
+              </div>
+            </section>
+          </form>
+<!--
+          <form id="saveInvoice" method="POST" action="{{ url_for('save') }}">
+            <section class="invoice">
+              <div class="row mb-4">
+                <div class="col-6">
+                  <h2>This is two</h2>
+                  <h2 class="page-header"><i class="fa fa-globe"></i> {{invoice_title}}</h2>
+                </div>
+                <div class="col-6">
+                  <h5 class="text-right">Date:  {{ today }} </h5>
+                </div>
+              </div>
+              <div class="row invoice-info">
+                <div class="col-4">From
+                  <address><strong>{{ name_from }}.</strong><br>{{address_from}}<br>Email:&nbsp;&nbsp;{{email_from}} <br>Telephone:&nbsp;&nbsp;{{telephone_from}}<br>Business Number:&nbsp;&nbsp;&nbsp;{{bus_number_from}}</address>
+                </div>
+                <div class="col-4">To
+                  <input type="hidden" name="name_to" value="{{name_to}}"><address><strong>{{ name_to }}.</strong><br><input type="hidden" name="address_to" value="{{address_to}}">{{address_to}}<br><input type="hidden" name="email_to" value="{{email_to}}">Email:&nbsp;&nbsp;{{email_to}} <br><input type="hidden" name="telephone_to" value="{{telephone_to}}">Telephone:&nbsp;&nbsp;{{telephone_to}}</address>
+                </div>
+                <div class="col-4"><b><input type="hidden" name="ref_number" value="{{ref_number}}">Invoice #{{ ref_number }}</b><br><br><b><input type="hidden" name="issue_date" value="{{issue_date}}">Issue Date:</b> {{ issue_date }}<br><b>Payment Due:</b><input type="hidden" name="due_date" value="{{due_date}}"> {{ due_date }}<br><b><input type="hidden" name="terms" value="{{terms}}">Account:</b> {{ terms }}</div>
+              </div>
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Item name</th>
+                        <th>Description</th>
+                        <th>Qty</th>
+                        <th>Unit Price</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><input type="hidden" name="item_name" value="{{item_name}}">{{ item_name }}</td>
+                        <td><input type="hidden" name="description" value="{{description}}">{{ description }}</td>
+                        <td><input type="hidden" name="amount" value="{{amount}}">${{ amount }}</td>
+                      </tr>
+                      <tr>
+                        <td><input type="hidden" name="item_name2" value="{{item_name2}}">{{ item_name2 }}</td>
+                        <td><input type="hidden" name="description2" value="{{description2}}">{{ description2 }}</td>
+                        <td><input type="hidden" name="amount2" value="{{amount2}}">${{ amount2 }}</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="row d-print-none mt-2">
+                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+              </div>
+              <div class="row mb-4">
+                <div class="col-5">
+                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
+                </div>
+              </div>
+            </section>
+          </form>-->
+ 
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endblock %}

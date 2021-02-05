@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   
+   <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS
+    <link href="main.css" rel="stylesheet">-->
+  </head>
+  <body class="app sidebar-mini">
+   
+    <!-- Sidebar menu-->
+    <div class="panel panel-default">
+     
+        <div>
+          <div class="tile">
+            <form  method="POST" action="">
+            <div class="container">
+              <div class="row mb-4">
+                <div class="col-6">
+                  <h2 class="page-header">Kiboome & Kirunda Advocates</h2>
+                </div>
+                <div class="col-6">
+                  <h5 class="text-right">Date:  {{ today }} </h5>
+                </div>
+              </div>
+              <div class="row invoice-info">
+                <div class="row invoice-info">
+                  <div class="col-4">Location
+                    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+                  </div>
+                  <div class="col-4">To 
+                    <address><strong>{{inv.name_to}}.</strong><br>{{inv.address_to}}<br>Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}} <br>Phone: Telephone:&nbsp;&nbsp;&nbsp;{{inv.telephone_to}}</address>
+                  </div>
+                  <div class="col-4"><b>Invoice #{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
+                </div>
+
+              </div>
+          </form>
+          </div>
+        </div>
+     
+      </div>
+      <div class="container">
+    <div class="panel panel-default">
+      <div class="panel-heading main-color-bg">
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-12 table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Item name</th>
+                  <th>Description</th><!--
+                  <th>Qty</th>
+                  <th>Unit Price</th>-->
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for myItem in item %}
+                
+                <tr>
+                  <td>{{ myItem.item_name }}</td>
+                  <td>{{myItem.notes }}</td>
+                  <td>${{ myItem.amount }}</td>
+                </tr>
+                {% endfor %}
+
+              </tbody>
+            </table>
+          </div>
+          <div class="container px-4">
+            <div class="row gx-5">
+              <div class="col">
+               <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+              </div>
+              <div class="col">
+                <div >VAT(18%):&nbsp;{{VAT}}&nbsp;ug.Shs</div>
+                TIN:&nbsp;&nbsp;&nbsp;1000150824 <br>
+              </div>
+              <div class="col">
+                <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      </div>
+      </div>
+    </div>
+   </div>
+      </body>
+    </html>

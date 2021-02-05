@@ -1,0 +1,110 @@
+
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Tax Invoice</title><!--
+		<link rel="stylesheet" href="testing.css">-->
+	</head>
+	<body>
+		<header>
+			<h1>Tax Invoice</h1>
+			<address >
+				<h4>Kamahoro,Kiboome & Kirunda Advocates</h4>
+				<p>1st Floor Block A-UAP<br>Nakawa Business Park</p>
+				<p>Plot 3-5 Port Bell Road</p>
+				<p>P.O.Box:&nbsp;27892 Kampala</p>
+				<p>Office:&nbsp;&nbsp;(+256) 394-836-201</p>
+				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
+			</address>
+
+		</header>
+		<article>
+			<h1>Recipient</h1>
+			<address >
+				<p>{{inv.name_to}}.</p>
+				<p>{{inv.address_to}}</p>
+				<p>
+                    {% if inv.email_to == '' %}
+                    {% else%}
+					Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}
+					{% endif %}
+                </p>
+                <p>                    
+                    {% if inv.telephone_to == '' %}
+                    {% else%}
+					Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to}}
+					{% endif %}
+                </p>
+                <p>
+                    {% if inv.box_number_to == '' %}
+                    {% else%}
+                    P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
+                    {% endif %}
+                </p>
+			</address>
+			<table class="meta">
+				<tr>
+					<th><span >Invoice #</span></th>
+					<td><span >{{ inv.ref_number }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Issue Date</span></th>
+					<td><span >{{ inv.issue_date }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Due Date</span></th>
+					<td><span > {{ inv.due_date }}</span></td>
+				</tr>
+				<tr>
+					<th><span >Payment Terms</span></th>
+					<td><span >{{inv.terms }}</span></td>
+				</tr>
+			</table>
+			<table class="inventory">
+				<thead>
+					<tr>
+						<tr>
+							<th><span >Description</span></th>
+							<th><span >Disbursements /Ugs.shs</span></th>
+							<th><span >Professional fees/Ugs.shs</span></th>
+							<th><span >Total/Ugs.shs</span></th>
+						</tr>
+
+					</tr>
+				</thead>
+				<tbody>
+				{% for myItem in item %}
+					<tr>
+						<td><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
+						<td><span >{{myItem.disbursements }}</span></td>
+                        <td><span >{{ myItem.professional_fees}}</span></td>
+                        <td><span >{{ myItem.amount}}</span></td>
+						
+					</tr>
+				 {% endfor %}
+				</tbody>
+			</table>
+
+			<table class="balance">
+				<tr>
+					<th><span >SubTotal</span><span data-prefix>/Ug.shs</span></th>
+					<td><span>{{subtotal}}</span></td>
+				</tr>
+				<tr>
+					<th><span >VAT({{inv.vat}}%)</span><span data-prefix>/Ug.shs</span></th>
+					<td><span >{{VAT}}</span></td>
+				</tr>
+				<tr>
+					<th><span >Grandtotal</span><span data-prefix>/Ug.shs</span></th>
+					<td><span>{{grandtotal}}</span></td>
+				</tr>
+			</table>
+		</article>
+		<aside>
+			<h1><span >ISSUED BY: {{inv.author.username}}</span></h1>
+			<div >
+				<p></p>
+			</div>
+		</aside>
+	</body>
+</html>

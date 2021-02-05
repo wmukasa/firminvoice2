@@ -1,0 +1,338 @@
+{# templates/index.html #}
+{% import "macros.html" as macros %}
+
+<html>
+    <head>
+        <title>Lap logging</title>
+
+        {# Import JQuery #}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+        <script>
+            const ID_RE = /(-)_(-)/;
+
+            /**
+             * Replace the template index of an element (-_-) with the
+             * given index.
+             */
+            function replaceTemplateIndex(value, index) {
+                return value.replace(ID_RE, '$1'+index+'$2');
+            }
+
+            /**
+             * Adjust the indices of form fields when removing items.
+             */
+            function adjustIndices(removedIndex) {
+                var $forms = $('.subform');
+
+                $forms.each(function(i) {
+                    var $form = $(this);
+                    var index = parseInt($form.data('index'));
+                    var newIndex = index - 1;
+
+                    if (index < removedIndex) {
+                        // Skip
+                        return true;
+                    }
+
+                    // This will replace the original index with the new one
+                    // only if it is found in the format -num-, preventing
+                    // accidental replacing of fields that may have numbers
+                    // intheir names.
+                    var regex = new RegExp('(-)'+index+'(-)');
+                    var repVal = '$1'+newIndex+'$2';
+
+                    // Change ID in form itself
+                    $form.attr('id', $form.attr('id').replace(index, newIndex));
+                    $form.data('index', newIndex);
+
+                    // Change IDs in form fields
+                    $form.find('label, input, select, textarea').each(function(j) {
+                        var $item = $(this);
+
+                        if ($item.is('label')) {
+                            // Update labels
+                            $item.attr('for', $item.attr('for').replace(regex, repVal));
+                            return;
+                        }
+
+                        // Update other fields
+                        $item.attr('id', $item.attr('id').replace(regex, repVal));
+                        $item.attr('name', $item.attr('name').replace(regex, repVal));
+                    });
+                });
+            }
+
+            /**
+             * Remove a form.
+             */
+            function removeForm() {
+                var $removedForm = $(this).closest('.subform');
+                var removedIndex = parseInt($removedForm.data('index'));
+
+                $removedForm.remove();
+
+                // Update indices
+                adjustIndices(removedIndex);
+            }
+
+            /**
+             * Add a new form.
+             */
+            function addForm() {
+                var $templateForm = $('#lap-_-form');
+
+                if ($templateForm.length === 0) {
+                    console.log('[ERROR] Cannot find template');
+                    return;
+                }
+
+                // Get Last index
+                var $lastForm = $('.subform').last();
+
+                var newIndex = 0;
+
+                if ($lastForm.length > 0) {
+                    newIndex = parseInt($lastForm.data('index')) + 1;
+                }
+
+                // Maximum of 20 subforms
+                if (newIndex >= 20) {
+                    console.log('[WARNING] Reached maximum number of elements');
+                    return;
+                }
+
+                // Add elements
+                var $newForm = $templateForm.clone();
+
+                $newForm.attr('id', replaceTemplateIndex($newForm.attr('id'), newIndex));
+                $newForm.data('index', newIndex);
+
+                $newForm.find('label, input, select, textarea').each(function(idx) {
+                    var $item = $(this);
+
+                    if ($item.is('label')) {
+                        // Update labels
+                        $item.attr('for', replaceTemplateIndex($item.attr('for'), newIndex));
+                        return;
+                    }
+
+                    // Update other fields
+                    $item.attr('id', replaceTemplateIndex($item.attr('id'), newIndex));
+                    $item.attr('name', replaceTemplateIndex($item.attr('name'), newIndex));
+                });
+
+                // Append
+                $('#subforms-container').append($newForm);
+                $newForm.addClass('subform');
+                $newForm.removeClass('is-hidden');
+
+                $newForm.find('.remove').click(removeForm);
+            }
+
+
+            $(document).ready(function() {
+                $('#add').click(addForm);
+                $('.remove').click(removeForm);
+            });
+        </script>
+
+        <style>
+            .is-hidden {
+                display: none;
+            }
+        </style>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding-top: 20px;
+  padding-right: 300px;
+  padding-bottom: 20px;
+  padding-left: 300px;
+
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+    </head>
+
+    <body>
+	<div class="container">
+      <form class="form-inline" method="POST" action="">  
+  <div class="row">	  
+        <button class="btn btn-outline-secondary" type="submit" form="lap-form" name="prev_save">SaveFirstToPreview</button>
+        <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
+ </div>     
+	  </form>
+        <hr/>
+
+        <div class="leftdiv">From
+            <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+        </div>
+        {# Show all subforms #}
+	
+		<div class="middiv">To
+			<form id="lap-form" action=" " method="POST" role="form">
+							{{ form.hidden_tag() }}
+				  <div class="row">
+					<div class="col-25">
+					 {{ form.name_to.label }}
+					</div>
+					<div class="col-75">
+					  {{ form.name_to }}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+				 {{ form.address_to.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.address_to}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.telephone_to.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.telephone_to}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.box_number_to.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.box_number_to}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.email_to.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.email_to}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.terms.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.terms}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.issue_date.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.issue_date}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.due_date.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.due_date}}
+					</div>
+				  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.vat.label }}
+					</div>
+					<div class="col-75">
+				 {{ form.vat}}
+					</div>
+				  </div>
+				<!--
+				  <div class="row">
+					<div class="col-25">
+					  <label for="subject">Subject</label>
+					</div>
+					<div class="col-75">
+					  <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+					</div>
+				  </div>
+				-->
+
+							<div>
+							<a id="add" href="#"><h3>Add more Items if any</h3></a>
+							<hr/>
+						  </div>
+							<div id="subforms-container">
+								{% for subform in form.laps %}
+									{{ macros.render_lap_form(subform, loop.index0) }}
+								{% endfor %}
+							</div>
+
+		</div>					<!--<button type="submit">Send</button>-->
+		</form>
+
+						{% if form.errors %}
+							{{ form.errors }}
+						{% endif %}
+
+						{# Form template #}
+						{{ macros.render_lap_form(_template, '_') }}
+</div>
+    </body>
+</html>

@@ -1,0 +1,393 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-file-text-o"></i> Invoice</h1>
+          <p>A Printable Invoice Format</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">Invoice</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-14">
+        <nav class="navbar navbar-light bg-light">
+         <form>
+  
+        </form>
+              
+            <form class="form-inline" method="POST" action="">
+              {% if (len(item) == 1) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 2) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 3) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 4) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 5) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;
+              <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+              <!--<button class="btn btn-outline-secondary" type="submit" onclick="handleInvoice()">Preview</button>
+               <label for="submit-form" tabindex="0">Preview</label>-->
+          </form>
+        </nav>
+        </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+
+            <section class="invoice">
+              <div class="row mb-4">
+                <div class="col-12">
+                  <h2 class="page-header"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
+                </div>
+                <div class="col-6">
+                  <!--<h5 class="text-right"> </h5>-->
+                </div>
+              </div>
+              {% if (len(item) == 1) %}
+              <form id="update_invoice" action=" " method="POST">
+              <div class="row invoice-info">
+                <div class="col-4">From
+                  <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+                </div>
+                <div class="col-4">To
+                  <address><strong>{{ form1.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form1.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form1.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form1.telephone_to(class="form-control form-control-ls") }}
+                    {% if updt_inv.box_number_to == '' %}
+                    {% else%}
+                    P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+                    {% endif %}
+                  </div>
+                <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form1.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form1.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form1.terms(class="form-control form-control-ls") }}
+                VAT:&nbsp;&nbsp;&nbsp;{{ form1.vat(class="form-control form-control-ls") }}
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Description</th>
+                        <th>Disbursements/&nbsp;ug.Shs</th>
+                        <th>Professional fees/&nbsp;ug.Shs</th>
+                        <th>Amount/&nbsp;ug.Shs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+
+                      {% for p in item %}
+                      <tr>
+                          {% if ((item.index(p)) == 0) %}
+                          <td>{{ form1.notes(class="form-control form-control-ls") }}</td>
+                          <td>{{ form1.disbursements(class="form-control form-control-ls") }}</td>
+                          <td>{{ form1.professional_fees(class="form-control form-control-ls") }}</td>
+                          <td>{{ form1.amount(class="form-control form-control-ls") }}</td>
+                            {% endif %}
+                            {% endfor %}
+                        </tr>
+                        
+                    </tbody>
+                  </table>
+                </div>
+               </div>
+          </form>
+          {% endif %}
+          {% if (len(item) == 2) %}     
+          <form id="update_invoice" action=" " method="POST">
+
+          <div class="row invoice-info">
+            <div class="col-4">From
+              <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+            </div>
+            <div class="col-4">To
+              <address><strong>{{ form2.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form2.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form2.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form2.telephone_to(class="form-control form-control-ls") }}
+              {% if updt_inv.box_number_to == '' %}
+              {% else%}
+              P.O.Box:&nbsp;&nbsp;&nbsp;{{ form2.box_number_to(class="form-control form-control-ls") }}</address>
+              {% endif %}
+            </div>
+            <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form2.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form2.due_date(class="form-control form-control-ls") }}Payment Terms:{{ form2.terms(class="form-control form-control-ls") }}
+              VAT:&nbsp;&nbsp;&nbsp;{{ form2.vat(class="form-control form-control-ls") }}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Disbursements/&nbsp;ug.Shs</th>
+                    <th>Professional fees/&nbsp;ug.Shs</th>
+                    <th>Amount/&nbsp;ug.Shs</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                    {% for p in item %}
+                  <tr>
+                      {% if ((item.index(p)) == 0) %}
+                      <td>{{ form2.notes(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.disbursements(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.professional_fees(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.amount(class="form-control form-control-ls") }}</td>
+                        {% endif %}
+                      {% if ((item.index(p)) == 1) %}
+                      <td>{{ form2.notes2(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.disbursements2(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.professional_fees2(class="form-control form-control-ls") }}</td>
+                      <td>{{ form2.amount2(class="form-control form-control-ls") }}</td>
+                      {% endif %}
+                      {% endfor %}
+                    </tr>
+ 
+                </tbody>
+              </table>
+            </div>
+           </div>
+      </form>
+      {% endif %}
+      {% if (len(item) == 3) %}     
+      <form id="update_invoice" action=" " method="POST">
+
+      <div class="row invoice-info">
+        <div class="col-4">From
+          <address><strong>William.</strong><br>Kampala, Kawempe Division, Keti Falawo Zone<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>TIN:&nbsp;&nbsp;&nbsp;1000150824 <br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517
+          {% if updt_inv.box_number_to == '' %}
+          {% else%}
+          P.O.Box:&nbsp;&nbsp;&nbsp;{{ form3.box_number_to(class="form-control form-control-ls") }}</address>
+          {% endif %}
+        </div>
+        <div class="col-4">To
+          <address><strong>{{ form3.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form3.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form3.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form3.telephone_to(class="form-control form-control-ls") }}</address>
+        </div>
+        <div class="col-4">Invoice #{{ updt_inv.ref_number}}<br>Issue Date: {{ form3.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form3.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form3.terms(class="form-control form-control-ls") }}
+          VAT:&nbsp;&nbsp;&nbsp;{{ form3.vat(class="form-control form-control-ls") }} 
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Disbursements/&nbsp;ug.Shs</th>
+                <th>Professional fees/&nbsp;ug.Shs</th>
+                <th>Amount/&nbsp;ug.Shs</th>
+              </tr>
+            </thead>
+            <tbody>
+
+                {% for p in item %}
+              <tr>
+                  {% if ((item.index(p)) == 0) %}
+                  <td>{{ form3.notes(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.disbursements(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.professional_fees(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.amount(class="form-control form-control-ls") }}</td>
+                    {% endif %}
+                  {% if ((item.index(p)) == 1) %}
+                  <td>{{ form3.notes2(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.disbursements2(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.professional_fees2(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.amount2(class="form-control form-control-ls") }}</td>
+                  {% endif %}
+                  {% if ((item.index(p)) == 2) %}
+                  <td>{{ form3.notes3(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.disbursements3(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.professional_fees3(class="form-control form-control-ls") }}</td>
+                  <td>{{ form3.amount3(class="form-control form-control-ls") }}</td>
+                  {% endif %}
+                  {% endfor %}
+                </tr>
+
+            </tbody>
+          </table>
+        </div>
+       </div>
+  </form>
+  {% endif %}
+  {% if (len(item) == 4) %}     
+  <form id="update_invoice" action=" " method="POST">
+
+  <div class="row invoice-info">
+    <div class="col-4">From
+      <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517
+      {% if updt_inv.box_number_to == '' %}
+      {% else%}
+      P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+      {% endif %}
+    </div>
+    <div class="col-4">To
+      <address><strong>{{ form4.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form4.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form4.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form4.telephone_to(class="form-control form-control-ls") }}</address>
+    </div>
+    <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form4.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form4.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form4.terms(class="form-control form-control-ls") }}
+      VAT:&nbsp;&nbsp;&nbsp;{{ form4.vat(class="form-control form-control-ls") }} 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Disbursements/&nbsp;ug.Shs</th>
+            <th>Professional fees/&nbsp;ug.Shs</th>
+            <th>Amount/&nbsp;ug.Shs</th>
+          </tr>
+        </thead>
+        <tbody>
+
+            {% for p in item %}
+          <tr>
+              {% if ((item.index(p)) == 0) %}
+              <td>{{ form4.notes(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.disbursements(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.professional_fees(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.amount(class="form-control form-control-ls") }}</td>
+                {% endif %}
+              {% if ((item.index(p)) == 1) %}
+              <td>{{ form4.notes2(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.disbursements2(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.professional_fees2(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.amount2(class="form-control form-control-ls") }}</td>
+              {% endif %}
+              {% if ((item.index(p)) == 2) %}
+              <td>{{ form4.notes3(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.disbursements3(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.professional_fees3(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.amount3(class="form-control form-control-ls") }}</td>
+              {% endif %}
+              {% if ((item.index(p)) == 3) %}
+              <td>{{ form4.notes4(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.disbursements4(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.professional_fees4(class="form-control form-control-ls") }}</td>
+              <td>{{ form4.amount4(class="form-control form-control-ls") }}</td>
+              {% endif %}
+              {% endfor %}
+            </tr>
+
+        </tbody>
+      </table>
+    </div>
+   </div>
+</form>
+{% endif %}
+
+{% if (len(item) == 5) %}     
+<form id="update_invoice" action=" " method="POST">
+
+<div class="row invoice-info">
+  <div class="col-4">From
+    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+    {% if updt_inv.box_number_to == '' %}
+    {% else%}
+    P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+    {% endif %}
+  </div>
+  <div class="col-4">To
+    <address><strong>{{ form5.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form5.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form5.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form5.telephone_to(class="form-control form-control-ls") }}
+  </div>
+  <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form5.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form5.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form5.terms(class="form-control form-control-ls") }}
+    VAT:&nbsp;&nbsp;&nbsp;{{ form5.vat(class="form-control form-control-ls") }} 
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Disbursements/&nbsp;ug.Shs</th>
+          <th>Professional fees/&nbsp;ug.Shs</th>
+          <th>Amount/&nbsp;ug.Shs</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for p in item %}
+        <tr>
+            {% if ((item.index(p)) == 0) %}
+            <td>{{ form5.notes(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.disbursements(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.professional_fees(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.amount(class="form-control form-control-ls") }}</td>
+              {% endif %}
+            {% if ((item.index(p)) == 1) %}
+            <td>{{ form5.notes2(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.disbursements2(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.professional_fees2(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.amount2(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 2) %}
+            <td>{{ form5.notes3(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.disbursements3(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.professional_fees3(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.amount3(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 3) %}
+            <td>{{ form5.notes4(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.disbursements4(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.professional_fees4(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.amount4(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 4) %}
+            <td>{{ form5.notes5(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.disbursements5(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.professional_fees5(class="form-control form-control-ls") }}</td>
+            <td>{{ form5.amount5(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+ </div>
+</form>
+{% endif %}
+          <!--
+              <div class="row d-print-none mt-2">
+                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+              </div>-->
+              <div class="row mb-4">
+                <div class="col-5">
+                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
+                </div>
+              </div>
+            </section>
+          </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal -->
+    <div class="modal fade" id="Deletelog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Are you sure, you want to delete this invoice?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+          <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button><br></br>
+              <form action="{{ url_for('delete_invoice',inv_id = inv_id)}}", method="POST">
+                <input class="btn btn-outline-danger" type = "submit" value="Delete"> 
+              </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endblock %}

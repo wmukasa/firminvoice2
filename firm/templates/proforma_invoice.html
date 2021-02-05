@@ -1,0 +1,137 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-file-text-o"></i>Pro Forma Invoice</h1>
+          <p>Saved Invoice from the database</p>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
+          <li class="breadcrumb-item"><a href="#">Invoice</a></li>
+        </ul>
+      </div>
+
+      <div class="col-lg-14">
+        <nav class="navbar navbar-light bg-light">
+
+         <form>
+         </form>
+            <form class="form-inline" method="POST" action="">
+              {% if ((len(item) == 1)) %}  
+              <a href="{{ url_for('update_invoice', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              {% endif %}
+
+              {% if ((len(item) == 2)) %}  
+              <a href="{{ url_for('update_invoice2', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              {% endif %}
+              {% if ((len(item) == 3)) %}  
+              <a href="{{ url_for('update_invoice3', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              {% endif %}
+              {% if ((len(item) == 4)) %}  
+              <a href="{{ url_for('update_invoice4', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              {% endif %}
+              {% if ((len(item) == 5)) %}  
+              <a href="{{ url_for('update_invoice5', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              {% endif %}
+              <button class="btn btn-outline-warning" type="button">Print</button>&nbsp;
+              <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
+          </form>
+          <form method="POST" action="{{ url_for('getProForma_pdf', inv_id=inv.id)}}">
+            <button class="btn btn-outline-warning" type="submit" id="saveInvoice">Download Pro Forma Invoice</button>&nbsp;
+          </form>
+        </nav>
+        </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <form id="saveInvoice" method="POST" action="">
+            <section class="invoice">
+              <div class="row mb-4">
+                <div class="col-12">
+                  <h2 class="page-header"><img style="border-radius: 50%; height: 80px;width: 80px;margin-right: 12px; margin-bottom: 08px;" src="static/images/image1(2).jpeg"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
+                </div>
+                <div class="col-6">
+                  <h5 class="text-right" >PRO FORMA INVOICE</h5>
+                </div>
+              </div>
+              <div class="row invoice-info">
+                <div class="col-4">Location
+                  <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+                </div>
+                <div class="col-4">To 
+                  <address><strong>{{inv.name_to}}.</strong><br>{{inv.address_to}}<br>
+                    {% if inv.email_to == '' %}
+                    {% else%}
+                    Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}} <br>
+                    {% endif %}
+                    {% if inv.telephone_to == '' %}
+                    {% else%}
+                    Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to}}</br>
+                    {% endif %}
+                    {% if inv.box_number_to == '' %}
+                    {% else%}
+                    P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
+                    {% endif %}
+                </div>
+                <div class="col-4"><b>Invoice #{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
+              </div>
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <tr>
+                          <th>Description</th>
+                          <th>Disbursements/&nbsp;ug.Shs</th>
+                          <th>Professional fees/&nbsp;ug.Shs</th>
+                          <th>Amount/&nbsp;ug.Shs</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for myItem in item %}
+                        
+                        <tr>
+                          <td>{{myItem.notes }}</td>
+                          <td>{{ myItem.disbursements }}</td>
+                          <td>{{ myItem.professional_fees }}</td>
+                          <td>{{ myItem.amount }}</td>
+                        </tr>
+                        {% endfor %}
+                      <!--<tr><th><td>Subtotal:</td><td>{{subtotal}}shs</td></th></tr>
+                      <tr><th><td>VAT(18%):</td><td>{{VAT}}shs</td></th></tr>
+                      <tr><th><td>Grandtotal:</td><td>{{grandtotal}}shs</td></th></tr>-->
+                    </tbody>   
+                  </table>
+                </div>
+              </div><!--
+              <div class="row d-print-none mt-2">
+                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+              </div>
+              <div class="form-group row">
+                <label class="control-label col-md-12">Amount in Words:&nbsp;<span>yhekhfkhafhehfkhfeihfhe</span></label>
+                <div class="row mb-4">
+                <div class="col-5">
+                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
+                </div>
+              </div>-->
+              <div class="container px-4">
+                <div class="row gx-5">
+                  <div class="col">
+                   <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+                  </div>
+                  <div class="col">
+                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </form>
+          <div class="col-6">
+            ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {% endblock %}
