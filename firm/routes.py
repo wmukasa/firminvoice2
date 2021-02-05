@@ -17,6 +17,14 @@ else:
             stdout=subprocess.PIPE).communicate()[0].strip()
         pdfkit_config = pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
 
+def _get_pdfkit_config():
+
+     if platform.system() == 'Windows':
+         return pdfkit.configuration(wkhtmltopdf=os.environ.get('WKHTMLTOPDF_BINARY', 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'))
+     else:
+         WKHTMLTOPDF_CMD = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf')], stdout=subprocess.PIPE).communicate()[0].strip()
+         return pdfkit.configuration(wkhtmltopdf=WKHTMLTOPDF_CMD)
+
 @app.route('/',methods=['GET', 'POST'])
 @app.route("/Login",methods=['GET', 'POST'])
 def index():
@@ -115,7 +123,7 @@ def get_pdf(inv_id):
         rendered=render_template('testing.html',
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
         css = ['firm/templates/testing.css']
-        pdf = pdfkit.from_string(rendered,False,css=css)
+        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config())
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
         response.headers['Content-Disposition']='inline; filename='+inv_id+'.pdf'
