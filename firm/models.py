@@ -63,8 +63,8 @@ class InvoiceLineItem(db.Model):
     __tablename__ = 'line_items' 
     id = db.Column(db.Integer, primary_key=True)
     notes = db.Column(db.String(255), nullable=False)
-    disbursements =db.Column(db.String, nullable=True)
-    professional_fees =db.Column(db.String, nullable=True)
+    disbursements =db.Column(db.Float, default='0.0')
+    professional_fees =db.Column(db.Float, default='0.0')
     amount = db.Column(db.Float, nullable=False)
     invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id'), nullable=False)
         # Relationship

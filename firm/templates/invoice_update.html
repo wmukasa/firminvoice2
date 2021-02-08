@@ -18,7 +18,9 @@
   
         </form>
               
-            <form class="form-inline" method="POST" action="">
+         <form class="form-inline" method="POST" action="">
+
+            {% if updt_inv.author == current_user %}
               {% if (len(item) == 1) %} 
               <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
               {% endif %}
@@ -35,6 +37,7 @@
               <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
               {% endif %}
               <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;
+            {% endif %}  
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
               <!--<button class="btn btn-outline-secondary" type="submit" onclick="handleInvoice()">Preview</button>
                <label for="submit-form" tabindex="0">Preview</label>-->
@@ -56,6 +59,9 @@
               </div>
               {% if (len(item) == 1) %}
               <form id="update_invoice" action=" " method="POST">
+                <div class="col-2">
+                  <p>Tax Invoice Number:{{form1.vat(class="form-control form-control-ls")}}</p>
+                </div>
               <div class="row invoice-info">
                 <div class="col-4">From
                   <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
@@ -68,7 +74,6 @@
                     {% endif %}
                   </div>
                 <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form1.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form1.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form1.terms(class="form-control form-control-ls") }}
-                VAT:&nbsp;&nbsp;&nbsp;{{ form1.vat(class="form-control form-control-ls") }}
               </div>
               </div>
               <div class="row">
@@ -116,7 +121,7 @@
               {% endif %}
             </div>
             <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form2.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form2.due_date(class="form-control form-control-ls") }}Payment Terms:{{ form2.terms(class="form-control form-control-ls") }}
-              VAT:&nbsp;&nbsp;&nbsp;{{ form2.vat(class="form-control form-control-ls") }}
+              VAT:&nbsp;&nbsp;&nbsp;{{ updt_inv.vat }}
             </div>
           </div>
           <div class="row">
@@ -160,17 +165,17 @@
 
       <div class="row invoice-info">
         <div class="col-4">From
-          <address><strong>William.</strong><br>Kampala, Kawempe Division, Keti Falawo Zone<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>TIN:&nbsp;&nbsp;&nbsp;1000150824 <br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517
+        <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+        </div>
+        <div class="col-4">To
+          <address><strong>{{ form3.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form3.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form3.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form3.telephone_to(class="form-control form-control-ls") }}
           {% if updt_inv.box_number_to == '' %}
           {% else%}
           P.O.Box:&nbsp;&nbsp;&nbsp;{{ form3.box_number_to(class="form-control form-control-ls") }}</address>
           {% endif %}
         </div>
-        <div class="col-4">To
-          <address><strong>{{ form3.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form3.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form3.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form3.telephone_to(class="form-control form-control-ls") }}</address>
-        </div>
         <div class="col-4">Invoice #{{ updt_inv.ref_number}}<br>Issue Date: {{ form3.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form3.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form3.terms(class="form-control form-control-ls") }}
-          VAT:&nbsp;&nbsp;&nbsp;{{ form3.vat(class="form-control form-control-ls") }} 
+          VAT:&nbsp;&nbsp;&nbsp;{{ updt_inv.vat }}
         </div>
       </div>
       <div class="row">
@@ -221,16 +226,16 @@
   <div class="row invoice-info">
     <div class="col-4">From
       <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517
-      {% if updt_inv.box_number_to == '' %}
-      {% else%}
-      P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
-      {% endif %}
     </div>
     <div class="col-4">To
-      <address><strong>{{ form4.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form4.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form4.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form4.telephone_to(class="form-control form-control-ls") }}</address>
+      <address><strong>{{ form4.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form4.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form4.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form4.telephone_to(class="form-control form-control-ls") }}
+        {% if updt_inv.box_number_to == '' %}
+        {% else%}
+        P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+        {% endif %}
     </div>
     <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form4.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form4.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form4.terms(class="form-control form-control-ls") }}
-      VAT:&nbsp;&nbsp;&nbsp;{{ form4.vat(class="form-control form-control-ls") }} 
+      VAT:&nbsp;&nbsp;&nbsp;{{ updt_inv.vat }}
     </div>
   </div>
   <div class="row">
@@ -288,16 +293,16 @@
 <div class="row invoice-info">
   <div class="col-4">From
     <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+  </div>
+  <div class="col-4">To
+    <address><strong>{{ form5.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form5.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form5.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form5.telephone_to(class="form-control form-control-ls") }}
     {% if updt_inv.box_number_to == '' %}
     {% else%}
     P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
     {% endif %}
-  </div>
-  <div class="col-4">To
-    <address><strong>{{ form5.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form5.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form5.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form5.telephone_to(class="form-control form-control-ls") }}
-  </div>
+    </div>
   <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form5.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form5.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form5.terms(class="form-control form-control-ls") }}
-    VAT:&nbsp;&nbsp;&nbsp;{{ form5.vat(class="form-control form-control-ls") }} 
+    VAT:&nbsp;&nbsp;&nbsp;{{ updt_inv.vat }}
   </div>
 </div>
 <div class="row">

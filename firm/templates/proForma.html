@@ -44,7 +44,7 @@
 			</address>
 			<table class="meta">
 				<tr>
-					<th><span >Invoice #</span></th>
+					<th><span >Our Ref#</span></th>
 					<td><span >{{ inv.ref_number }}</span></td>
 				</tr>
 				<tr>
@@ -70,13 +70,20 @@
 					</tr>
 				</thead>
 				<tbody>
-				{% for myItem in item %}
+					{% for myItem in item %}
 					<tr>
 						<td><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
+						{% if myItem.disbursements != 0.0%}
 						<td><span >{{myItem.disbursements }}</span></td>
+						{% else %}
+						<td></td>
+						{% endif%}
+						{% if myItem.professional_fees != 0.0%}
                         <td><span >{{ myItem.professional_fees}}</span></td>
-                        <td><span >{{ myItem.amount}}</span></td>
-						
+						{% else %}
+						<td></td>
+                        {% endif%}
+						<td><span >{{ myItem.amount}}</span></td>
 					</tr>
 				 {% endfor %}
 				</tbody>
@@ -84,20 +91,25 @@
 
 			<table class="balance">
 				<tr>
-					<th><span >SubTotal</span><span data-prefix>Ug.shs</span></th>
+					<th><span >SubTotal</span><span data-prefix>/Ug.shs</span></th>
 					<td><span>{{subtotal}}</span></td>
 				</tr>
 				<tr>
-					<th><span >Grandtotal</span><span data-prefix>Ug.shs</span></th>
+					<th><span >VAT(18%)</span><span data-prefix>/Ug.shs</span></th>
+					<td><span >{{VAT}}</span></td>
+				</tr>
+				<tr>
+					<th><span >Grandtotal</span><span data-prefix>/Ug.shs</span></th>
 					<td><span>{{grandtotal}}</span></td>
 				</tr>
 			</table>
         </article>
 		<aside>
-			<h1><span >ISSUED BY: {{inv.author.username}}</span></h1>
+			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
 			<div >
 				<p></p>
 			</div>
+			<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 		</aside>
 	</body>
 </html>

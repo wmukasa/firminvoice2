@@ -16,7 +16,6 @@
 				<p>Office:&nbsp;&nbsp;(+256) 394-836-201</p>
 				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
 			</address>
-
 		</header>
 		<article>
 			<h1>Recipient</h1>
@@ -42,9 +41,10 @@
                     {% endif %}
                 </p>
 			</address>
+			<h6 class="text-right">Tax Invoice Number:&nbsp;&nbsp;&nbsp;{{inv.vat}}</h6>
 			<table class="meta">
 				<tr>
-					<th><span >Invoice #</span></th>
+					<th><span >Our Ref #</span></th>
 					<td><span >{{ inv.ref_number }}</span></td>
 				</tr>
 				<tr>
@@ -76,22 +76,28 @@
 				{% for myItem in item %}
 					<tr>
 						<td><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
+						{% if myItem.disbursements != 0.0%}
 						<td><span >{{myItem.disbursements }}</span></td>
+						{% else %}
+						<td></td>
+						{% endif%}
+						{% if myItem.professional_fees!= 0.0%}
                         <td><span >{{ myItem.professional_fees}}</span></td>
-                        <td><span >{{ myItem.amount}}</span></td>
-						
+						{% else %}
+						<td></td>
+                        {% endif%}
+						<td><span >{{ myItem.amount}}</span></td>
 					</tr>
 				 {% endfor %}
 				</tbody>
 			</table>
-
 			<table class="balance">
 				<tr>
 					<th><span >SubTotal</span><span data-prefix>/Ug.shs</span></th>
 					<td><span>{{subtotal}}</span></td>
 				</tr>
 				<tr>
-					<th><span >VAT({{inv.vat}}%)</span><span data-prefix>/Ug.shs</span></th>
+					<th><span >VAT(18%)</span><span data-prefix>/Ug.shs</span></th>
 					<td><span >{{VAT}}</span></td>
 				</tr>
 				<tr>
@@ -101,10 +107,17 @@
 			</table>
 		</article>
 		<aside>
-			<h1><span >ISSUED BY: {{inv.author.username}}</span></h1>
+			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
 			<div >
 				<p></p>
 			</div>
+			<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
+			<!--<div class="line"><br>
+				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>
+			</div>-->
+			<div style="float:right;"> 
+				<span class ="signature">Kamahoro,Kiboome & Kirunda Advocates</span>    
+			  </div>
 		</aside>
 	</body>
 </html>

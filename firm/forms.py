@@ -90,7 +90,7 @@ class MainForm(FlaskForm):
 
     issue_date = StringField('Issue Date/MM/DD/YR', validators=[validators.InputRequired(), validators.Length(max=20)])
     due_date= StringField('Due Date/MM/DD/YR',validators=[validators.InputRequired(), validators.Length(max=20)])
-    vat = StringField('Percentage number only for tax Invoice')
+    vat = StringField('Tax Invoice Number ')
     laps = FieldList(
         FormField(LapForm),
         min_entries=1,
@@ -107,7 +107,7 @@ class Invoice_Items(FlaskForm):
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
     issue_date = StringField('Issue Date', validators=[DataRequired()])
     due_date= StringField('Due Date',validators=[DataRequired(), Length(min=2, max=20)])
-    vat = StringField('Percentage number only for tax Invoice')
+    vat = StringField('Tax Invoice Number ')
 
   
     notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=255)])
@@ -131,7 +131,7 @@ class Invoice_Items2(FlaskForm):
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
     issue_date = StringField('Issue Date', validators=[DataRequired()])
     due_date= StringField('Due Date',validators=[DataRequired(), Length(min=2, max=20)])
-    vat = StringField('Percentage number only for tax Invoice')
+    vat = StringField('Tax Invoice Number ')
 
   
     notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=255)])
@@ -160,7 +160,7 @@ class Invoice_Items3(FlaskForm):
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
     issue_date = StringField('Issue Date', validators=[DataRequired()])
     due_date= StringField('Due Date',validators=[DataRequired(), Length(min=2, max=20)])
-    vat = StringField('Percentage number only for tax Invoice')
+    vat = StringField('Tax Invoice Number ')
 
   
     notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=255)])
@@ -193,7 +193,7 @@ class Invoice_Items4(FlaskForm):
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
     issue_date = StringField('Issue Date', validators=[DataRequired()])
     due_date= StringField('Due Date',validators=[DataRequired(), Length(min=2, max=20)])
-    vat = StringField('Percentage number only for tax Invoice')
+    vat = StringField('Tax Invoice Number ')
 
   
     notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=255)])

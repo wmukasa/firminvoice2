@@ -18,6 +18,7 @@
          <form>
          </form>
             <form class="form-inline" method="POST" action="">
+          {% if inv.author == current_user %}
               {% if ((len(item) == 1)) %}  
               <a href="{{ url_for('update_invoice', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               {% endif %}
@@ -34,6 +35,7 @@
               {% if ((len(item) == 5)) %}  
               <a href="{{ url_for('update_invoice5', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               {% endif %}
+          {% endif %}
               <button class="btn btn-outline-warning" type="button">Print</button>&nbsp;
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
           </form>
@@ -74,7 +76,7 @@
                     P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
                     {% endif %}
                 </div>
-                <div class="col-4"><b>Invoice #{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
+                <div class="col-4"><b>Our Ref #{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
@@ -90,11 +92,19 @@
                       </thead>
                       <tbody>
                         {% for myItem in item %}
-                        
+                      
                         <tr>
                           <td>{{myItem.notes }}</td>
+                          {% if myItem.disbursements != 0.0%}
                           <td>{{ myItem.disbursements }}</td>
+                          {% else %}
+                          <td></td>
+                          {% endif%}
+                          {% if myItem.professional_fees != 0.0%}
                           <td>{{ myItem.professional_fees }}</td>
+                          {% else %}
+                          <td></td>
+                          {% endif%}
                           <td>{{ myItem.amount }}</td>
                         </tr>
                         {% endfor %}
@@ -119,6 +129,10 @@
                 <div class="row gx-5">
                   <div class="col">
                    <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+                  </div>
+                  <div class="col">
+                    <div >VAT({{18}}%):&nbsp;{{VAT}}&nbsp;ug.Shs</div>
+                    TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
                   </div>
                   <div class="col">
                     <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>

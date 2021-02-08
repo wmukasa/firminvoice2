@@ -71,7 +71,7 @@ article address { float: left; font-size: 100%; font-weight: bold;}
 
 /* table meta & balance */
 
-table.meta, table.balance { float: right; width: 36%; }
+table.meta, table.balance { float: right; width: 40%; }
 table.meta:after, table.balance:after { clear: both; content: ""; display: table; }
 
 /* table meta */
@@ -145,3 +145,19 @@ tr:hover .cut { opacity: 1; }
 }
 
 @page { margin: 0; }
+
+.line{
+	width: 250px;
+	height: 47px;
+	border-bottom: 1px solid black;
+	position: absolute;
+	}
+div { margin: 50px; }
+
+	.signature{ float: left; }
+	.signature{ 
+	  margin: 20px 10px;
+	  border-top: 1px solid #000;
+	  width: 300px; 
+	  text-align: center;
+	}
