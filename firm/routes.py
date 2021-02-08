@@ -89,7 +89,8 @@ def account():
 @login_required
 def dashboard():
     page = request.args.get('page',1,type=int)
-    myInv = Invoice.query.paginate(page = page ,per_page=4)
+    #myInv = Invoice.query.paginate(page = page ,per_page=4)
+    myInv = Invoice.query.order_by(Invoice.ref_number.desc()).paginate(page = page ,per_page=4)
     return render_template('dashboard.html',myInv=myInv)
 
 @app.route('/SavedInvoice-<int:inv_id>')
