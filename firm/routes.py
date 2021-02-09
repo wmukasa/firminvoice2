@@ -99,20 +99,21 @@ def saved_invoice(inv_id):
     subtotal = 0
     VAT =0
     grandtotal =0
+    myPro =0
     inv = Invoice.query.filter( Invoice.id== inv_id).first()
     #myVat=(float(inv.vat))/100 
     item = InvoiceLineItem.query.filter_by(invoice=inv).all()
     for q in item:
         subtotal +=float(q.amount)
         #VAT is only on professional price 
-        myPro =q.professional_fees  
+        myPro +=q.professional_fees 
         VAT = (18/100)* float(myPro)
         #VAT = myVat*subtotal
         grandtotal = float(VAT+subtotal)
     #print(subtotal)
     #print(VAT)
     #(grandtotal)
-    return render_template('saved_invoice.html',inv=inv,item=item,inv_id=inv_id,
+    return render_template('saved_invoice.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
                         subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,len=len,title='SavedInvoice')
 
 @app.route('/get_pdf/<inv_id>', methods=['POST'])
@@ -120,6 +121,7 @@ def saved_invoice(inv_id):
 def get_pdf(inv_id,options=wk_options):
     subtotal = 0
     VAT =0
+    myPro =0
     grandtotal =0
     if request.method =="POST":
         inv = Invoice.query.filter( Invoice.id== inv_id).first()
@@ -128,10 +130,11 @@ def get_pdf(inv_id,options=wk_options):
         item = InvoiceLineItem.query.filter_by(invoice=inv).all()
         for q in item:
             subtotal +=float(q.amount)
-            myPro =q.professional_fees  
+            myPro +=q.professional_fees 
+            print(myPro)  
             VAT = (18/100)* float(myPro)
             grandtotal = float(VAT+subtotal)
-        rendered=render_template('testing.html',
+        rendered=render_template('testing.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
         css = ['firm/templates/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
@@ -145,16 +148,18 @@ def get_pdf(inv_id,options=wk_options):
 @login_required
 def getProForma_pdf(inv_id,options=wk_options):
     subtotal = 0
+    VAT =0
+    myPro =0
     grandtotal =0
     if request.method =="POST":
         inv = Invoice.query.filter( Invoice.id== inv_id).first()
         item = InvoiceLineItem.query.filter_by(invoice=inv).all()
         for q in item:
             subtotal +=float(q.amount)
-            myPro =q.professional_fees  
+            myPro +=q.professional_fees 
             VAT = (18/100)* float(myPro)
             grandtotal = float(VAT+subtotal)
-        rendered=render_template('proForma.html',
+        rendered=render_template('proForma.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
         css = ['firm/templates/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
@@ -231,13 +236,13 @@ def create_invoice():
 def proform_invoice(inv_id):
     subtotal = 0
     grandtotal =0
+    myPro = 0
     VAT=0
     inv = Invoice.query.filter( Invoice.id== inv_id).first()
     item = InvoiceLineItem.query.filter_by(invoice=inv).all()
     for q in item:
         subtotal +=float(q.amount)
-
-        myPro =(q.professional_fees)   
+        myPro +=(q.professional_fees)   
         VAT = (18/100)* float(myPro)
         print(VAT)
         #VAT = myVat*subtotal
@@ -245,7 +250,7 @@ def proform_invoice(inv_id):
     #print(subtotal)
     #print(VAT)
     #(grandtotal)
-    return render_template('proforma_invoice.html',inv=inv,item=item,VAT=VAT,
+    return render_template('proforma_invoice.html',inv=inv,item=item,VAT=VAT,myPro=myPro,
                         subtotal=subtotal,grandtotal=grandtotal,len=len,title='Pro forma Invoice')
     
 @app.route("/Invoice-<int:inv_id>-Update", methods=['GET', 'POST'])
