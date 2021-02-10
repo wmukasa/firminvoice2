@@ -16,6 +16,7 @@ class User(db.Model,UserMixin):
       password = db.Column(db.String(60), nullable=False)
       is_admin = db.Column(db.Boolean,default = True)
       invoice = db.relationship('Invoice',backref='author', lazy=True)
+      receipt = db.relationship('Receipt',backref='receiptAuthor', lazy=True)
       def __repr__(self):
         return f" User('{self.username}','{self.email}','{self.designation}','{self.image_file}')"
 
@@ -73,3 +74,35 @@ class InvoiceLineItem(db.Model):
         backref=db.backref('laps', lazy='dynamic', collection_class=list)
 
     )
+class Receipt(db.Model):
+    __tablename__ = 'receipts'
+    id = db.Column(db.Integer, primary_key=True)
+    receipt_number = db.Column(db.String(),nullable=False)
+    date_created = db.Column(db.Date,default=datetime.now)
+    received_from = db.Column(db.String(120), nullable=False)
+    sum_in_words = db.Column(db.String(120), nullable=False)
+    reason = db.Column(db.String(255), nullable=False)
+    cash_cheque = db.Column(db.String(),nullable=False)
+    balance = db.Column(db.String(20),nullable=False)
+    amount = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+
+    def get_last_id():
+
+        qry = Receipt.query.order_by(Invoice.id.desc()).first()
+        x = qry.id
+        ym = date.today().strftime("%y%m")
+        q_custom_id = "" + ym + str(x).zfill(3) + ""
+
+        return q_custom_id
+
+    def __init__(self,receipt_number,date_created,received_from,sum_in_words,reason,cash_cheque,balance,amount,user_id):
+        self.receipt_number = receipt_number
+        self.date_created= date_created
+        self.received_from = received_from
+        self.sum_in_words = sum_in_words
+        self.reason=reason
+        self.cash_cheque = cash_cheque
+        self.balance= balance
+        self.amount=amount
+        self.user_id=user_id

@@ -63,8 +63,8 @@
 
       <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-edit"></i><span class="app-menu__label">Manage Receipts</span><i class="treeview-indicator fa fa-angle-right"></i></a>
         <ul class="treeview-menu">
-          <li><a class="treeview-item" href="receipt.html.html"><i class="icon fa fa-file-text"></i> Receipts</a></li>
-          <li><a class="treeview-item" href="receipt_items.html"><i class="icon fa fa-file-text"></i> Receipt Items</a></li>
+          <li><a class="treeview-item" href="{{url_for('dashboard')}}"><i class="icon fa fa-file-text"></i> Receipts</a></li>
+          <li><a class="treeview-item" href="{{ url_for('Create_Receipt')}}"><i class="icon fa fa-file-text"></i> Receipt Items</a></li>
         </ul>
       </li>
       <li><a class="treeview-item" href="{{ url_for('register')}}"><i class="icon fa fa-file-text"></i> User Registration</a></li> 

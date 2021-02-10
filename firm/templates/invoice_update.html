@@ -36,7 +36,7 @@
               {% if (len(item) == 5) %} 
               <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
               {% endif %}
-              <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;
+
             {% endif %}  
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
               <!--<button class="btn btn-outline-secondary" type="submit" onclick="handleInvoice()">Preview</button>
@@ -359,10 +359,7 @@
  </div>
 </form>
 {% endif %}
-          <!--
-              <div class="row d-print-none mt-2">
-                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
-              </div>-->
+
               <div class="row mb-4">
                 <div class="col-5">
                   <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
@@ -375,24 +372,4 @@
       </div>
     </main>
 
-    <!-- Modal -->
-    <div class="modal fade" id="Deletelog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Are you sure, you want to delete this invoice?</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          
-          <div class="modal-footer">
-              <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button><br></br>
-              <form action="{{ url_for('delete_invoice',inv_id = inv_id)}}", method="POST">
-                <input class="btn btn-outline-danger" type = "submit" value="Delete"> 
-              </form>
-          </div>
-        </div>
-      </div>
-    </div>
     {% endblock %}

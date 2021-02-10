@@ -1,7 +1,7 @@
 from datetime import datetime, date
 from flask import Flask,render_template,request,url_for,flash,redirect, make_response 
-from firm.models import User,Invoice,InvoiceLineItem
-from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,
+from firm.models import User,Invoice,InvoiceLineItem,Receipt
+from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,ReceiptForm,
                 Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,Invoice_Items4)
 from firm import app
 from sqlalchemy import desc
@@ -91,7 +91,8 @@ def dashboard():
     page = request.args.get('page',1,type=int)
     #myInv = Invoice.query.paginate(page = page ,per_page=4)
     myInv = Invoice.query.order_by(Invoice.ref_number.desc()).paginate(page = page ,per_page=4)
-    return render_template('dashboard.html',myInv=myInv)
+    myRpt = Receipt.query.order_by(Receipt.receipt_number.desc()).paginate(page = page ,per_page=4)
+    return render_template('dashboard.html',myInv=myInv,myRpt=myRpt )
 
 @app.route('/SavedInvoice-<int:inv_id>')
 @login_required
@@ -196,7 +197,6 @@ def create_invoice():
         ref_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
     finally:
         if form.validate_on_submit():
-            # Create race
             author = current_user
             ref_number = ref_number
             name_to = request.form['name_to']
@@ -657,8 +657,114 @@ def update_invoice5(inv_id):
 @login_required
 def delete_invoice(inv_id):
     updt_inv = Invoice.query.get_or_404(inv_id)
-    item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    #item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
     db.session.delete(updt_inv)
     db.session.commit()
     flash('Your Invoice has been Deleted!', 'success')
-    return redirect(url_for('saved_invoice.html'))
+    return redirect(url_for('saved_invoice'))
+
+@app.route('/CreateReceipt',methods=['GET', 'POST'])
+@login_required
+def Create_Receipt():
+    form = ReceiptForm(request.form)
+    try:
+        get_id = Receipt.query.order_by(desc('id')).first()
+        x: int = get_id.id + 1
+        y = date.today().strftime("%y%m")
+        if get_id:
+            receipt_number = "" + y + str(x).zfill(3) + ""
+    except:
+        receipt_number = str(date.today().strftime("%y%m") + str(1).zfill(3))  
+    finally:
+    
+        #if form.is_submitted():
+            #print ("submitted")
+
+        #if form.validate():
+            #print ("valid")
+        #print(form.errors)
+        if form.validate_on_submit():
+            receiptAuthor = current_user
+            receipt_number = receipt_number
+            date_created = request.form['date_created']
+            received_from = request.form['received_from']
+            sum_in_words = request.form['sum_in_words']
+            reason = request.form['reason']
+            cash_cheque = request.form['cash_cheque']
+            balance  = request.form['balance']
+            amount = request.form['amount']
+            print(current_user.id)
+            print(receiptAuthor,receipt_number,received_from,sum_in_words,reason,cash_cheque,balance,amount)
+            new_receipt = Receipt(receipt_number,date_created,received_from,sum_in_words,reason,cash_cheque,balance,amount,current_user.id)
+            db.session.add(new_receipt)
+            db.session.commit()
+            return redirect(url_for('dashboard'))
+    #receipt = Receipt.query.all()
+    return render_template('create_receipt.html',form=form,)
+
+@app.route('/Receipt-<int:rpt_id>')
+@login_required
+def receipt(rpt_id):
+    rpt = Receipt.query.filter( Receipt.id== rpt_id).first()
+    return render_template('receipt.html',rpt_id=rpt_id,rpt=rpt)
+
+@app.route("/Receipt-<int:rpt_id>-Update", methods=['GET', 'POST'])
+@login_required
+def update_receipt(rpt_id):
+    updt_rpt = Receipt.query.get_or_404(rpt_id)
+    form=ReceiptForm()
+    try:
+        get_id = Receipt.query.order_by(desc('id')).first()
+        x: int = get_id.id + 1
+        y = date.today().strftime("%y%m")
+        if get_id:
+            receipt_number = "" + y + str(x).zfill(3) + ""
+    except:
+        receipt_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
+    finally:
+        if request.method == 'POST':
+
+            receipt_number = receipt_number
+            updt_rpt.date_created = form.date_created.data
+            updt_rpt.received_from = form.received_from.data
+            updt_rpt.sum_in_words = form.sum_in_words.data 
+            updt_rpt.reason = form.reason.data
+            updt_rpt.cash_cheque = form.cash_cheque.data
+            updt_rpt.balance = form.balance.data
+            updt_rpt.amount = form.amount.data
+            db.session.commit()
+            flash('Your receipt has been updated!', 'success')
+            return redirect(url_for('receipt',rpt_id=rpt_id))
+        elif request.method == 'GET':
+        
+            form.date_created.data = updt_rpt.date_created
+            form.received_from.data  = updt_rpt.received_from
+            form.sum_in_words.data  = updt_rpt.sum_in_words
+            form.reason.data= updt_rpt.reason
+            form.cash_cheque.data = updt_rpt.cash_cheque
+            form.balance.data = updt_rpt.balance
+            form.amount.data = updt_rpt.amount
+    return render_template('receipt_update.html',updt_rpt=updt_rpt,rpt_id=rpt_id,form=form,title='Update Receipt')
+
+@app.route("/Receipt-<int:rpt_id>-Delete", methods=['POST'])
+@login_required
+def delete_receipt(rpt_id):
+    dt_rpt = Receipt.query.get_or_404(rpt_id)
+    db.session.delete(dt_rpt)
+    db.session.commit()
+    flash('Your Invoice has been Deleted!', 'success')
+    return redirect(url_for('receipt'))
+
+@app.route('/Receipt_get_pdf/<rpt_id>', methods=['POST'])
+@login_required
+def receipt_pdf(rpt_id,options=wk_options):
+    if request.method =="POST":
+        rpt = Receipt.query.filter( Receipt.id== rpt_id).first()
+        rendered=render_template('receiptPdf.html',rpt=rpt)
+        css = ['firm/static/css/main2.css']
+        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
+        response = make_response(pdf)
+        response.headers['Content-Type']='application/pdf'
+        response.headers['Content-Disposition']='inline; filename=Receipt'+rpt_id+'.pdf'
+        return response
+    return redirect(url_for('receipt'))

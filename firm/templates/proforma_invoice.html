@@ -36,7 +36,6 @@
               <a href="{{ url_for('update_invoice5', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               {% endif %}
           {% endif %}
-              <button class="btn btn-outline-warning" type="button">Print</button>&nbsp;
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
           </form>
           <form method="POST" action="{{ url_for('getProForma_pdf', inv_id=inv.id)}}">
@@ -148,4 +147,5 @@
         </div>
       </div>
     </main>
+
     {% endblock %}

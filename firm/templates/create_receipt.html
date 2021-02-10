@@ -1,0 +1,154 @@
+{% extends "layout/layout1.html" %}
+{% block content %}
+
+<main class="app-content">
+        <div class="col-lg-14">
+          <nav class="navbar navbar-light bg-light">
+           <form>
+    
+          </form>
+                
+           <form class="form-inline" method="POST" action="">
+                <button class="btn btn-outline-success" type="submit" form="create_receipt">Create</button>&nbsp;
+                <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
+
+            </form>
+          </nav>
+          </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="tile">
+      <section class="invoice">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h2 class="page-header"><img style="border-radius: 50%; height: 80px;width: 80px;margin-right: 12px; margin-bottom: 08px;" src="static/images/image1(2).jpeg"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
+              </div>
+          <div class="col-6">
+            <!--<h5 class="text-right"> </h5>-->
+          </div>
+        </div>
+            <form id="create_receipt" method="POST" action="" >
+                 {{ form.hidden_tag() }}
+                <div class="row invoice-info">
+                    <div class="col-4">Location
+                        <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+                      </div>
+                  <div class="col-4">
+                    <h5 >RECEIPT</h5>
+                  </div>
+                  <div class="col-4"><h8><b>Date:&nbsp;&nbsp;{{ form.date_created()}}</h8></b><br><b>Receipt No:&nbsp;&nbsp;Auto generated</b><br></div>
+                </div>
+                <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Received with thanks from:</label>
+                    <div class="col-sm-10">
+                        {% if form.received_from.errors %}
+                        {{ form.received_from(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.received_from.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ form.received_from(class="form-control ") }}
+                    {% endif %}
+
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">The Sum of shillings:</label>
+                    <div class="col-sm-10">
+                        {% if form.sum_in_words.errors %}
+                        {{ form.sum_in_words(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.sum_in_words.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ form.sum_in_words(class="form-control ") }}
+                    {% endif %}
+                     
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Being payment of:</label>
+                    <div class="col-sm-10">
+                        {% if form.reason.errors %}
+                        {{ form.reason(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.reason.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ form.reason(class="form-control ") }}
+                    {% endif %}
+                      
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Cash/Cheque No:</label>
+                    <div class="col-sm-4">
+                        {% if form.cash_cheque.errors %}
+                        {{ form.cash_cheque(class="form-control is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.cash_cheque.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                    {{ form.cash_cheque(class="form-control ") }}
+                    {% endif %}
+
+                    </div>
+                    <div class="row mb-2">
+                        <label for="colFormLabel" class="col-sm-4 col-form-label">Balance/(Ug.Shs):</label>
+                        <div class="col-sm-8">
+                            {% if form.balance.errors %}
+                            {{ form.balance(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.balance.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.balance(class="form-control ") }}
+                        {% endif %}
+
+                        </div>
+                    </div>
+                    </div>
+                    <div class="row mb-2">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Shillings in Figures/(Ug.Shs):</label>
+                        <div class="col-sm-4">
+                            {% if form.amount.errors %}
+                            {{ form.amount(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.amount.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                        {{ form.amount(class="form-control ") }}   
+                        {% endif %}
+                          With thanks
+                        </div>
+                    
+                    <div class="row mb-2">
+                        <label for="colFormLabel" class="col-sm-2 col-form-label">Signature:</label>
+                        <div class="col-sm-10">
+                          <input type="email" class="form-control" id="colFormLabel" placeholder="DigitalSignature Required" disabled="">
+                          For:<b>Kamohoro,Kiboome&Kirunda Advocates</b>
+                        </div>
+                    </div>
+                </div>
+                {{ form.submit(class="btn btn-primary") }}
+
+        </form> 
+    </section> 
+</div>
+</div>
+</div> 
+  </main>
+
+{% endblock %}

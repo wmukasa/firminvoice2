@@ -5,7 +5,6 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 app = Flask(__name__)
-
 ENV = 'prod'
 if ENV =='prod':
     app.debug =True

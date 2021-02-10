@@ -222,3 +222,16 @@ class Invoice_Items4(FlaskForm):
     professional_fees5 =StringField('Professional Fees/Ug.shs')
     amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
     submit = SubmitField('Update')
+
+class ReceiptForm(FlaskForm):
+    """ReceiptForm."""
+    date_created= StringField('Date',default=datetime.now)
+    received_from  = StringField('Received from',validators=[validators.InputRequired(), validators.Length(max=100)])
+    sum_in_words  = StringField('Sum in words',validators=[validators.InputRequired(), validators.Length(max=100)]) 
+    reason = StringField('Being payment of',validators=[validators.InputRequired(), validators.Length(max=100)])
+    cash_cheque = StringField('Cash/Cheque No',validators=[validators.InputRequired(), validators.Length(max=100)])
+    balance = StringField('Balance')
+    amount = StringField('Amount in figures', validators=[validators.InputRequired(), validators.Length(max=20)])
+    
+    submit = SubmitField('CreateReceipt')
+    
