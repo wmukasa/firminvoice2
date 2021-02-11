@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>   
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+  <body class="app sidebar-mini">
+<main class="app-content">
+    <div class="col-lg-14">
+
+        </nav>
+        </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="tile">
+          <section class="invoice">
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="page-header"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
+                  </div>
+                </div>
+                  <form id="saveReceipt" method="POST" action="">
+
+            <div class="row invoice-info">
+                <div class="col-4">Location
+                    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+                  </div>
+              <div class="col-4">
+                <h5 >RECEIPT</h5>
+              </div>
+              <div class="col-4"><h8><b>Date:&nbsp;&nbsp; {{rpt.date_created}}</h8></b><br><b>Receipt No:&nbsp;&nbsp;{{rpt.receipt_number}}</b><br></div>
+            </div>
+              <div class="row mb-3">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">Received with thanks from:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.received_from}}"disabled="">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">The Sum of shillings:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.sum_in_words}}"disabled="">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">Being payment of:</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.reason}}"disabled="">
+                </div>
+              </div>
+              <div class="row mb-3">
+                <label for="colFormLabel" class="col-sm-2 col-form-label">Cash/Cheque No:</label>
+                <div class="col-sm-4">
+                  <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.cash_cheque}}"disabled="">
+                </div>
+                <div class="row mb-2">
+                    <label for="colFormLabel" class="col-sm-4 col-form-label">Balance/(Ug.Shs):</label>
+                    <div class="col-sm-8">
+                      <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.balance}}"disabled="">
+                </div>
+                </div>
+                </div>
+                <div class="row mb-2">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Amount in Figures/(Ug.Shs):</label>
+                    <div class="col-sm-4">
+                      <input type="email" class="form-control" id="colFormLabel" placeholder="{{rpt.amount}}"disabled="">
+                       With thanks
+                    </div>
+                
+                <div class="row mb-2">
+                    <label for="colFormLabel" class="col-sm-2 col-form-label">Signature:</label>
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="colFormLabel" placeholder="DigitalSignature Required" disabled="">
+                      For:<b>Kamohoro,Kiboome&Kirunda Advocates</b>
+                    </div>
+                </div>
+            </div>
+          </section>
+        </form>
+        </div>
+      </div>
+    </div>
+  </main>
+

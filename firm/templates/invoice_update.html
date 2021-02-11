@@ -235,7 +235,7 @@
       <address><strong>{{ form4.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form4.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form4.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form4.telephone_to(class="form-control form-control-ls") }}
         {% if updt_inv.box_number_to == '' %}
         {% else%}
-        P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+        P.O.Box:&nbsp;&nbsp;&nbsp;{{ form4.box_number_to(class="form-control form-control-ls") }}</address>
         {% endif %}
     </div>
     <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form4.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form4.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form4.terms(class="form-control form-control-ls") }}
@@ -303,7 +303,7 @@
     <address><strong>{{ form5.name_to(class="form-control form-control-ls") }}</strong>Address:{{ form5.address_to(class="form-control form-control-ls") }}Email:&nbsp;&nbsp;&nbsp;{{ form5.email_to(class="form-control form-control-ls") }}Telephone:&nbsp;&nbsp;&nbsp;{{ form5.telephone_to(class="form-control form-control-ls") }}
     {% if updt_inv.box_number_to == '' %}
     {% else%}
-    P.O.Box:&nbsp;&nbsp;&nbsp;{{ form1.box_number_to(class="form-control form-control-ls") }}</address>
+    P.O.Box:&nbsp;&nbsp;&nbsp;{{ form5.box_number_to(class="form-control form-control-ls") }}</address>
     {% endif %}
     </div>
   <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form5.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form5.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form5.terms(class="form-control form-control-ls") }}

@@ -135,9 +135,9 @@ def get_pdf(inv_id,options=wk_options):
             print(myPro)  
             VAT = (18/100)* float(myPro)
             grandtotal = float(VAT+subtotal)
-        rendered=render_template('testing.html',myPro= myPro,
+        rendered=render_template('pdf_invoiceTrial.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
-        css = ['firm/templates/testing.css']
+        css = ['firm/static/css/main.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
@@ -656,8 +656,12 @@ def update_invoice5(inv_id):
 @app.route("/Invoice-<int:inv_id>-Update", methods=['POST'])
 @login_required
 def delete_invoice(inv_id):
+#https://esmithy.net/2020/06/20/sqlalchemy-cascade-delete/
     updt_inv = Invoice.query.get_or_404(inv_id)
-    #item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    for inv in item.invoice:
+
+        db.session.delete(inv)
     db.session.delete(updt_inv)
     db.session.commit()
     flash('Your Invoice has been Deleted!', 'success')
@@ -753,15 +757,15 @@ def delete_receipt(rpt_id):
     db.session.delete(dt_rpt)
     db.session.commit()
     flash('Your Invoice has been Deleted!', 'success')
-    return redirect(url_for('receipt'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/Receipt_get_pdf/<rpt_id>', methods=['POST'])
 @login_required
 def receipt_pdf(rpt_id,options=wk_options):
     if request.method =="POST":
         rpt = Receipt.query.filter( Receipt.id== rpt_id).first()
-        rendered=render_template('receiptPdf.html',rpt=rpt)
-        css = ['firm/static/css/main2.css']
+        rendered=render_template('trial.html',rpt=rpt)
+        css = ['firm/static/css/main.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'

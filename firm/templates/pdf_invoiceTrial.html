@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>   
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body class="app sidebar-mini">
+    <main class="app-content">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <form id="saveInvoice" method="POST" action="">
+            <section class="invoice">
+              <div class="row mb-4">
+                <div class="col-12">
+                  <h2 class="page-header"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
+                </div>
+                <div class="col-6">
+                  <h5 class="text-right">TAX INVOICE</h5>
+                  <h6 class="text-right">Tax Invoice Number:&nbsp;&nbsp;&nbsp;{{inv.vat}}</h6>
+                </div>
+
+              </div>
+              <div class="row invoice-info">
+                <div class="col-4">Location
+                  <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+                </div>
+                <div class="col-4">To 
+                  <address><strong>{{inv.name_to}}.</strong><br>{{inv.address_to}}<br>
+                    {% if inv.email_to == '' %}
+                    {% else%}
+                    Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}} <br>
+                    {% endif %}
+                    {% if inv.telephone_to == '' %}
+                    {% else%}
+                    Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to}}</br>
+                    {% endif %}
+                    {% if inv.box_number_to == '' %}
+                    {% else%}
+                    P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
+                    {% endif %}
+                </div>
+                <div class="col-4"><b>Our Ref:{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
+              </div>
+              <div class="row">
+                <div class="col-12 table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Description</th>
+                        <th>Disbursements/&nbsp;ug.Shs</th>
+                        <th>Professional fees/&nbsp;ug.Shs</th>
+                        <th>Amount/&nbsp;ug.Shs</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for myItem in item %}
+                      
+                      <tr>
+                        <td>{{myItem.notes }}</td>
+                        {% if myItem.disbursements != 0.0%}
+                        <td>{{ myItem.disbursements }}</td>
+                        {% else %}
+                        <td></td>
+                        {% endif%}
+                        {% if myItem.professional_fees != 0.0%}
+                        <td>{{ myItem.professional_fees }}</td>
+                        {% else %}
+                        <td></td>
+                        {% endif%}
+                        <td>{{ myItem.amount }}</td>
+                      </tr>
+                      {% endfor %}
+
+                    </tbody>   
+                  </table>
+                </div>
+              </div>
+              <div class="container px-4">
+                <div class="row gx-5">
+                  <div class="col">
+                   <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+                  </div>
+                  <div class="col">
+                    <div >VAT({{18}}%):&nbsp;{{VAT}}&nbsp;ug.Shs</div>
+                    TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
+                  </div>
+                  <div class="col">
+                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </form>
+          <div class="col-6">
+          ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
+          </div>
+          </div>
+        </div>
+      </div>
+    </main>
