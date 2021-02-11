@@ -135,9 +135,9 @@ def get_pdf(inv_id,options=wk_options):
             print(myPro)  
             VAT = (18/100)* float(myPro)
             grandtotal = float(VAT+subtotal)
-        rendered=render_template('pdf_invoiceTrial.html',myPro= myPro,
+        rendered=render_template('testing.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
-        css = ['firm/static/css/main.css']
+        css = ['firm/templates/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
@@ -764,8 +764,8 @@ def delete_receipt(rpt_id):
 def receipt_pdf(rpt_id,options=wk_options):
     if request.method =="POST":
         rpt = Receipt.query.filter( Receipt.id== rpt_id).first()
-        rendered=render_template('trial.html',rpt=rpt)
-        css = ['firm/static/css/main.css']
+        rendered=render_template('receiptPdf.html',rpt=rpt)
+        css = ['firm/static/css/main2.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
