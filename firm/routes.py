@@ -764,8 +764,8 @@ def delete_receipt(rpt_id):
 def receipt_pdf(rpt_id,options=wk_options):
     if request.method =="POST":
         rpt = Receipt.query.filter( Receipt.id== rpt_id).first()
-        rendered=render_template('receiptPdf.html',rpt=rpt)
-        css = ['firm/static/css/main2.css']
+        rendered=render_template('receiptPdf2.html',rpt=rpt)
+        css = ['firm/static/css/testing_2.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'

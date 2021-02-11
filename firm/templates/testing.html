@@ -44,6 +44,7 @@
 			<table class="meta">
 				<span><h6 class="text-right">Tax Invoice Number:&nbsp;&nbsp;&nbsp;{{inv.vat}}</h6></span>
 				<tr>
+					TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
 					<th><span >Our Ref #</span></th>
 					<td><span >{{ inv.ref_number }}</span></td>
 				</tr>
@@ -75,7 +76,7 @@
 				<tbody>
 				{% for myItem in item %}
 					<tr>
-						<td><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
+						<td class="note"><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
 						{% if myItem.disbursements != 0.0%}
 						<td><span >{{myItem.disbursements }}</span></td>
 						{% else %}
