@@ -56,33 +56,26 @@
             {% else %}
                 {{ form.password(class="form-control") }}
             {% endif %}
-          </div>
-          <div class="form-group">
-            <div class="utility">
-              <div class="animated-checkbox">
-                <label>
-                  <input type="checkbox"><span class="label-text">Stay Signed in</span>
-                </label>
-              </div>
-              <p class="semibold-text mb-2"><a href="#" data-toggle="flip">Forgot Password ?</a></p>
+          
+        </div>
+        <div class="form-group">
+          <div class="utility">
+            <div class="animated-checkbox">
+              <label>
+                <input type="checkbox"><span class="label-text">Stay Signed in</span>
+              </label>
+              <small class="text-muted ml-2">
+                <a class="login-head" href="{{url_for('reset_request')}}"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password?</a>
+            </small>
             </div>
+            
+
           </div>
-          <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
-          </div>
-        </form>
-        <form class="forget-form" action="index.html">
-          <h3 class="login-head"><i class="fa fa-lg fa-fw fa-lock"></i>Forgot Password ?</h3>
-          <div class="form-group">
-            <label class="control-label">EMAIL</label>
-            <input class="form-control" type="text" placeholder="Email">
-          </div>
-          <div class="form-group btn-container">
-            <!--<button class="btn btn-primary btn-block"><i class="fa fa-unlock fa-lg fa-fw"></i>RESET</button>-->
-          </div>
-          <div class="form-group mt-3">
-            <p class="semibold-text mb-0"><a href="#" data-toggle="flip"><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
-          </div>
+        </div>
+        <div class="form-group btn-container">
+          {{ form.submit(class="btn btn-primary btn-block fa fa-sign-in fa-lg fa-fw") }}
+          
+        </div>
         </form>
       </div>
     </section>

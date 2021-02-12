@@ -67,7 +67,12 @@
                   <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
                 <div class="col-4">To 
-                  <address><strong>{{inv.name_to}}.</strong><br>{{inv.address_to}}<br>
+                  <address><strong>{{inv.name_to}}.</strong><br><strong>
+                    {% if inv.company_name == '' %}
+                    {% else%}
+                    {{inv.company_name}} </strong>
+                    {% endif %}
+                    <br>{{inv.address_to}}<br>
                     {% if inv.email_to == '' %}
                     {% else%}
                     Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}} <br>

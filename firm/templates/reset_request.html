@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Login - 3Ks</title>
+  </head>
+  <body class="landing-page">
+  <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <defs>
+        <symbol id="icon-chart" viewbox="0 0 32 32">
+          <title>chart</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M24 26.667v-13.333"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 26.667v-21.333"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M8 26.667v-8"></path>
+        </symbol>
+        <symbol id="icon-globe" viewbox="0 0 32 32">
+          <title>globe</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M29.333 16c0 7.364-5.97 13.333-13.333 13.333s-13.333-5.97-13.333-13.333c0-7.364 5.97-13.333 13.333-13.333s13.333 5.97 13.333 13.333z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M2.667 16h26.667"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 2.667c3.216 3.512 5.223 8.178 5.333 13.311l0 0.022c-0.111 5.155-2.117 9.822-5.347 13.349l0.014-0.015c-3.216-3.512-5.223-8.178-5.333-13.311l-0-0.022c0.111-5.155 2.117-9.822 5.347-13.349l-0.014 0.015z"></path>
+        </symbol>
+        <symbol id="icon-grid" viewbox="0 0 32 32">
+          <title>grid</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M4 4h9.333v9.333h-9.333v-9.333z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M18.667 4h9.333v9.333h-9.333v-9.333z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M18.667 18.667h9.333v9.333h-9.333v-9.333z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M4 18.667h9.333v9.333h-9.333v-9.333z"></path>
+        </symbol>
+        <symbol id="icon-layout" viewbox="0 0 32 32">
+          <title>layout</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M6.667 4h18.667c1.473 0 2.667 1.194 2.667 2.667v18.667c0 1.473-1.194 2.667-2.667 2.667h-18.667c-1.473 0-2.667-1.194-2.667-2.667v-18.667c0-1.473 1.194-2.667 2.667-2.667z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M4 12h24"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M12 28v-16"></path>
+        </symbol>
+        <symbol id="icon-smartphone" viewbox="0 0 32 32">
+          <title>smartphone</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M9.333 2.667h13.333c1.473 0 2.667 1.194 2.667 2.667v21.333c0 1.473-1.194 2.667-2.667 2.667h-13.333c-1.473 0-2.667-1.194-2.667-2.667v-21.333c0-1.473 1.194-2.667 2.667-2.667z"></path>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M16 24v0"></path>
+        </symbol>
+        <symbol id="icon-zap" viewbox="0 0 32 32">
+          <title>zap</title>
+          <path stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2.6667" d="M17.333 2.667l-13.333 16h12l-1.333 10.667 13.333-16h-12l1.333-10.667z"></path>
+        </symbol>
+      </defs>
+    </svg>
+    <section class="landing-hero">
+	 <div class="landing-hero-overlay"></div>
+	 <div class="landing-hero-content">
+    
+    <section class="login-content">
+  {% with messages = get_flashed_messages(with_categories = true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+  
+ 
+  <h3 class="landing-hero-title">Kamahoro,Kiboome & Kirunda Advocates</h3>
+  <div class="col-md-3">
+    <div class ="">
+    <div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Reset Password</legend>
+            <div class="form-group">
+                {{ form.email.label(class="form-control-label") }}
+                {% if form.email.errors %}
+                    {{ form.email(class="form-control form-control-lg is-invalid") }}
+                    <div class="invalid-feedback">
+                        {% for error in form.email.errors %}
+                            <span>{{ error }}</span>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    {{ form.email(class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+        </fieldset>
+        <div class="form-group">
+            {{ form.submit(class="btn btn-primary btn-block") }}
+        </div>
+        <div class="form-group mt-3">
+            <p class="semibold-text mb-0"><a href="{{url_for('index')}}" ><i class="fa fa-angle-left fa-fw"></i> Back to Login</a></p>
+          </div>
+    </form>
+</div>
+</div>
+</div>
+
+</div>
+    </section>
+	</div>
+</section>
+    <!-- Essential javascripts for application to work-->
+    <script src="static/js/jquery-3.3.1.min.js"></script>
+    <script src="static/js/popper.min.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="static/js/plugins/pace.min.js"></script>
+    <script type="text/javascript">
+      // Login Page Flipbox control
+      $('.login-content [data-toggle="flip"]').click(function() {
+      	$('.login-box').toggleClass('flipped');
+      	return false;
+      });
+    </script>
+  </body>
+</html>

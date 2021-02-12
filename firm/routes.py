@@ -1,14 +1,15 @@
+import os, sys, subprocess, platform
+import pdfkit
 from datetime import datetime, date
 from flask import Flask,render_template,request,url_for,flash,redirect, make_response 
 from firm.models import User,Invoice,InvoiceLineItem,Receipt
-from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,ReceiptForm,
-                Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,Invoice_Items4)
-from firm import app
+from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,ReceiptForm,RequestResetForm,
+                ResetPasswordForm,Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,Invoice_Items4)
 from sqlalchemy import desc
-from firm import db,bcrypt
+from firm import db,bcrypt,app,mail
 from flask_login import login_user,current_user,logout_user,login_required
-import os, sys, subprocess, platform
-import pdfkit
+from  flask_mail import Message
+
 
 def _get_pdfkit_config():
 
@@ -137,7 +138,7 @@ def get_pdf(inv_id,options=wk_options):
             grandtotal = float(VAT+subtotal)
         rendered=render_template('testing.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
-        css = ['firm/templates/testing.css']
+        css = ['firm/static/css/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
@@ -162,7 +163,7 @@ def getProForma_pdf(inv_id,options=wk_options):
             grandtotal = float(VAT+subtotal)
         rendered=render_template('proForma.html',myPro= myPro,
                                     subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
-        css = ['firm/templates/testing.css']
+        css = ['firm/static/css/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
@@ -203,13 +204,14 @@ def create_invoice():
             address_to = request.form['address_to']
             email_to = request.form['email_to']
             telephone_to = request.form['telephone_to']
+            company_name = request.form['company_name']
             box_number_to = request.form['box_number_to']
             vat = request.form['vat']
             terms = request.form['terms']
             issue_date = request.form['issue_date']
             due_date = request.form['due_date']
 
-            new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,email_to,box_number_to,vat,terms,issue_date,due_date,current_user.id)
+            new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,company_name,email_to,box_number_to,vat,terms,issue_date,due_date,current_user.id)
 
             db.session.add(new_invoice)
 
@@ -279,7 +281,8 @@ def update_invoice(inv_id):
             ref_number = ref_number
             updt_inv.name_to = form1.name_to.data 
             updt_inv.address_to = form1.address_to.data 
-            updt_inv.email_to = form1.email_to.data 
+            updt_inv.email_to = form1.email_to.data
+            updt_inv.company_name = form1.company_name.data 
             updt_inv.telephone_to = form1.telephone_to.data 
             updt_inv.box_number_to = form1.box_number_to.data 
             updt_inv.vat = form1.vat.data 
@@ -301,6 +304,7 @@ def update_invoice(inv_id):
             form1.address_to.data  = updt_inv.address_to
             form1.email_to.data  = updt_inv.email_to
             form1.telephone_to.data= updt_inv.telephone_to
+            form1.company_name.data = updt_inv.company_name
             form1.box_number_to.data = updt_inv.box_number_to
             #form1.ref_number.data = updt_inv.ref_number
             form1.terms.data = updt_inv.terms
@@ -339,6 +343,7 @@ def update_invoice2(inv_id):
             updt_inv.name_to = form2.name_to.data 
             updt_inv.address_to = form2.address_to.data 
             updt_inv.email_to = form2.email_to.data 
+            updt_inv.company_name = form2.company_name.data
             updt_inv.telephone_to = form2.telephone_to.data 
             updt_inv.box_number_to = form2.box_number_to.data 
             updt_inv.vat = form2.vat.data 
@@ -366,6 +371,7 @@ def update_invoice2(inv_id):
             form2.name_to.data = updt_inv.name_to
             form2.address_to.data  = updt_inv.address_to
             form2.email_to.data  = updt_inv.email_to
+            form2.company_name.data = updt_inv.company_name
             form2.telephone_to.data= updt_inv.telephone_to
             form2.terms.data = updt_inv.terms
             form2.issue_date.data = updt_inv.issue_date
@@ -407,7 +413,8 @@ def update_invoice3(inv_id):
             ref_number = ref_number
             updt_inv.name_to = form3.name_to.data 
             updt_inv.address_to = form3.address_to.data 
-            updt_inv.email_to = form3.email_to.data 
+            updt_inv.email_to = form3.email_to.data
+            updt_inv.company_name = form3.company_name.data 
             updt_inv.telephone_to = form3.telephone_to.data 
             updt_inv.box_number_to = form3.box_number_to.data 
             updt_inv.vat = form3.vat.data 
@@ -438,6 +445,7 @@ def update_invoice3(inv_id):
             form3.name_to.data = updt_inv.name_to
             form3.address_to.data  = updt_inv.address_to
             form3.email_to.data  = updt_inv.email_to
+            form3.company_name.data = updt_inv.data
             form3.telephone_to.data= updt_inv.telephone_to
             #form3.ref_number.data = updt_inv.ref_number
             form3.terms.data = updt_inv.terms
@@ -484,7 +492,8 @@ def update_invoice4(inv_id):
             ref_number =ref_number
             updt_inv.name_to = form4.name_to.data 
             updt_inv.address_to = form4.address_to.data 
-            updt_inv.email_to = form4.email_to.data 
+            updt_inv.email_to = form4.email_to.data
+            updt_inv.company_name = form4.company_name.data 
             updt_inv.telephone_to = form4.telephone_to.data 
             updt_inv.box_number_to = form4.box_number_to.data 
             updt_inv.vat = form4.vat.data 
@@ -520,6 +529,7 @@ def update_invoice4(inv_id):
             form4.name_to.data = updt_inv.name_to
             form4.address_to.data  = updt_inv.address_to
             form4.email_to.data  = updt_inv.email_to
+            form4.company_name.data = updt_inv.company_name
             form4.telephone_to.data= updt_inv.telephone_to
             form4.terms.data = updt_inv.terms
             form4.issue_date.data = updt_inv.issue_date
@@ -572,6 +582,7 @@ def update_invoice5(inv_id):
             updt_inv.name_to = form5.name_to.data 
             updt_inv.address_to = form5.address_to.data 
             updt_inv.email_to = form5.email_to.data 
+            updt_inv.company_name = form5.company_name.data
             updt_inv.telephone_to = form5.telephone_to.data 
             updt_inv.box_number_to = form5.box_number_to.data 
             updt_inv.vat = form5.vat.data  
@@ -612,6 +623,7 @@ def update_invoice5(inv_id):
             form5.name_to.data = updt_inv.name_to
             form5.address_to.data  = updt_inv.address_to
             form5.email_to.data  = updt_inv.email_to
+            form5.company_name.data =  updt_inv.company_name
             form5.telephone_to.data= updt_inv.telephone_to
             form5.terms.data = updt_inv.terms
             form5.issue_date.data = updt_inv.issue_date
@@ -772,3 +784,44 @@ def receipt_pdf(rpt_id,options=wk_options):
         response.headers['Content-Disposition']='inline; filename=Receipt'+rpt_id+'.pdf'
         return response
     return redirect(url_for('receipt'))
+
+def send_reset_email(user):
+    token = user.get_reset_token()
+    msg = Message('Password Reset Request', 
+                    sender='firm2.herokuapp.com/',
+                     recipients=[user.email])
+    msg.body = f''' To reset your password, visit the following link: 
+{url_for('reset_token',token=token, _external = True)}
+
+If you did not make this request then simply ignore this email and no change will be made.
+'''
+    mail.send(msg)
+
+@app.route("/reset_password", methods=['GET', 'POST'])
+def reset_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    form = RequestResetForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email = form.email.data).first()
+        send_reset_email(user)
+        flash ('An email has been sent with instructions to reset your password.','info')
+        return redirect(url_for('index'))
+    return render_template('reset_request.html',title ='Reset Password', form = form)
+
+@app.route("/reset_password-<token>", methods=['GET', 'POST'])
+def reset_token(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('dashboard'))
+    user = User.verify_reset_token(token)
+    if user is None:
+        flash('That is an invalid or expired token', 'warning')
+        return redirect(url_for('users.reset_request'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user.password = hashed_password
+        db.session.commit()
+        flash('Your password has been updated! You can now log in', 'success')
+        return redirect(url_for('index'))
+    return render_template('reset_token.html',title ='Reset Password', form = form)

@@ -16,12 +16,20 @@
 				<p>Office:&nbsp;&nbsp;(+256) 394-836-201</p>
 				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
 			</address>
-
+			<location>			
+				<h2><strong>TIN Number:&nbsp;&nbsp;1017550332</strong></h2>
+			</location>
 		</header>
 		<article>
 			<h1>Recipient</h1>
 			<address >
 				<p>{{inv.name_to}}.</p>
+				<p>
+                    {% if inv.company_name == '' %}
+                    {% else%}
+					{{inv.company_name}}
+					{% endif %}
+                </p>
 				<p>{{inv.address_to}}</p>
 				<p>
                     {% if inv.email_to == '' %}
@@ -44,7 +52,6 @@
 			</address>
 			<table class="meta">
 				<tr>
-					TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
 					<th><span >Our Ref</span></th>
 					<td><span >{{ inv.ref_number }}</span></td>
 				</tr>
