@@ -7,6 +7,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 from wtforms import validators
 from flask_login import current_user
 from wtforms.widgets import Input
+from wtforms.fields.html5 import DateField
 from firm.models import User
 
 class RegistrationForm(FlaskForm):
@@ -105,8 +106,8 @@ class MainForm(FlaskForm):
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('Due on Receipt', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
 
-    issue_date= DateTimeField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
-    due_date= DateTimeField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
     laps = FieldList(
         FormField(LapForm),
@@ -123,8 +124,8 @@ class Invoice_Items(FlaskForm):
     box_number_to = StringField('P.O.BOX if any')
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
-    issue_date= DateTimeField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
-    due_date= DateTimeField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
   
@@ -148,8 +149,8 @@ class Invoice_Items2(FlaskForm):
     box_number_to = StringField('P.O.BOX if any')
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
-    issue_date= DateTimeField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
-    due_date= DateTimeField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
   
@@ -178,8 +179,8 @@ class Invoice_Items3(FlaskForm):
     box_number_to = StringField('P.O.BOX if any')
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
-    issue_date= DateTimeField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
-    due_date= DateTimeField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
   
@@ -212,8 +213,8 @@ class Invoice_Items4(FlaskForm):
     box_number_to = StringField('P.O.BOX if any')
     terms = SelectField('Payment Terms',
                 choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
-    issue_date= DateTimeField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
-    due_date= DateTimeField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
   
@@ -246,7 +247,7 @@ class Invoice_Items4(FlaskForm):
 
 class ReceiptForm(FlaskForm):
     """ReceiptForm."""
-    date_created= DateTimeField('Date', format="%Y-%m-%d",default=datetime.now)
+    date_created= DateField('Date', format="%Y-%m-%d",default=datetime.now)
     received_from  = StringField('Received from',validators=[validators.InputRequired(), validators.Length(max=100)])
     sum_in_words  = StringField('Sum in words',validators=[validators.InputRequired(), validators.Length(max=255)]) 
     reason = StringField('Being payment of',validators=[validators.InputRequired(), validators.Length(max=100)])

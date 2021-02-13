@@ -142,7 +142,7 @@ def get_pdf(inv_id,options=wk_options):
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
-        response.headers['Content-Disposition']='inline; filename='+inv_id+'.pdf'
+        response.headers['Content-Disposition']='inline; filename=TaxInvoice'+inv_id+'.pdf'
         return response
     return redirect(url_for('saved_invoice'))
 
@@ -167,7 +167,7 @@ def getProForma_pdf(inv_id,options=wk_options):
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
-        response.headers['Content-Disposition']='inline; filename='+inv_id+'.pdf'
+        response.headers['Content-Disposition']='inline; filename=ProFormaInvoice'+inv_id+'.pdf'
         return response
     return redirect(url_for('saved_invoice'))
 
