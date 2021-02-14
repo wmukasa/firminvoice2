@@ -112,7 +112,7 @@ class MainForm(FlaskForm):
     laps = FieldList(
         FormField(LapForm),
         min_entries=1,
-        max_entries=5
+        max_entries=8
     )
 
 class Invoice_Items(FlaskForm):
@@ -243,6 +243,165 @@ class Invoice_Items4(FlaskForm):
     disbursements5 =StringField('Disbursements Fees/Ug.shs')
     professional_fees5 =StringField('Professional Fees/Ug.shs')
     amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    submit = SubmitField('Update')
+
+class Invoice_Items5(FlaskForm):
+    name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
+    company_name = StringField('Company if any')
+    address_to = StringField('Address',validators=[DataRequired(), Length(min=2, max=20)])
+    email_to  = StringField('Email if any')  
+    telephone_to = StringField('Telephone if any')
+    box_number_to = StringField('P.O.BOX if any')
+    terms = SelectField('Payment Terms',
+                choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    vat = StringField('Tax Invoice Number ')
+
+  
+    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements =StringField('Disbursements Fees/Ug.shs')
+    professional_fees =StringField('Professional Fees/Ug.shs')
+    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+
+    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements2 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees2 =StringField('Professional Fees/Ug.shs')
+    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements3 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees3 =StringField('Professional Fees/Ug.shs')
+    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements4 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees4 =StringField('Professional Fees/Ug.shs')
+    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    
+    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements5 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees5 =StringField('Professional Fees/Ug.shs')
+    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+   
+      
+    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements6 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees6 =StringField('Professional Fees/Ug.shs')
+    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    submit = SubmitField('Update')
+
+class Invoice_Items6(FlaskForm):
+    name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
+    company_name = StringField('Company if any')
+    address_to = StringField('Address',validators=[DataRequired(), Length(min=2, max=20)])
+    email_to  = StringField('Email if any')  
+    telephone_to = StringField('Telephone if any')
+    box_number_to = StringField('P.O.BOX if any')
+    terms = SelectField('Payment Terms',
+                choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    vat = StringField('Tax Invoice Number ')
+
+  
+    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements =StringField('Disbursements Fees/Ug.shs')
+    professional_fees =StringField('Professional Fees/Ug.shs')
+    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+
+    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements2 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees2 =StringField('Professional Fees/Ug.shs')
+    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements3 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees3 =StringField('Professional Fees/Ug.shs')
+    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements4 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees4 =StringField('Professional Fees/Ug.shs')
+    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    
+    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements5 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees5 =StringField('Professional Fees/Ug.shs')
+    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+   
+      
+    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements6 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees6 =StringField('Professional Fees/Ug.shs')
+    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+      
+    notes7= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements7 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees7 =StringField('Professional Fees/Ug.shs')
+    amount7 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    submit = SubmitField('Update')
+
+class Invoice_Items7(FlaskForm):
+    name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
+    company_name = StringField('Company if any')
+    address_to = StringField('Address',validators=[DataRequired(), Length(min=2, max=20)])
+    email_to  = StringField('Email if any')  
+    telephone_to = StringField('Telephone if any')
+    box_number_to = StringField('P.O.BOX if any')
+    terms = SelectField('Payment Terms',
+                choices=[('none', 'NONE'), ('due', 'Due on Receipt'),('cheque', 'Cheque'),('today', 'Today'),('Mobile/Airtel Money', 'Mobile/Airtel Money')])
+    issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
+    vat = StringField('Tax Invoice Number ')
+
+  
+    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements =StringField('Disbursements Fees/Ug.shs')
+    professional_fees =StringField('Professional Fees/Ug.shs')
+    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+
+    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements2 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees2 =StringField('Professional Fees/Ug.shs')
+    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements3 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees3 =StringField('Professional Fees/Ug.shs')
+    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements4 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees4 =StringField('Professional Fees/Ug.shs')
+    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    
+    
+    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements5 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees5 =StringField('Professional Fees/Ug.shs')
+    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+   
+      
+    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements6 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees6 =StringField('Professional Fees/Ug.shs')
+    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+     
+    notes7= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements7 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees7 =StringField('Professional Fees/Ug.shs')
+    amount7 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    submit = SubmitField('Update')
+
+    notes8= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
+    disbursements8 =StringField('Disbursements Fees/Ug.shs')
+    professional_fees8 =StringField('Professional Fees/Ug.shs')
+    amount8 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
     submit = SubmitField('Update')
 
 class ReceiptForm(FlaskForm):

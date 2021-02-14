@@ -4,7 +4,8 @@ from datetime import datetime, date
 from flask import Flask,render_template,request,url_for,flash,redirect, make_response 
 from firm.models import User,Invoice,InvoiceLineItem,Receipt
 from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,ReceiptForm,RequestResetForm,
-                ResetPasswordForm,Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,Invoice_Items4)
+                ResetPasswordForm,Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,
+                Invoice_Items4,Invoice_Items5,Invoice_Items6,Invoice_Items7)
 from sqlalchemy import desc
 from firm import db,bcrypt,app,mail
 from flask_login import login_user,current_user,logout_user,login_required
@@ -91,8 +92,8 @@ def account():
 def dashboard():
     page = request.args.get('page',1,type=int)
     #myInv = Invoice.query.paginate(page = page ,per_page=4)
-    myInv = Invoice.query.order_by(Invoice.ref_number.desc()).paginate(page = page ,per_page=4)
-    myRpt = Receipt.query.order_by(Receipt.receipt_number.desc()).paginate(page = page ,per_page=4)
+    myInv = Invoice.query.order_by(Invoice.ref_number.desc()).paginate(page = page ,per_page=6)
+    myRpt = Receipt.query.order_by(Receipt.receipt_number.desc()).paginate(page = page ,per_page=6)
     return render_template('dashboard.html',myInv=myInv,myRpt=myRpt )
 
 @app.route('/Manage Receipts')
@@ -672,6 +673,374 @@ def update_invoice5(inv_id):
 
     return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
                             form5=form5,len=len,title='Update Invoice')
+
+@app.route("/Invoice6-<int:inv_id>-Update", methods=['GET', 'POST'])
+@login_required
+def update_invoice6(inv_id):
+    today = date.today()
+    updt_inv = Invoice.query.get_or_404(inv_id)
+    item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    form6=Invoice_Items5()
+    try:
+        get_id = Invoice.query.order_by(desc('id')).first()
+        x: int = get_id.id + 1
+        y = date.today().strftime("%y%m")
+        if get_id:
+            ref_number = "" + y + str(x).zfill(3) + ""
+    except:
+        ref_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
+    finally:
+        if request.method == 'POST':
+            updt_inv.name_to = form6.name_to.data 
+            updt_inv.address_to = form6.address_to.data 
+            updt_inv.email_to = form6.email_to.data 
+            updt_inv.company_name = form6.company_name.data
+            updt_inv.telephone_to = form6.telephone_to.data 
+            updt_inv.box_number_to = form6.box_number_to.data 
+            updt_inv.vat = form6.vat.data  
+            updt_inv.terms = form6.terms.data 
+            updt_inv.issue_date = form6.issue_date.data
+            updt_inv.due_date = form6.due_date.data   
+            for p in item:
+                if ((item.index(p)) == 0):
+                    p.notes = form6.notes.data
+                    p.disbursements = form6.disbursements.data
+                    p.professional_fees = form6.professional_fees.data
+                    p.amount = form6.amount.data
+                if ((item.index(p)) == 1):
+                    p.notes = form6.notes2.data
+                    p.disbursements = form6.disbursements2.data
+                    p.professional_fees = form6.professional_fees2.data
+                    p.amount = form6.amount2.data
+                if ((item.index(p)) == 2):
+                    p.notes = form6.notes3.data
+                    p.disbursements = form6.disbursements3.data
+                    p.professional_fees = form6.professional_fees3.data
+                    p.amount = form6.amount3.data
+                if ((item.index(p)) == 3):
+                    p.notes = form6.notes4.data
+                    p.disbursements = form6.disbursements4.data
+                    p.professional_fees = form6.professional_fees4.data
+                    p.amount = form6.amount4.data
+                if ((item.index(p)) == 4):
+                    p.notes = form6.notes5.data
+                    p.disbursements = form6.disbursements5.data
+                    p.professional_fees = form6.professional_fees5.data
+                    p.amount = form6.amount5.data
+                if ((item.index(p)) == 5):
+                    p.notes = form6.notes6.data
+                    p.disbursements = form6.disbursements6.data
+                    p.professional_fees = form6.professional_fees6.data
+                    p.amount = form6.amount6.data
+            db.session.commit()
+            flash('Your log has been updated!', 'success')
+            return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
+        elif request.method == 'GET':
+        
+            form6.name_to.data = updt_inv.name_to
+            form6.address_to.data  = updt_inv.address_to
+            form6.email_to.data  = updt_inv.email_to
+            form6.company_name.data =  updt_inv.company_name
+            form6.telephone_to.data= updt_inv.telephone_to
+            form6.terms.data = updt_inv.terms
+            form6.issue_date.data = updt_inv.issue_date
+            form6.due_date.data = updt_inv.due_date
+            form6.box_number_to.data = updt_inv.box_number_to
+            form6.vat.data = updt_inv.vat 
+            for p in item:
+                #print(p.id,p.invoice_id)
+                if ((item.index(p)) == 0):
+                    form6.notes.data = p.notes
+                    form6.disbursements.data = p.disbursements
+                    form6.professional_fees.data = p.professional_fees
+                    form6.amount.data = p.amount
+
+                if ((item.index(p)) == 1):
+                    form6.notes2.data = p.notes
+                    form6.disbursements2.data = p.disbursements
+                    form6.professional_fees2.data = p.professional_fees
+                    form6.amount2.data = p.amount
+
+                if ((item.index(p)) == 2):
+                    form6.notes3.data = p.notes
+                    form6.disbursements3.data = p.disbursements
+                    form6.professional_fees3.data = p.professional_fees
+                    form6.amount3.data = p.amount
+
+                if ((item.index(p)) == 3):
+                    form6.notes4.data = p.notes
+                    form6.disbursements4.data = p.disbursements
+                    form6.professional_fees4.data = p.professional_fees
+                    form6.amount4.data = p.amount
+
+                if ((item.index(p)) == 4):
+                    form6.notes5.data = p.notes
+                    form6.disbursements5.data = p.disbursements
+                    form6.professional_fees5.data = p.professional_fees
+                    form6.amount5.data = p.amount
+                if ((item.index(p)) == 5):
+                    form6.notes6.data = p.notes
+                    form6.disbursements6.data = p.disbursements
+                    form6.professional_fees6.data = p.professional_fees
+                    form6.amount6.data = p.amount
+
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                            form6=form6,len=len,title='Update Invoice')
+@app.route("/Invoice7-<int:inv_id>-Update", methods=['GET', 'POST'])
+@login_required
+def update_invoice7(inv_id):
+    today = date.today()
+    updt_inv = Invoice.query.get_or_404(inv_id)
+    item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    form7=Invoice_Items6()
+    try:
+        get_id = Invoice.query.order_by(desc('id')).first()
+        x: int = get_id.id + 1
+        y = date.today().strftime("%y%m")
+        if get_id:
+            ref_number = "" + y + str(x).zfill(3) + ""
+    except:
+        ref_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
+    finally:
+        if request.method == 'POST':
+            updt_inv.name_to = form7.name_to.data 
+            updt_inv.address_to = form7.address_to.data 
+            updt_inv.email_to = form7.email_to.data 
+            updt_inv.company_name = form7.company_name.data
+            updt_inv.telephone_to = form7.telephone_to.data 
+            updt_inv.box_number_to = form7.box_number_to.data 
+            updt_inv.vat = form7.vat.data  
+            updt_inv.terms = form7.terms.data 
+            updt_inv.issue_date = form7.issue_date.data
+            updt_inv.due_date = form7.due_date.data   
+            for p in item:
+                if ((item.index(p)) == 0):
+                    p.notes = form7.notes.data
+                    p.disbursements = form7.disbursements.data
+                    p.professional_fees = form7.professional_fees.data
+                    p.amount = form7.amount.data
+                if ((item.index(p)) == 1):
+                    p.notes = form7.notes2.data
+                    p.disbursements = form7.disbursements2.data
+                    p.professional_fees = form7.professional_fees2.data
+                    p.amount = form7.amount2.data
+                if ((item.index(p)) == 2):
+                    p.notes = form7.notes3.data
+                    p.disbursements = form7.disbursements3.data
+                    p.professional_fees = form7.professional_fees3.data
+                    p.amount = form7.amount3.data
+                if ((item.index(p)) == 3):
+                    p.notes = form7.notes4.data
+                    p.disbursements = form7.disbursements4.data
+                    p.professional_fees = form7.professional_fees4.data
+                    p.amount = form7.amount4.data
+                if ((item.index(p)) == 4):
+                    p.notes = form7.notes5.data
+                    p.disbursements = form7.disbursements5.data
+                    p.professional_fees = form7.professional_fees5.data
+                    p.amount = form7.amount5.data
+                if ((item.index(p)) == 5):
+                    p.notes = form7.notes6.data
+                    p.disbursements = form7.disbursements6.data
+                    p.professional_fees = form7.professional_fees6.data
+                    p.amount = form7.amount6.data
+                if ((item.index(p)) == 6):
+                    p.notes = form7.notes7.data
+                    p.disbursements = form7.disbursements7.data
+                    p.professional_fees = form7.professional_fees7.data
+                    p.amount = form7.amount7.data
+            db.session.commit()
+            flash('Your log has been updated!', 'success')
+            return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
+        elif request.method == 'GET':
+        
+            form7.name_to.data = updt_inv.name_to
+            form7.address_to.data  = updt_inv.address_to
+            form7.email_to.data  = updt_inv.email_to
+            form7.company_name.data =  updt_inv.company_name
+            form7.telephone_to.data= updt_inv.telephone_to
+            form7.terms.data = updt_inv.terms
+            form7.issue_date.data = updt_inv.issue_date
+            form7.due_date.data = updt_inv.due_date
+            form7.box_number_to.data = updt_inv.box_number_to
+            form7.vat.data = updt_inv.vat 
+            for p in item:
+                #print(p.id,p.invoice_id)
+                if ((item.index(p)) == 0):
+                    form7.notes.data = p.notes
+                    form7.disbursements.data = p.disbursements
+                    form7.professional_fees.data = p.professional_fees
+                    form7.amount.data = p.amount
+
+                if ((item.index(p)) == 1):
+                    form7.notes2.data = p.notes
+                    form7.disbursements2.data = p.disbursements
+                    form7.professional_fees2.data = p.professional_fees
+                    form7.amount2.data = p.amount
+
+                if ((item.index(p)) == 2):
+                    form7.notes3.data = p.notes
+                    form7.disbursements3.data = p.disbursements
+                    form7.professional_fees3.data = p.professional_fees
+                    form7.amount3.data = p.amount
+
+                if ((item.index(p)) == 3):
+                    form7.notes4.data = p.notes
+                    form7.disbursements4.data = p.disbursements
+                    form7.professional_fees4.data = p.professional_fees
+                    form7.amount4.data = p.amount
+
+                if ((item.index(p)) == 4):
+                    form7.notes5.data = p.notes
+                    form7.disbursements5.data = p.disbursements
+                    form7.professional_fees5.data = p.professional_fees
+                    form7.amount5.data = p.amount
+                if ((item.index(p)) == 5):
+                    form7.notes6.data = p.notes
+                    form7.disbursements6.data = p.disbursements
+                    form7.professional_fees6.data = p.professional_fees
+                    form7.amount6.data = p.amount
+                if ((item.index(p)) == 6):
+                    form7.notes7.data = p.notes
+                    form7.disbursements7.data = p.disbursements
+                    form7.professional_fees7.data = p.professional_fees
+                    form7.amount7.data = p.amount
+
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                            form7=form7,len=len,title='Update Invoice')
+
+@app.route("/Invoice8-<int:inv_id>-Update", methods=['GET', 'POST'])
+@login_required
+def update_invoice8(inv_id):
+    today = date.today()
+    updt_inv = Invoice.query.get_or_404(inv_id)
+    item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    form8=Invoice_Items7()
+    try:
+        get_id = Invoice.query.order_by(desc('id')).first()
+        x: int = get_id.id + 1
+        y = date.today().strftime("%y%m")
+        if get_id:
+            ref_number = "" + y + str(x).zfill(3) + ""
+    except:
+        ref_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
+    finally:
+        if request.method == 'POST':
+            updt_inv.name_to = form8.name_to.data 
+            updt_inv.address_to = form8.address_to.data 
+            updt_inv.email_to = form8.email_to.data 
+            updt_inv.company_name = form8.company_name.data
+            updt_inv.telephone_to = form8.telephone_to.data 
+            updt_inv.box_number_to = form8.box_number_to.data 
+            updt_inv.vat = form8.vat.data  
+            updt_inv.terms = form8.terms.data 
+            updt_inv.issue_date = form8.issue_date.data
+            updt_inv.due_date = form8.due_date.data   
+            for p in item:
+                if ((item.index(p)) == 0):
+                    p.notes = form8.notes.data
+                    p.disbursements = form8.disbursements.data
+                    p.professional_fees = form8.professional_fees.data
+                    p.amount = form8.amount.data
+                if ((item.index(p)) == 1):
+                    p.notes = form8.notes2.data
+                    p.disbursements = form8.disbursements2.data
+                    p.professional_fees = form8.professional_fees2.data
+                    p.amount = form8.amount2.data
+                if ((item.index(p)) == 2):
+                    p.notes = form8.notes3.data
+                    p.disbursements = form8.disbursements3.data
+                    p.professional_fees = form8.professional_fees3.data
+                    p.amount = form8.amount3.data
+                if ((item.index(p)) == 3):
+                    p.notes = form8.notes4.data
+                    p.disbursements = form8.disbursements4.data
+                    p.professional_fees = form8.professional_fees4.data
+                    p.amount = form8.amount4.data
+                if ((item.index(p)) == 4):
+                    p.notes = form8.notes5.data
+                    p.disbursements = form8.disbursements5.data
+                    p.professional_fees = form8.professional_fees5.data
+                    p.amount = form8.amount5.data
+                if ((item.index(p)) == 5):
+                    p.notes = form8.notes6.data
+                    p.disbursements = form8.disbursements6.data
+                    p.professional_fees = form8.professional_fees6.data
+                    p.amount = form8.amount6.data
+                if ((item.index(p)) == 6):
+                    p.notes = form8.notes7.data
+                    p.disbursements = form8.disbursements7.data
+                    p.professional_fees = form8.professional_fees7.data
+                    p.amount = form8.amount7.data
+                if ((item.index(p)) == 7):
+                    p.notes = form8.notes8.data
+                    p.disbursements = form8.disbursements8.data
+                    p.professional_fees = form8.professional_fees8.data
+                    p.amount = form8.amount6.data
+            db.session.commit()
+            flash('Your log has been updated!', 'success')
+            return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
+        elif request.method == 'GET':
+        
+            form8.name_to.data = updt_inv.name_to
+            form8.address_to.data  = updt_inv.address_to
+            form8.email_to.data  = updt_inv.email_to
+            form8.company_name.data =  updt_inv.company_name
+            form8.telephone_to.data= updt_inv.telephone_to
+            form8.terms.data = updt_inv.terms
+            form8.issue_date.data = updt_inv.issue_date
+            form8.due_date.data = updt_inv.due_date
+            form8.box_number_to.data = updt_inv.box_number_to
+            form8.vat.data = updt_inv.vat 
+            for p in item:
+                #print(p.id,p.invoice_id)
+                if ((item.index(p)) == 0):
+                    form8.notes.data = p.notes
+                    form8.disbursements.data = p.disbursements
+                    form8.professional_fees.data = p.professional_fees
+                    form8.amount.data = p.amount
+
+                if ((item.index(p)) == 1):
+                    form8.notes2.data = p.notes
+                    form8.disbursements2.data = p.disbursements
+                    form8.professional_fees2.data = p.professional_fees
+                    form8.amount2.data = p.amount
+
+                if ((item.index(p)) == 2):
+                    form8.notes3.data = p.notes
+                    form8.disbursements3.data = p.disbursements
+                    form8.professional_fees3.data = p.professional_fees
+                    form8.amount3.data = p.amount
+
+                if ((item.index(p)) == 3):
+                    form8.notes4.data = p.notes
+                    form8.disbursements4.data = p.disbursements
+                    form8.professional_fees4.data = p.professional_fees
+                    form8.amount4.data = p.amount
+
+                if ((item.index(p)) == 4):
+                    form8.notes5.data = p.notes
+                    form8.disbursements5.data = p.disbursements
+                    form8.professional_fees5.data = p.professional_fees
+                    form8.amount5.data = p.amount
+                if ((item.index(p)) == 5):
+                    form8.notes6.data = p.notes
+                    form8.disbursements6.data = p.disbursements
+                    form8.professional_fees6.data = p.professional_fees
+                    form8.amount6.data = p.amount
+                if ((item.index(p)) == 6):
+                    form8.notes7.data = p.notes
+                    form8.disbursements7.data = p.disbursements
+                    form8.professional_fees7.data = p.professional_fees
+                    form8.amount7.data = p.amount
+                if ((item.index(p)) == 7):
+                    form8.notes8.data = p.notes
+                    form8.disbursements8.data = p.disbursements
+                    form8.professional_fees8.data = p.professional_fees
+                    form8.amount8.data = p.amount
+
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                            form8=form8,len=len,title='Update Invoice')
 
 @app.route("/Invoice-<int:inv_id>-Update", methods=['POST'])
 @login_required

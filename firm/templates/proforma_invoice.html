@@ -35,6 +35,18 @@
               {% if ((len(item) == 5)) %}  
               <a href="{{ url_for('update_invoice5', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               {% endif %}
+              {% if ((len(item) == 6)) %}  
+              <a href="{{ url_for('update_invoice6', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
+              {% endif %}
+              {% if ((len(item) == 7)) %}  
+              <a href="{{ url_for('update_invoice7', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
+              {% endif %}
+              {% if ((len(item) == 8)) %}  
+              <a href="{{ url_for('update_invoice8', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
+              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
+              {% endif %}
           {% endif %}
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
           </form>

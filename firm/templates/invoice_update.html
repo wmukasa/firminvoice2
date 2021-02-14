@@ -36,7 +36,15 @@
               {% if (len(item) == 5) %} 
               <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
               {% endif %}
-
+              {% if (len(item) == 6) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 7) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
+              {% if (len(item) == 8) %} 
+              <button class="btn btn-outline-success" type="submit" form="update_invoice">Update</button>&nbsp;
+              {% endif %}
             {% endif %}  
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
               <!--<button class="btn btn-outline-secondary" type="submit" onclick="handleInvoice()">Preview</button>
@@ -346,6 +354,252 @@
 </form>
 {% endif %}
 
+{% if (len(item) == 6) %}     
+<form id="update_invoice" action=" " method="POST">
+  <div class="col-2">
+    <p>Tax Invoice Number:{{form6.vat(class="form-control form-control-ls")}}</p>
+  </div>
+<div class="row invoice-info">
+  <div class="col-4">From
+    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+  </div>
+  <div class="col-4">To
+    <address><strong>{{form6.name_to(class="form-control form-control-ls")}}.</strong><br>{% if updt_inv.company_name == '' %}{% else%}{{form6.company_name(class="form-control form-control-ls")}}{% endif %}Address:{{form6.address_to(class="form-control form-control-ls")}}<br>{% if updt_inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{form6.email_to(class="form-control form-control-ls")}}{% endif %}{% if updt_inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{form6.telephone_to(class="form-control form-control-ls") }}{% endif %}{% if updt_inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{form6.box_number_to(class="form-control form-control-ls")}} {% endif %}</address>
+  </div>
+  <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form6.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form6.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form6.terms(class="form-control form-control-ls") }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Disbursements/&nbsp;ug.Shs</th>
+          <th>Professional fees/&nbsp;ug.Shs</th>
+          <th>Amount/&nbsp;ug.Shs</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for p in item %}
+        <tr>
+            {% if ((item.index(p)) == 0) %}
+            <td>{{ form6.notes(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount(class="form-control form-control-ls") }}</td>
+              {% endif %}
+            {% if ((item.index(p)) == 1) %}
+            <td>{{ form6.notes2(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements2(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees2(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount2(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 2) %}
+            <td>{{ form6.notes3(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements3(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees3(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount3(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 3) %}
+            <td>{{ form6.notes4(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements4(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees4(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount4(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 4) %}
+            <td>{{ form6.notes5(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements5(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees5(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount5(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 5) %}
+            <td>{{ form6.notes6(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.disbursements6(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.professional_fees6(class="form-control form-control-ls") }}</td>
+            <td>{{ form6.amount6(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+ </div>
+</form>
+{% endif %}
+
+{% if (len(item) == 7) %}     
+<form id="update_invoice" action=" " method="POST">
+  <div class="col-2">
+    <p>Tax Invoice Number:{{form7.vat(class="form-control form-control-ls")}}</p>
+  </div>
+<div class="row invoice-info">
+  <div class="col-4">From
+    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+  </div>
+  <div class="col-4">To
+    <address><strong>{{form7.name_to(class="form-control form-control-ls")}}.</strong><br>{% if updt_inv.company_name == '' %}{% else%}{{form7.company_name(class="form-control form-control-ls")}}{% endif %}Address:{{form7.address_to(class="form-control form-control-ls")}}<br>{% if updt_inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{form7.email_to(class="form-control form-control-ls")}}{% endif %}{% if updt_inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{form7.telephone_to(class="form-control form-control-ls") }}{% endif %}{% if updt_inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{form7.box_number_to(class="form-control form-control-ls")}} {% endif %}</address>
+  </div>
+  <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form7.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form7.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form7.terms(class="form-control form-control-ls") }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Disbursements/&nbsp;ug.Shs</th>
+          <th>Professional fees/&nbsp;ug.Shs</th>
+          <th>Amount/&nbsp;ug.Shs</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for p in item %}
+        <tr>
+            {% if ((item.index(p)) == 0) %}
+            <td>{{ form7.notes(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount(class="form-control form-control-ls") }}</td>
+              {% endif %}
+            {% if ((item.index(p)) == 1) %}
+            <td>{{ form7.notes2(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements2(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees2(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount2(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 2) %}
+            <td>{{ form7.notes3(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements3(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees3(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount3(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 3) %}
+            <td>{{ form7.notes4(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements4(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees4(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount4(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 4) %}
+            <td>{{ form7.notes5(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements5(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees5(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount5(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 5) %}
+            <td>{{ form7.notes6(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements6(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees6(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount6(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 6) %}
+            <td>{{ form7.notes7(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.disbursements7(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.professional_fees7(class="form-control form-control-ls") }}</td>
+            <td>{{ form7.amount7(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+ </div>
+</form>
+{% endif %}
+
+
+{% if (len(item) == 8) %}     
+<form id="update_invoice" action=" " method="POST">
+  <div class="col-2">
+    <p>Tax Invoice Number:{{form8.vat(class="form-control form-control-ls")}}</p>
+  </div>
+<div class="row invoice-info">
+  <div class="col-4">From
+    <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;wmukasa@gmail.com<br>Telephone:&nbsp;&nbsp;&nbsp;0704160994<br>Business Number:&nbsp;&nbsp;&nbsp;0781544517</address>
+  </div>
+  <div class="col-4">To
+    <address><strong>{{form8.name_to(class="form-control form-control-ls")}}.</strong><br>{% if updt_inv.company_name == '' %}{% else%}{{form8.company_name(class="form-control form-control-ls")}}{% endif %}Address:{{form8.address_to(class="form-control form-control-ls")}}<br>{% if updt_inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{form8.email_to(class="form-control form-control-ls")}}{% endif %}{% if updt_inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{form8.telephone_to(class="form-control form-control-ls") }}{% endif %}{% if updt_inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{form8.box_number_to(class="form-control form-control-ls")}} {% endif %}</address>
+  </div>
+  <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form8.issue_date(class="form-control form-control-ls") }}Payment Due: {{ form8.due_date(class="form-control form-control-ls") }}Payment Terms: {{ form8.terms(class="form-control form-control-ls") }}
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Disbursements/&nbsp;ug.Shs</th>
+          <th>Professional fees/&nbsp;ug.Shs</th>
+          <th>Amount/&nbsp;ug.Shs</th>
+        </tr>
+      </thead>
+      <tbody>
+
+          {% for p in item %}
+        <tr>
+            {% if ((item.index(p)) == 0) %}
+            <td>{{ form8.notes(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount(class="form-control form-control-ls") }}</td>
+              {% endif %}
+            {% if ((item.index(p)) == 1) %}
+            <td>{{ form8.notes2(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements2(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees2(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount2(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 2) %}
+            <td>{{ form8.notes3(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements3(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees3(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount3(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 3) %}
+            <td>{{ form8.notes4(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements4(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees4(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount4(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 4) %}
+            <td>{{ form8.notes5(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements5(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees5(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount5(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 5) %}
+            <td>{{ form8.notes6(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements6(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees6(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount6(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 6) %}
+            <td>{{ form8.notes7(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements7(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees7(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount7(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% if ((item.index(p)) == 7) %}
+            <td>{{ form8.notes8(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.disbursements8(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.professional_fees8(class="form-control form-control-ls") }}</td>
+            <td>{{ form8.amount8(class="form-control form-control-ls") }}</td>
+            {% endif %}
+            {% endfor %}
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+ </div>
+</form>
+{% endif %}
               <div class="row mb-4">
                 <div class="col-5">
                   <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
