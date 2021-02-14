@@ -56,31 +56,15 @@
                   <h5 class="text-right" >PRO FORMA INVOICE</h5>
                 </div>
               </div>
+
               <div class="row invoice-info">
                 <div class="col-4">Location
-                  <address><br>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
+                  <address>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
-                <div class="col-4">To 
-                  <address><strong>{{inv.name_to}}.</strong><br><strong>
-                    {% if inv.company_name == '' %}
-                    {% else%}
-                    {{inv.company_name}} </strong>
-                    {% endif %}
-                    <br>{{inv.address_to}}<br>
-                    {% if inv.email_to == '' %}
-                    {% else%}
-                    Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}} <br>
-                    {% endif %}
-                    {% if inv.telephone_to == '' %}
-                    {% else%}
-                    Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to}}</br>
-                    {% endif %}
-                    {% if inv.box_number_to == '' %}
-                    {% else%}
-                    P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
-                    {% endif %}
+                <div class="col-4">To
+                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
                 </div>
-                <div class="col-4"><b>Our Ref #{{ inv.ref_number }}</b><br><br><b>Issue Date:</b> {{ inv.issue_date }}<br><b>Payment Due:</b> {{ inv.due_date }}<br><b>Payment Terms:</b> {{inv.terms }}</div>
+                <div class="col-4"><strong>Our Ref:{{ inv.ref_number }}</strong><br>Issue Date: {{ inv.issue_date }}<br>Payment Due:&nbsp; {{ inv.due_date }}<br>Payment Terms:&nbsp;&nbsp;{{inv.terms }}</div>
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">

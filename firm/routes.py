@@ -95,6 +95,14 @@ def dashboard():
     myRpt = Receipt.query.order_by(Receipt.receipt_number.desc()).paginate(page = page ,per_page=4)
     return render_template('dashboard.html',myInv=myInv,myRpt=myRpt )
 
+@app.route('/Manage Receipts')
+@login_required
+def ourReceipts():
+    page = request.args.get('page',1,type=int)
+    #myInv = Invoice.query.paginate(page = page ,per_page=4)
+    myRpt = Receipt.query.order_by(Receipt.receipt_number.desc()).paginate(page = page ,per_page=4)
+    return render_template('ourReceiptPage.html',myRpt=myRpt )
+
 @app.route('/SavedInvoice-<int:inv_id>')
 @login_required
 def saved_invoice(inv_id):
@@ -445,7 +453,7 @@ def update_invoice3(inv_id):
             form3.name_to.data = updt_inv.name_to
             form3.address_to.data  = updt_inv.address_to
             form3.email_to.data  = updt_inv.email_to
-            form3.company_name.data = updt_inv.data
+            form3.company_name.data = updt_inv.company_name
             form3.telephone_to.data= updt_inv.telephone_to
             #form3.ref_number.data = updt_inv.ref_number
             form3.terms.data = updt_inv.terms

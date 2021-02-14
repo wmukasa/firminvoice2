@@ -5,6 +5,7 @@ from firm import db,login_manager,app
 from flask_login import UserMixin,current_user
 from firm import admin
 from flask_admin.contrib.sqla import ModelView
+from werkzeug.security import generate_password_hash, check_password_hash
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -21,6 +22,11 @@ class User(db.Model,UserMixin):
       is_admin = db.Column(db.Boolean,default = True)
       invoice = db.relationship('Invoice',backref='author', lazy=True)
       receipt = db.relationship('Receipt',backref='receiptAuthor', lazy=True)
+
+      def check_password(self, password):
+        """Check hashed password."""
+        return check_password_hash(self.password, password)
+
       def get_reset_token(self,expires_sec = 1800):
         s = Serializer(current_app.config['SECRET_KEY'],expires_sec)
         return s.dumps({'user_id':self.id}).decode('utf-8')
