@@ -1042,19 +1042,20 @@ def update_invoice8(inv_id):
     return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
                             form8=form8,len=len,title='Update Invoice')
 
-@app.route("/Invoice-<int:inv_id>-Update", methods=['POST'])
+@app.route("/Invoice-<int:inv_id>-Delete", methods=['POST'])
 @login_required
 def delete_invoice(inv_id):
 #https://esmithy.net/2020/06/20/sqlalchemy-cascade-delete/
-    updt_inv = Invoice.query.get_or_404(inv_id)
+    #updt_inv = Invoice.query.filter_by(id=inv_id).first()
+    updt_inv = Invoice.query.get(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
-    for inv in item.invoice:
-
-        db.session.delete(inv)
+    #for inv in item.invoice:
+    for our_item in item:
+        db.session.delete(our_item)
     db.session.delete(updt_inv)
     db.session.commit()
     flash('Your Invoice has been Deleted!', 'success')
-    return redirect(url_for('saved_invoice'))
+    return redirect(url_for('dashboard'))
 
 @app.route('/CreateReceipt',methods=['GET', 'POST'])
 @login_required
@@ -1202,3 +1203,7 @@ def reset_token(token):
         flash('Your password has been updated! You can now log in', 'success')
         return redirect(url_for('index'))
     return render_template('reset_token.html',title ='Reset Password', form = form)
+
+@app.route("/Documentation")
+def doc():
+    return render_template('docs.html',title ='Readme')

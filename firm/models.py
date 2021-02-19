@@ -57,7 +57,7 @@ class Invoice(db.Model):
     issue_date = db.Column(db.Date, nullable=False)
     due_date =db.Column(db.Date,nullable=False)
     vat = db.Column(db.String, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable= False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable= False)
 
     def get_last_id():
 
@@ -90,11 +90,11 @@ class InvoiceLineItem(db.Model):
     disbursements =db.Column(db.Float, default='0.0')
     professional_fees =db.Column(db.Float, default='0.0')
     amount = db.Column(db.Float, nullable=False)
-    invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id'), nullable=False)
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id', ondelete='SET NULL'), nullable=False)
         # Relationship
     invoice = db.relationship(
         'Invoice',
-        backref=db.backref('laps', lazy='dynamic', collection_class=list)
+        backref=db.backref('laps', lazy='dynamic', passive_deletes=True, collection_class=list)
 
     )
 class Receipt(db.Model):

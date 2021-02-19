@@ -21,9 +21,10 @@
             {% if inv.author == current_user %}
               {% if ((len(item) == 1)) %}  
               <a href="{{ url_for('update_invoice', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;
+              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#DeleteInvoice">Delete Invoice</button>&nbsp;-->
               {% endif %}
               {% if ((len(item) == 2)) %}  
+             
               <a href="{{ url_for('update_invoice2', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
@@ -51,6 +52,7 @@
               <a href="{{ url_for('update_invoice8', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
+              <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#DeleteInvoice">Delete Invoice</button>&nbsp;
               {% endif %}
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
           </form>
@@ -80,7 +82,7 @@
                   <address>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
                 <div class="col-4">To
-                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
+                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
                 </div>
                 <div class="col-4"><strong>Our Ref:{{ inv.ref_number }}</strong><br>Issue Date: {{ inv.issue_date }}<br>Payment Due:&nbsp; {{ inv.due_date }}<br>Payment Terms:&nbsp;&nbsp;{{inv.terms }}</div>
               </div>
@@ -156,7 +158,7 @@
       </div>
     </main>
     <!-- Modal -->
-    <div class="modal fade" id="Deletelog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="DeleteInvoice" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -168,8 +170,8 @@
           
           <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button><br></br>
-              <form action="{{ url_for('delete_invoice',inv_id = inv_id)}}", method="POST">
-                <input class="btn btn-outline-danger" type = "submit" value="Delete"> 
+              <form action="{{ url_for('delete_invoice',inv_id = inv.id)}}", method="POST">
+                <input class="btn btn-danger" type = "submit" value="Delete"> 
               </form>
           </div>
         </div>

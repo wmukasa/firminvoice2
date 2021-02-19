@@ -74,7 +74,7 @@
                   <address>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
                 <div class="col-4">To
-                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
+                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
                 </div>
                 <div class="col-4"><strong>Our Ref:{{ inv.ref_number }}</strong><br>Issue Date: {{ inv.issue_date }}<br>Payment Due:&nbsp; {{ inv.due_date }}<br>Payment Terms:&nbsp;&nbsp;{{inv.terms }}</div>
               </div>
