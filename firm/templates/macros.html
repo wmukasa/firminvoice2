@@ -15,24 +15,24 @@
           <table>
               <thead>
                   <tr>
-                      <th>{{ subform.notes.label }}</th>
-                      <th>{{ subform.disbursements.label }}</th>
-                      <th>{{ subform.professional_fees.label }}</th>
-                      <th>{{ subform.amount.label }}</th>
+                    <th>{{ subform.professional_desc.label }}</th>
+                    <th>{{ subform.professional_amount.label }}</th>
+                      <th>{{ subform.disbursements_desc.label }}</th>
+                      <th>{{ subform.disbursements_amount.label }}</th>
                   </tr>
               </thead>
               <tbody>
                   
                       <tr>
-                        <th style="font-size:200%">{{ subform.notes }}</th>
-                        <th>{{ subform.disbursements(value='0') }}</th>
-                        <th>{{ subform.professional_fees(value='0') }}</th>
-                        <th>{{ subform.amount }}</th>
+                        <!--<th style="font-size:200%">{{ subform.notes }}</th>-->
+                        <th>{{ subform.professional_desc }}</th>
+                        <th>{{ subform.professional_amount(value='0') }}</th>
+                        <th>{{ subform.disbursements_desc}}</th>
+                        <th>{{ subform.disbursements_amount(value='0') }}</th> 
                       </tr>
                   
               </tbody>
           </table>
-  
           <a class="remove" href="#"><h3>Remove Item</h3></a>
           <hr/>
       </div>

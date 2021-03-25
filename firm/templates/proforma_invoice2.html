@@ -3,7 +3,7 @@
     <main class="app-content">
       <div class="app-title">
         <div>
-          <h1><i class="fa fa-file-text-o"></i>Tax Invoice</h1>
+          <h1><i class="fa fa-file-text-o"></i>Pro Forma Invoice</h1>
           <p>Saved Invoice from the database</p>
         </div>
         <ul class="app-breadcrumb breadcrumb">
@@ -18,27 +18,22 @@
          <form>
          </form>
             <form class="form-inline" method="POST" action="">
-            {% if inv.author == current_user %}
+          {% if inv.author == current_user %}
               {% if ((len(item) == 1)) %}  
               <a href="{{ url_for('update_invoice', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#DeleteInvoice">Delete Invoice</button>&nbsp;-->
               {% endif %}
+
               {% if ((len(item) == 2)) %}  
-             
               <a href="{{ url_for('update_invoice2', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
               {% if ((len(item) == 3)) %}  
               <a href="{{ url_for('update_invoice3', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
               {% if ((len(item) == 4)) %}  
               <a href="{{ url_for('update_invoice4', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
               {% if ((len(item) == 5)) %}  
               <a href="{{ url_for('update_invoice5', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
-              <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
               {% if ((len(item) == 6)) %}  
               <a href="{{ url_for('update_invoice6', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
@@ -52,12 +47,11 @@
               <a href="{{ url_for('update_invoice8', inv_id=inv.id)}}" class="btn btn-outline-success" type="button">Edit</a>&nbsp;
               <!--<button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#Deletelog">Delete Invoice</button>&nbsp;-->
               {% endif %}
-              <button type="button" class="btn btn-outline-danger " data-toggle="modal" data-target="#DeleteInvoice">Delete Invoice</button>&nbsp;
-              {% endif %}
+          {% endif %}
               <a class="btn btn-outline-secondary" href="{{ url_for('dashboard')}}"><i class="fa fa-fw fa-lg fa-times-circle"></i>Back</a>
           </form>
-          <form method="POST" action="{{ url_for('get_pdf', inv_id=inv.id)}}">
-            <button class="btn btn-outline-warning" type="submit" id="saveInvoice">Download Tax Invoice</button>&nbsp;
+          <form method="POST" action="{{ url_for('getProForma_pdf', inv_id=inv.id)}}">
+            <button class="btn btn-outline-warning" type="submit" id="saveInvoice">Download Pro Forma Invoice</button>&nbsp;
           </form>
         </nav>
         </div>
@@ -71,10 +65,8 @@
                   <h2 class="page-header"><img style="border-radius: 50%; height: 80px;width: 80px;margin-right: 12px; margin-bottom: 08px;" src="static/images/image1(2).jpeg"> KAMAHORO,KIBOOME&KIRUNDA ADVOCATES</h2>
                 </div>
                 <div class="col-6">
-                  <h5 class="text-right">TAX INVOICE</h5>
-                  <h6 class="text-right">Tax Invoice Number:&nbsp;&nbsp;&nbsp;{{inv.vat}}</h6>
+                  <h5 class="text-right" >PRO FORMA INVOICE</h5>
                 </div>
-
               </div>
 
               <div class="row invoice-info">
@@ -82,44 +74,78 @@
                   <address>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
                 <div class="col-4">To
-                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
+                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}<br>{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}<br>{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
                 </div>
                 <div class="col-4"><strong>Our Ref:{{ inv.ref_number }}</strong><br>Issue Date: {{ inv.issue_date }}<br>Payment Terms:&nbsp;&nbsp;{{inv.terms }}</div>
               </div>
-
               <div class="row">
                 <div class="col-12 table-responsive">
-                  <table class="table">
+                  <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>Description</th>
-                        <th>Disbursements/&nbsp;ug.Shs</th>
-                        <th>Professional fees/&nbsp;ug.Shs</th>
-                        <th>Amount/&nbsp;ug.Shs</th>
+                        <th colspan="2">Professional fees/&nbsp;ug.Shs</th>
+                        <th colspan="2">Disbursements/&nbsp;ug.Shs</th>
+                        <th>GrandTotal/&nbsp;ug.Shs</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for myItem in item %}
-                      
-                      <tr>
-                        <td>{{myItem.notes }}</td>
+                        <tr>
+                            <td >{{myItem.professional_desc }}</td>
+                            {% if myItem.professional_amount != 0.0%}
+                            <td>{{ myItem.professional_amount }}&nbsp;/=</td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
 
-                        {% if myItem.disbursements != 0.0%}
-                        <td>{{ myItem.disbursements }}</td>
-                        {% else %}
-                        <td></td>
-                        {% endif%}
-                        {% if myItem.professional_fees != 0.0%}
-                        <td>{{ myItem.professional_fees }}</td>
-                        {% else %}
-                        <td></td>
-                        {% endif%}
-                        <td>{{ myItem.amount }}</td>
+                            <td>{{myItem.disbursements_desc}} </td>
+                            {% if myItem.disbursements_amount != 0.0%}
+                            <td>{{ myItem.disbursements_amount }}&nbsp;/=</td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
                       </tr>
-                      {% endfor %}
-                      <!--<tr><th><td>Subtotal:</td><td>{{subtotal}}shs</td></th></tr>
-                      <tr><th><td>VAT(18%):</td><td>{{VAT}}shs</td></th></tr>
-                      <tr><th><td>Grandtotal:</td><td>{{grandtotal}}shs</td></th></tr>-->
+                      {% endfor %}  
+                         <!--  https://mdbootstrap.com/docs/standard/plugins/table-editor/ 
+                          </tr>
+                          <tr>
+                            <td>Not the answer you're looking for? Browse other questions tagged</td>
+                            <td>200000000</td>  
+                          </tr>
+                          <tr>
+                            <td>Not the answer you're looking for? Browse other questions tagged</td>
+                            <td>2000</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2"></td>
+                            <td>Not the answer you're looking for? Browse other questions tagged</td>
+                            <td>200000000</td> 
+                            
+                          </tr>
+                          <tr>
+                            <td colspan="2"></td>
+                            <td>Not the answer you're looking for? Browse other questions tagged</td>
+                            <td>2000</td>
+                          </tr>
+                          <tr>
+                            <td colspan="2"></td>
+                            <td>Not the answer you're looking for? Browse other questions tagged</td>
+                            <td>2000</td>
+                          </tr>-->
+                          <tr>
+                              <td>To 18% VAT</td>
+                              <td>{{VAT}}&nbsp;/=</td>
+                              <td colspan="2"></td>
+                              
+                          </tr>
+                          <tr>
+                            <td>SubTotal</td>
+                            <td>{{grandtotal_pr}}&nbsp;/=</td>
+                            <td>SubTotal</td>
+                            <td>{{subtotal_db}}&nbsp;/=</td>
+                            <td>{{grandtotal }}&nbsp;/=</td>
+                          </tr>
+
                     </tbody>   
                   </table>
                 </div>
@@ -137,22 +163,21 @@
               <div class="container px-4">
                 <div class="row gx-5">
                   <div class="col">
-                   <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+                    
                   </div>
                   <div class="col">
-                    <div >VAT({{18}}%):&nbsp;{{VAT}}&nbsp;ug.Shs</div>
                     TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
                   </div>
                   <div class="col">
-                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>
+                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;USh</div>
                   </div>
                 </div>
               </div>
             </section>
           </form>
           <div class="col-6">
-          ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
-          </div>
+            ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
+            </div>
           </div>
         </div>
       </div>
@@ -170,7 +195,7 @@
           
           <div class="modal-footer">
               <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button><br></br>
-              <form action="{{ url_for('delete_invoice',inv_id = inv.id)}}", method="POST">
+              <form action="#", method="POST">
                 <input class="btn btn-danger" type = "submit" value="Delete"> 
               </form>
           </div>

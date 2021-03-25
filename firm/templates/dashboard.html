@@ -23,7 +23,16 @@
       <div class="clearfix"></div>
       <div class="col-md-12">
       <div class="row d-print-none mt-2">
-        <div class="col-12 text-left"><a class="btn btn-primary" href="{{ url_for('create_invoice')}}" ><i class="fa fa-print"></i> CREATE NEW INVOICE</a></div>
+        <div class="col-12 text-left">
+        <nav class="navbar navbar-light bg-light">
+          <a class="btn btn-primary" href="{{ url_for('create_invoice')}}" ><i class="fa fa-print"></i> CREATE NEW INVOICE</a>
+          <strong>Search For Reference number or Name to :{{ tag }}</strong>
+          <form class="form-inline" method="POST" action="{{ url_for('mySearch')}} ">
+            <input class="form-control mr-sm-2" type="text" name="tag" id="tag" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
+      </div>
       </div>
     </div>        
           <div class="clearfix"></div>
@@ -39,7 +48,7 @@
                       <tr>
                       <th>Reference Number</th>
                       <th>Date cashed</th>
-                      <th>Date Due</th>
+                      <th>Name To</th>
                       <th>Issued By</th>
                       <th>View Tax Invoice</th>
                       <th>View Pro Forma Invoice</th>
@@ -51,7 +60,7 @@
                     <tr>
                       <td>{{inv.ref_number}}</td>
                       <td>{{inv.issue_date}}</td>
-                      <td>{{inv.due_date}}</td>
+                      <td>{{inv.name_to}}</td>
                       <td>{{inv.author.username}}</td>
                       <td><a href="{{url_for('saved_invoice',reference_num= inv.ref_number, inv_id = inv.id)}} ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</a></td>
                       <td><a href="{{url_for('proform_invoice', inv_id = inv.id)}} ">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;View</a></td>

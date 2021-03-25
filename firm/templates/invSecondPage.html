@@ -82,44 +82,55 @@
                   <address>1st Floor Block A-UAP<br><strong>Nakawa Business Park</strong><br>Plot 3-5 Portbell Road<br>P.O.Box:&nbsp;27892 Kampala<br>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com<br>Telephone:&nbsp;&nbsp;(+256)-394-836-201</address>
                 </div>
                 <div class="col-4">To
-                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
+                  <address><strong>{{inv.name_to}}.</strong><br>{% if inv.company_name == '' %}{% else%}{{inv.company_name}}{% endif %}<br>{{inv.address_to}}<br>{% if inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}{% endif %}<br>{% if inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to }}{% endif %}<br>{% if inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{inv.box_number_to}} {% endif %}</address>
                 </div>
                 <div class="col-4"><strong>Our Ref:{{ inv.ref_number }}</strong><br>Issue Date: {{ inv.issue_date }}<br>Payment Terms:&nbsp;&nbsp;{{inv.terms }}</div>
               </div>
 
               <div class="row">
                 <div class="col-12 table-responsive">
-                  <table class="table">
+                  <table class="table table-bordered">
                     <thead>
                       <tr>
-                        <th>Description</th>
-                        <th>Disbursements/&nbsp;ug.Shs</th>
-                        <th>Professional fees/&nbsp;ug.Shs</th>
-                        <th>Amount/&nbsp;ug.Shs</th>
+                        <th colspan="2">Professional fees/&nbsp;ug.Shs</th>
+                        <th colspan="2">Disbursements/&nbsp;ug.Shs</th>
+                        <th>GrandTotal/&nbsp;ug.Shs</th>
                       </tr>
                     </thead>
                     <tbody>
                       {% for myItem in item %}
-                      
-                      <tr>
-                        <td>{{myItem.notes }}</td>
+                        <tr>
+                            <td >{{myItem.professional_desc }}</td>
+                            {% if myItem.professional_amount != 0.0%}
+                            <td>{{ myItem.professional_amount }}&nbsp;/=</td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
 
-                        {% if myItem.disbursements != 0.0%}
-                        <td>{{ myItem.disbursements }}</td>
-                        {% else %}
-                        <td></td>
-                        {% endif%}
-                        {% if myItem.professional_fees != 0.0%}
-                        <td>{{ myItem.professional_fees }}</td>
-                        {% else %}
-                        <td></td>
-                        {% endif%}
-                        <td>{{ myItem.amount }}</td>
+                            <td>{{myItem.disbursements_desc}} </td>
+                            {% if myItem.disbursements_amount != 0.0%}
+                            <td>{{ myItem.disbursements_amount }}&nbsp;/=</td>
+                            {% else %}
+                            <td></td>
+                            {% endif%}
                       </tr>
-                      {% endfor %}
-                      <!--<tr><th><td>Subtotal:</td><td>{{subtotal}}shs</td></th></tr>
-                      <tr><th><td>VAT(18%):</td><td>{{VAT}}shs</td></th></tr>
-                      <tr><th><td>Grandtotal:</td><td>{{grandtotal}}shs</td></th></tr>-->
+                      {% endfor %}  
+                         <!--  https://mdbootstrap.com/docs/standard/plugins/table-editor/ 
+                         -->
+                          <tr>
+                              <td>To 18% VAT</td>
+                              <td>{{VAT}}&nbsp;/=</td>
+                              <td colspan="2"></td>
+                              
+                          </tr>
+                          <tr>
+                            <td>SubTotal</td>
+                            <td>{{grandtotal_pr}}&nbsp;/=</td>
+                            <td>SubTotal</td>
+                            <td>{{subtotal_db}}&nbsp;/=</td>
+                            <td>{{grandtotal }}&nbsp;/=</td>
+                          </tr>
+
                     </tbody>   
                   </table>
                 </div>
@@ -137,22 +148,21 @@
               <div class="container px-4">
                 <div class="row gx-5">
                   <div class="col">
-                   <div>Subtotal:&nbsp;{{subtotal}}&nbsp;ug.Shs</div>
+                    
                   </div>
                   <div class="col">
-                    <div >VAT({{18}}%):&nbsp;{{VAT}}&nbsp;ug.Shs</div>
                     TIN:&nbsp;&nbsp;&nbsp;1017550332 <br>
                   </div>
                   <div class="col">
-                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;ug.Shs</div>
+                    <div>Grandtotal:&nbsp;&nbsp;{{grandtotal}}&nbsp;USh</div>
                   </div>
                 </div>
               </div>
             </section>
           </form>
           <div class="col-6">
-          ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
-          </div>
+            ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
+            </div>
           </div>
         </div>
       </div>

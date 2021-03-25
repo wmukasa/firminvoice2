@@ -43,6 +43,7 @@ class User(db.Model,UserMixin):
 
 class Invoice(db.Model):
     __tablename__ = 'invoice' 
+    __searchable__=['ref_number','name_to','company_name']
     id = db.Column(db.Integer, primary_key=True)
     #ref_number = db.Column(db.Integer,unique=True, nullable=False)
     ref_number = db.Column(db.String(),nullable=False)
@@ -82,7 +83,7 @@ class Invoice(db.Model):
         self.due_date=due_date
         self.user_id=user_id
 
-
+'''
 class InvoiceLineItem(db.Model):
     __tablename__ = 'line_items' 
     id = db.Column(db.Integer, primary_key=True)
@@ -90,6 +91,21 @@ class InvoiceLineItem(db.Model):
     disbursements =db.Column(db.Float, default='0.0')
     professional_fees =db.Column(db.Float, default='0.0')
     amount = db.Column(db.Float, nullable=False)
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id', ondelete='SET NULL'), nullable=False)
+        # Relationship
+    invoice = db.relationship(
+        'Invoice',
+        backref=db.backref('laps', lazy='dynamic', passive_deletes=True, collection_class=list)
+
+    )
+'''
+class InvoiceLineItem(db.Model):
+    __tablename__ = 'line_items' 
+    id = db.Column(db.Integer, primary_key=True)
+    professional_desc = db.Column(db.String(500), nullable=True)
+    professional_amount =db.Column(db.Float, default='0.0')
+    disbursements_desc = db.Column(db.String(500), nullable=True)
+    disbursements_amount =db.Column(db.Float, default='0.0')
     invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id', ondelete='SET NULL'), nullable=False)
         # Relationship
     invoice = db.relationship(

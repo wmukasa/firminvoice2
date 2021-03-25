@@ -12,7 +12,7 @@ from firm.models import User
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
+                           validators=[DataRequired(), Length(min=2, max=120)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     designation = StringField('Designation',
@@ -41,7 +41,7 @@ class LoginForm(FlaskForm):
     
 class UpdateAccountForm(FlaskForm):
     username = StringField('Username',
-                           validators=[DataRequired(), Length(min=2, max=20)])
+                           validators=[DataRequired(), Length(min=2, max=120)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     designation = StringField('Designation',
@@ -86,13 +86,10 @@ class LapForm(Form):
    
     item_name= StringField('Item name',validators=[validators.InputRequired(), validators.Length(max=100)])
     """ 
-  
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-
-    
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
 class MainForm(FlaskForm):
     """Parent form."""
@@ -128,16 +125,15 @@ class Invoice_Items(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
-  
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
 
     submit = SubmitField('Update')
 class Invoice_Items2(FlaskForm):
@@ -153,22 +149,20 @@ class Invoice_Items2(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
-  
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
     submit = SubmitField('Update')
 class Invoice_Items3(FlaskForm):
     name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
@@ -184,25 +178,25 @@ class Invoice_Items3(FlaskForm):
     vat = StringField('Tax Invoice Number ')
 
   
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    
-    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements4 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees4 =StringField('Professional Fees/Ug.shs')
-    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
+
+    professional_desc4 =TextAreaField('Professional Description')
+    professional_amount4 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc4 =TextAreaField('Disbursements Description')
+    disbursements_amount4 =StringField('Disbursements Amount/Ug.shs')
     submit = SubmitField('Update')
 class Invoice_Items4(FlaskForm):
     name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
@@ -218,31 +212,32 @@ class Invoice_Items4(FlaskForm):
     vat = StringField('Tax Invoice Number ')
 
   
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
+
+    professional_desc4 =TextAreaField('Professional Description')
+    professional_amount4 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc4 =TextAreaField('Disbursements Description')
+    disbursements_amount4 =StringField('Disbursements Amount/Ug.shs')
     
-    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements4 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees4 =StringField('Professional Fees/Ug.shs')
-    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
     
-    
-    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements5 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees5 =StringField('Professional Fees/Ug.shs')
-    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc5 =TextAreaField('Professional Description')
+    professional_amount5 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc5 =TextAreaField('Disbursements Description')
+    disbursements_amount5 =StringField('Disbursements Amount/Ug.shs')
+
     submit = SubmitField('Update')
 
 class Invoice_Items5(FlaskForm):
@@ -258,38 +253,36 @@ class Invoice_Items5(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
-  
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
+
+    professional_desc4 =TextAreaField('Professional Description')
+    professional_amount4 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc4 =TextAreaField('Disbursements Description')
+    disbursements_amount4 =StringField('Disbursements Amount/Ug.shs')
     
-    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements4 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees4 =StringField('Professional Fees/Ug.shs')
-    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    
-    
-    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements5 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees5 =StringField('Professional Fees/Ug.shs')
-    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc5 =TextAreaField('Professional Description')
+    professional_amount5 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc5 =TextAreaField('Disbursements Description')
+    disbursements_amount5 =StringField('Disbursements Amount/Ug.shs')
    
       
-    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements6 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees6 =StringField('Professional Fees/Ug.shs')
-    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc6 =TextAreaField('Professional Description')
+    professional_amount6 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc6 =TextAreaField('Disbursements Description')
+    disbursements_amount6 =StringField('Disbursements Amount/Ug.shs')
     
     submit = SubmitField('Update')
 
@@ -307,43 +300,41 @@ class Invoice_Items6(FlaskForm):
     vat = StringField('Tax Invoice Number ')
 
   
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
+
+    professional_desc4 =TextAreaField('Professional Description')
+    professional_amount4 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc4 =TextAreaField('Disbursements Description')
+    disbursements_amount4 =StringField('Disbursements Amount/Ug.shs')
     
-    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements4 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees4 =StringField('Professional Fees/Ug.shs')
-    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    
-    
-    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements5 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees5 =StringField('Professional Fees/Ug.shs')
-    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc5 =TextAreaField('Professional Description')
+    professional_amount5 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc5 =TextAreaField('Disbursements Description')
+    disbursements_amount5 =StringField('Disbursements Amount/Ug.shs')
    
       
-    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements6 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees6 =StringField('Professional Fees/Ug.shs')
-    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc6 =TextAreaField('Professional Description')
+    professional_amount6 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc6 =TextAreaField('Disbursements Description')
+    disbursements_amount6 =StringField('Disbursements Amount/Ug.shs')
     
-      
-    notes7= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements7 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees7 =StringField('Professional Fees/Ug.shs')
-    amount7 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc7 =TextAreaField('Professional Description')
+    professional_amount7 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc7 =TextAreaField('Disbursements Description')
+    disbursements_amount7 =StringField('Disbursements Amount/Ug.shs')
     submit = SubmitField('Update')
 
 class Invoice_Items7(FlaskForm):
@@ -359,49 +350,47 @@ class Invoice_Items7(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
-  
-    notes= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements =StringField('Disbursements Fees/Ug.shs')
-    professional_fees =StringField('Professional Fees/Ug.shs')
-    amount = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc =TextAreaField('Professional Description')
+    professional_amount =StringField('Professional Amount/Ug.shs')
+    disbursements_desc =TextAreaField('Disbursements Description')
+    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
 
-    notes2= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements2 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees2 =StringField('Professional Fees/Ug.shs')
-    amount2 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc2 =TextAreaField('Professional Description')
+    professional_amount2 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc2 =TextAreaField('Disbursements Description')
+    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
     
-    notes3= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements3 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees3 =StringField('Professional Fees/Ug.shs')
-    amount3 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc3 =TextAreaField('Professional Description')
+    professional_amount3 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc3 =TextAreaField('Disbursements Description')
+    disbursements_amount3 =StringField('Disbursements Amount/Ug.shs')
+
+    professional_desc4 =TextAreaField('Professional Description')
+    professional_amount4 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc4 =TextAreaField('Disbursements Description')
+    disbursements_amount4 =StringField('Disbursements Amount/Ug.shs')
     
-    notes4= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements4 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees4 =StringField('Professional Fees/Ug.shs')
-    amount4 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    
-    
-    notes5= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements5 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees5 =StringField('Professional Fees/Ug.shs')
-    amount5 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
+    professional_desc5 =TextAreaField('Professional Description')
+    professional_amount5 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc5 =TextAreaField('Disbursements Description')
+    disbursements_amount5 =StringField('Disbursements Amount/Ug.shs')
    
       
-    notes6= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements6 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees6 =StringField('Professional Fees/Ug.shs')
-    amount6 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-     
-    notes7= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements7 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees7 =StringField('Professional Fees/Ug.shs')
-    amount7 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
-    submit = SubmitField('Update')
+    professional_desc6 =TextAreaField('Professional Description')
+    professional_amount6 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc6 =TextAreaField('Disbursements Description')
+    disbursements_amount6 =StringField('Disbursements Amount/Ug.shs')
+    
+    professional_desc7 =TextAreaField('Professional Description')
+    professional_amount7 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc7 =TextAreaField('Disbursements Description')
+    disbursements_amount7 =StringField('Disbursements Amount/Ug.shs')
+    
+    professional_desc8 =TextAreaField('Professional Description')
+    professional_amount8 =StringField('Professional Amount/Ug.shs')
+    disbursements_desc8 =TextAreaField('Disbursements Description')
+    disbursements_amount8 =StringField('Disbursements Amount/Ug.shs')
 
-    notes8= TextAreaField('Description',validators=[validators.InputRequired(), validators.Length(max=510)])
-    disbursements8 =StringField('Disbursements Fees/Ug.shs')
-    professional_fees8 =StringField('Professional Fees/Ug.shs')
-    amount8 = StringField('Amount/Ug.shs',validators=[validators.InputRequired(), validators.Length(min=2,max=20)])
     submit = SubmitField('Update')
 
 class ReceiptForm(FlaskForm):

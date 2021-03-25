@@ -24,7 +24,17 @@
     <div class="clearfix"></div>
       <div class="col-md-12">
       <div class="row d-print-none mt-2">
-        <div class="col-12 text-left"><a class="btn btn-primary" href="{{ url_for('Create_Receipt')}}" ><i class="fa fa-print"></i> CREATE NEW RECEIPT</a></div>
+        <div class="col-12 text-left">
+          <nav class="navbar navbar-light bg-light">
+            <a class="btn btn-primary" href="{{ url_for('Create_Receipt')}}" ><i class="fa fa-print"></i> CREATE NEW RECEIPT</a>
+            <strong>Search For received_from or receipt_number:{{ tag2 }}</strong>
+            <form class="form-inline" method="POST" action="{{ url_for('receiptSearch')}} ">
+              <input class="form-control mr-sm-2" type="text" name="tag2" id="tag2" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </nav>
+        </div>
+      
       </div>
       </div>        
           <div class="clearfix"></div>

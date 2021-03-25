@@ -68,54 +68,58 @@
 			<table class="inventory">
 				<thead>
 					<tr>
-                        <th><span >Description</span></th>
-                        <th><span >Disbursements /Ugs.shs</span></th>
-                        <th><span >Professional fees/Ugs.shs</span></th>
-                        <th><span >Total/Ugs.shs</span></th>
+						<tr>
+							<th colspan="2"><span >Professional fees/Ugs.shs</span></th>
+							<th colspan="2"><span >Disbursements /Ugs.shs</span></th>
+						</tr>
+
 					</tr>
 				</thead>
 				<tbody>
-					{% for myItem in item %}
+				{% for myItem in item %}
 					<tr>
-						<td><a class="cut">-</a><span >{{ myItem.notes  }}</span></td>
-						{% if myItem.disbursements != 0.0%}
-						<td><span >{{myItem.disbursements }}</span></td>
+						<td><span >{{myItem.professional_desc }}</span></td>
+						{% if myItem.professional_amount != 0.0%}
+						<td><span >{{ myItem.professional_amount }}&nbsp;/=</span></td>
 						{% else %}
 						<td></td>
 						{% endif%}
-						{% if myItem.professional_fees != 0.0%}
-                        <td><span >{{ myItem.professional_fees}}</span></td>
+						<td><span>{{myItem.disbursements_desc}}</span></td>
+						{% if myItem.disbursements_amount != 0.0%}
+						<td><span >{{ myItem.disbursements_amount }}&nbsp;/=</span></td>
 						{% else %}
 						<td></td>
-                        {% endif%}
-						<td><span >{{ myItem.amount}}</span></td>
+						{% endif%}
 					</tr>
-				 {% endfor %}
+					{% endfor %}  
+					<tr>
+						<td class="note" ><a class="cut">-</a><span >To 18% VAT</span></td>
+						<td><span >{{VAT}}&nbsp;/=</span></td>
+					</tr>
+					
+					<tr>
+						<td class="note" ><a class="cut">-</a><span >SubTotal</span></td>
+						<td><span >{{grandtotal_pr}}&nbsp;/=</span></td>
+                        <td><span >SubTotal </span></td>
+						<td><span >{{subtotal_db}}&nbsp;/=</span></td>
+                        
+					</tr>
 				</tbody>
 			</table>
-
 			<table class="balance">
 				<tr>
-					<th><span >SubTotal</span><span data-prefix>/Ug.shs</span></th>
-					<td><span>{{subtotal}}</span></td>
-				</tr>
-				<tr>
-					<th><span >VAT(18%)</span><span data-prefix>/Ug.shs</span></th>
-					<td><span >{{VAT}}</span></td>
-				</tr>
-				<tr>
 					<th><span >Grandtotal</span><span data-prefix>/Ug.shs</span></th>
-					<td><span>{{grandtotal}}</span></td>
+					<td><span>{{grandtotal }}&nbsp;/=</span></td>
 				</tr>
 			</table>
-        </article>
+		</article>
 		<aside>
 			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
 			<!--<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 			<div class="line"><br>
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>
 			</div>-->
-			<div style="float:right;"> 
+			<div style="float:right;">
 				<span class ="signature">Kamahoro,Kiboome & Kirunda Advocates</span>    
 			  </div>
 		</aside>
