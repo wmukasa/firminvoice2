@@ -85,27 +85,83 @@
                   <table class="table">
                     <thead>
                       <tr>
-                        <th>Description</th>
-                        <th>Disbursements/&nbsp;ug.Shs</th>
                         <th>Professional fees/&nbsp;ug.Shs</th>
-                        <th>Amount/&nbsp;ug.Shs</th>
+                        <th>Disbursements fees</th>
                       </tr>
                     </thead>
                     <tbody>
-
+                      <td>{{ form1.professional_amount(class="form-control form-control-ls") }}</td>
                       {% for p in item %}
                       <tr>
+                        <td>
                           {% if ((item.index(p)) == 0) %}
-                          <td>{{ form1.professional_desc(class="form-control form-control-ls") }}</td>
-                          <td>{{ form1.professional_amount(class="form-control form-control-ls") }}</td>
-                          <td>{{ form1.disbursements_desc(class="form-control form-control-ls") }}</td>
-                          <td>{{ form1.disbursements_amount(class="form-control form-control-ls") }}</td>
+                          {{ form1.prof_heading.label(class="form-control-label") }}
+                          {{ form1.prof_heading(class="form-control form-control-ls") }}
+        
+                          {% if item.prof_sub1 =='' %}
+                           {% else%}
+                           {{ form1.prof_sub1.label(class="form-control-label") }}
+                           {{ form1.prof_sub1(class="form-control form-control-ls") }}
+                          {% endif%}
+        
+                          {% if item.prof_sub2 !='' %}
+                          {% else%}
+                          {{ form1.prof_sub2.label(class="form-control-label") }}
+                          {{ form1.prof_sub2(class="form-control form-control-ls") }}
+                          {% endif%}
+        
+                          {% if item.prof_sub3 !='' %}
+                          {% else%}
+        
+                          {{ form1.prof_sub3.label(class="form-control-label") }}
+                          {{ form1.prof_sub3(class="form-control form-control-ls") }}
+                          {% endif%}
+        
+                          {% if item.prof_sub4 !=''%}
+                          {% else%}
+                          {{ form1.prof_sub4.label(class="form-control-label") }}
+                          {{ form1.prof_sub4(class="form-control form-control-ls") }}
+                          {% endif%}
+                          
+                          {% if item.prof_sub5 !='' %}
+                          {% else%}
+                          {{ form1.prof_sub5.label(class="form-control-label") }}
+                          {{ form1.prof_sub5(class="form-control form-control-ls") }}
+                          {% endif%}
                             {% endif %}
                             {% endfor %}
+
+                        </td>
+                        <td>
+                          {% for q in dis %}
+                          {{ form1.disbursement_amount.label(class="form-control-label") }}
+                          {{ form1.disbursement_amount(class="form-control form-control-ls") }}
+                          {{ form1.disb_heading.label(class="form-control-label") }}
+                          {{ form1.disb_heading(class="form-control form-control-ls") }}
+                          {% if dis.disb_sub1 =='' %}
+                          {% else%}
+                          {{ form1.disb_sub1.label(class="form-control-label") }}
+                          {{ form1.disb_sub1(class="form-control form-control-ls") }}
+                          {% endif %}
+
+                          {% if dis.disb_sub2 !='' %}
+                          {% else%}
+                          {{ form1.disb_sub2.label(class="form-control-label") }}
+                          {{ form1.disb_sub2(class="form-control form-control-ls") }}
+                          {% endif %}
+
+                          {% if dis.disb_sub3 !='' %}
+                          {% else%}
+                          {{ form1.disb_sub3.label(class="form-control-label") }}
+                          {{ form1.disb_sub3(class="form-control form-control-ls") }}
+                          {% endif %}
+                          {% endfor %}
+                        </td>
                         </tr>
                         
                     </tbody>
                   </table>
+
                 </div>
                </div>
           </form>

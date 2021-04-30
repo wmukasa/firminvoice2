@@ -58,8 +58,8 @@ class Invoice(db.Model):
     issue_date = db.Column(db.Date, nullable=False)
     due_date =db.Column(db.Date,nullable=False)
     vat = db.Column(db.String, nullable=True)
+    professional_amount =db.Column(db.Float, default='0.0')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable= False)
-
     def get_last_id():
 
         qry = Invoice.query.order_by(Invoice.id.desc()).first()
@@ -69,7 +69,7 @@ class Invoice(db.Model):
 
         return q_custom_id
 
-    def __init__(self,ref_number,name_to,address_to,telephone_to,company_name,email_to, box_number_to,vat,terms,issue_date,due_date,user_id):
+    def __init__(self,ref_number,name_to,address_to,telephone_to,company_name,email_to, box_number_to,vat,terms,issue_date,due_date,professional_amount,user_id):
         self.ref_number = ref_number
         self.name_to = name_to
         self.address_to = address_to
@@ -81,7 +81,9 @@ class Invoice(db.Model):
         self.terms=terms
         self.issue_date =issue_date
         self.due_date=due_date
+        self.professional_amount=professional_amount
         self.user_id=user_id
+
 
 '''
 class InvoiceLineItem(db.Model):
@@ -102,10 +104,13 @@ class InvoiceLineItem(db.Model):
 class InvoiceLineItem(db.Model):
     __tablename__ = 'line_items' 
     id = db.Column(db.Integer, primary_key=True)
-    professional_desc = db.Column(db.String(500), nullable=True)
-    professional_amount =db.Column(db.Float, default='0.0')
-    disbursements_desc = db.Column(db.String(500), nullable=True)
-    disbursements_amount =db.Column(db.Float, default='0.0')
+    prof_heading = db.Column(db.String(500), nullable=True)
+    prof_sub1 = db.Column(db.String(500), nullable=True)
+    prof_sub2 = db.Column(db.String(500), nullable=True)
+    prof_sub3 = db.Column(db.String(500), nullable=True)
+    prof_sub4 = db.Column(db.String(500), nullable=True)
+    prof_sub5 = db.Column(db.String(500), nullable=True)
+
     invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id', ondelete='SET NULL'), nullable=False)
         # Relationship
     invoice = db.relationship(
@@ -113,6 +118,25 @@ class InvoiceLineItem(db.Model):
         backref=db.backref('laps', lazy='dynamic', passive_deletes=True, collection_class=list)
 
     )
+class disbursements(db.Model):
+    __tablename__ = 'disbursementsfees' 
+    id = db.Column(db.Integer,primary_key=True)
+    disbursement_amount =db.Column(db.Float, default='0.0')
+    disb_heading = db.Column(db.String,nullable=True)
+
+    disb_sub1 = db.Column(db.String(500), nullable=True)
+    disb_sub2 = db.Column(db.String(500), nullable=True)
+    disb_sub3 = db.Column(db.String(500), nullable=True)
+
+    invoice_id = db.Column(db.Integer, db.ForeignKey('invoice.id', ondelete='SET NULL'), nullable=False)
+        # Relationship
+    invoice = db.relationship(
+        'Invoice',
+        backref=db.backref('laps2', lazy='dynamic', passive_deletes=True, collection_class=list)
+
+    )
+
+
 class Receipt(db.Model):
     __tablename__ = 'receipts'
     id = db.Column(db.Integer, primary_key=True)
@@ -158,4 +182,6 @@ class Controller(ModelView):
 admin.add_view(Controller(User,db.session))
 admin.add_view(Controller(Invoice,db.session))
 admin.add_view(Controller(InvoiceLineItem,db.session))
+admin.add_view(Controller(disbursements,db.session))
+
 admin.add_view(Controller(Receipt,db.session))

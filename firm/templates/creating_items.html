@@ -311,25 +311,45 @@ input[type=submit]:hover {
          {{ form.vat}}
          <!--(value='18',disabled="")-->
 					</div>
-          </div>
+                  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.pro_heading.label }}
+					</div>
+					<div class="col-75">
+         {{ form.pro_heading}}
+					</div>
+                  </div>
+				  <div class="row">
+					<div class="col-25">
+								{{ form.professional_amount.label }}
+					</div>
+					<div class="col-75">
+         {{ form.professional_amount}}
+					</div>
+				  </div>
+				<!--
+				  <div class="row">
+					<div class="col-25">
+					  <label for="subject">Subject</label>
+					</div>
+					<div class="col-75">
+					  <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+					</div>
+				  </div>
+				-->
 
-          <div id="subforms-container">
-            {% for subform in form.laps %}
-             <h1>Please add Professional fees</h1>
-             <div class="row">
-              <div class="col-25">
-               {{ form.professional_amount.label}}
-              </div>
-              <div class="col-75">
-                {{ form.professional_amount }}
-           </div>
-          </div>
-             <a id="add" href="#">Add Professional fees</a>
-                {{ macros.render_lap_form(subform, loop.index0) }}
-            {% endfor %}
-        </div>
+							<div>
+							<a id="add" href="#"><h3>Add more Items if any</h3></a>
+							<hr/>
+						  </div>
+							<div id="subforms-container">
+								{% for subform in form.laps %}
+									{{ macros.render_lap_form(subform, loop.index0) }}
+								{% endfor %}
+							</div>
 
-        <button type="submit">Send to add Disbursement fees</button>
+		</div>					<!--<button type="submit">Send</button>-->
 		</form>
 
 						{% if form.errors %}

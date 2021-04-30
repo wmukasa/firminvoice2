@@ -97,26 +97,76 @@
                         <th>GrandTotal/&nbsp;ug.Shs</th>
                       </tr>
                     </thead>
-                    <tbody>
-                      {% for myItem in item %}
+                    <tbody>   
                         <tr>
-                            <td >{{myItem.professional_desc }}</td>
-                            {% if myItem.professional_amount != 0.0%}
-                            <td>{{ myItem.professional_amount }}&nbsp;/=</td>
-                            {% else %}
-                            <td></td>
-                            {% endif%}
-
-                            <td>{{myItem.disbursements_desc}} </td>
-                            {% if myItem.disbursements_amount != 0.0%}
-                            <td>{{ myItem.disbursements_amount }}&nbsp;/=</td>
-                            {% else %}
-                            <td></td>
-                            {% endif%}
-                      </tr>
-                      {% endfor %}  
-                         <!--  https://mdbootstrap.com/docs/standard/plugins/table-editor/ 
-                         -->
+                          <td>
+                            {% for myItem in item %}
+                            <ul type ="circle">
+                              <li>{{myItem.prof_heading }}
+                                <ol>
+                                  {% if myItem.prof_sub1 !='' %}
+                                        <li>{{myItem.prof_sub1}}</li>
+                                  {% else %}
+                                  {% endif%}
+                                  {% if myItem.prof_sub2 !='' %}
+                                        <li>{{myItem.prof_sub2}}</li>
+                                  {% else %}
+                                  {% endif%}
+                                  {% if myItem.prof_sub3 !='' %}
+                                        <li>{{myItem.prof_sub3}}</li>
+                                  {% else %}
+                                  {% endif%}
+                                  {% if myItem.prof_sub4 !='' %}
+                                        <li>{{myItem.prof_sub4}}</li>
+                                  {% else %}
+                                  {% endif%}
+                                  {% if myItem.prof_sub5 !='' %}
+                                        <li>{{myItem.prof_sub5}}</li>
+                                  {% else %}
+                                  {% endif%}
+                                </ol>
+                              </li>
+                              
+                            </ul>
+                            {% endfor %}  
+                           </td>
+                            <td><br><br><br><br>{{inv.professional_amount}}&nbsp;/=</td>
+                     
+                        <td>
+                          {% for dbmt in dis %} 
+                           <ul type = "circle">
+                             <li>{{dbmt.disb_heading}} 
+                               <ol>
+                                {% if dbmt.disb_sub1 !='' %}
+                                <li>{{dbmt.disb_sub1}}</li>
+                                      {% else %}
+                                {% endif%}
+                                {% if dbmt.disb_sub2 !='' %}
+                                <li>{{dbmt.disb_sub2}}</li>
+                                      {% else %}
+                                {% endif%}
+                                {% if dbmt.disb_sub3 !='' %}
+                                <li>{{dbmt.disb_sub3}}</li>
+                                      {% else %}
+                                {% endif%}
+                                </ol>
+                             </li>
+                            </ul>
+                              {% endfor %}
+                          </td>
+                          
+                                
+                            <td>
+                              {% for dbmt in dis %} 
+                              {% if dbmt.disbursement_amount != 0.0%}
+                              <br><br>
+                              {{dbmt.disbursement_amount}}&nbsp;/=
+                              {% else %}
+                              <td></td>
+                                     {% endif%}
+                              {% endfor %}
+                            </td>
+                            </tr>
                           <tr>
                               <td>To 18% VAT</td>
                               <td>{{VAT}}&nbsp;/=</td>
@@ -125,26 +175,16 @@
                           </tr>
                           <tr>
                             <td>SubTotal</td>
-                            <td>{{grandtotal_pr}}&nbsp;/=</td>
+                            <td>{{subtotal_pr}}&nbsp;/=</td>
                             <td>SubTotal</td>
                             <td>{{subtotal_db}}&nbsp;/=</td>
                             <td>{{grandtotal }}&nbsp;/=</td>
                           </tr>
-
-                    </tbody>   
-                  </table>
-                </div>
-              </div><!--
-              <div class="row d-print-none mt-2">
-                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
+						
+					 </tbody>
+          </table>
+					 <!-- ending trial-->
               </div>
-              <div class="form-group row">
-                <label class="control-label col-md-12">Amount in Words:&nbsp;<span>yhekhfkhafhehfkhfeihfhe</span></label>
-                <div class="row mb-4">
-                <div class="col-5">
-                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
-                </div>
-              </div>-->
               <div class="container px-4">
                 <div class="row gx-5">
                   <div class="col">

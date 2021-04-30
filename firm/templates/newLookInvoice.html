@@ -76,23 +76,81 @@
 
 					</tr>
 				</thead>
-				<tbody>
-				{% for myItem in item %}
+				<tbody class="head">
+					<!--<colgroup>
+						<col> 
+						<col width="100px">
+						<col>
+						<col width="120px">
+					</colgroup>-->
 					<tr>
-						<td><span >{{myItem.professional_desc }}</span></td>
-						{% if myItem.professional_amount != 0.0%}
-						<td><span >{{ myItem.professional_amount }}&nbsp;/=</span></td>
-						{% else %}
-						<td></td>
-						{% endif%}
-						<td><span>{{myItem.disbursements_desc}}</span></td>
-						{% if myItem.disbursements_amount != 0.0%}
-						<td><span >{{ myItem.disbursements_amount }}&nbsp;/=</span></td>
-						{% else %}
-						<td></td>
-						{% endif%}
+                        <td><span>
+							{% for myItem in item %}
+							<ul class="a">
+							  <li>{{myItem.prof_heading }}
+								<ol type="1">
+								  {% if myItem.prof_sub1 !='' %}
+										<li>{{myItem.prof_sub1}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub2 !='' %}
+										<li>{{myItem.prof_sub2}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub3 !='' %}
+										<li>{{myItem.prof_sub3}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub4 !='' %}
+										<li>{{myItem.prof_sub4}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub5 !='' %}
+										<li>{{myItem.prof_sub5}}</li>
+								  {% else %}
+								  {% endif%}
+								</ol>
+							  </li>
+							  
+							</ul>
+							{% endfor %}  
+						   </span></td>
+						   <td><span><br>{{inv.professional_amount}}&nbsp;/=</span></td>
+
+						   <td style="text-align:left;"><span>
+							{% for dbmt in dis %} 
+							 <ul class="a">
+							   <li>{{dbmt.disb_heading}} 
+								 <ol type="1">
+								  {% if dbmt.disb_sub1 !='' %}
+								  <li>{{dbmt.disb_sub1}}</li>
+										{% else %}
+								  {% endif%}
+								  {% if dbmt.disb_sub2 !='' %}
+								  <li>{{dbmt.disb_sub2}}</li>
+										{% else %}
+								  {% endif%}
+								  {% if dbmt.disb_sub3 !='' %}
+								  <li>{{dbmt.disb_sub3}}</li>
+										{% else %}
+								  {% endif%}
+								  </ol>
+							   </li>
+							  </ul>
+								{% endfor %}
+							</span></td> 
+							  <td><span>
+								{% for dbmt in dis %} 
+								{% if dbmt.disbursement_amount != 0.0%}
+								<br><br>
+								{{dbmt.disbursement_amount}}&nbsp;/=
+								{% else %}
+								<td></td>
+									   {% endif%}
+								{% endfor %}
+							</span></td>
 					</tr>
-				{% endfor %}  
+				
 					<tr>
 						<td class="note" ><a class="cut">-</a><span >To 18% VAT</span></td>
 						<td><span >{{VAT}}&nbsp;/=</span></td>
@@ -100,7 +158,7 @@
 					
 					<tr>
 						<td class="note" ><a class="cut">-</a><span >SubTotal</span></td>
-						<td><span >{{grandtotal_pr}}&nbsp;/=</span></td>
+						<td><span >{{subtotal_pr}}&nbsp;/=</span></td>
                         <td><span >SubTotal </span></td>
 						<td><span >{{subtotal_db}}&nbsp;/=</span></td>
 					</tr>

@@ -11,29 +11,39 @@
   #}
   {%- macro render_lap_form(subform, index) %}
       <div id="lap-{{ index }}-form" class="{% if index != '_' %}subform{% else %}is-hidden{% endif %}" data-index="{{ index }}">
+          <div>     
+          </div>
+            {{ subform.prof_heading.label}}
+                {{ subform.prof_heading }}  
 
-          <table>
-              <thead>
-                  <tr>
-                    <th>{{ subform.professional_desc.label }}</th>
-                    <th>{{ subform.professional_amount.label }}</th>
-                      <th>{{ subform.disbursements_desc.label }}</th>
-                      <th>{{ subform.disbursements_amount.label }}</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  
-                      <tr>
-                        <!--<th style="font-size:200%">{{ subform.notes }}</th>-->
-                        <th>{{ subform.professional_desc }}</th>
-                        <th>{{ subform.professional_amount(value='0') }}</th>
-                        <th>{{ subform.disbursements_desc}}</th>
-                        <th>{{ subform.disbursements_amount(value='0') }}</th> 
-                      </tr>
-                  
-              </tbody>
-          </table>
-          <a class="remove" href="#"><h3>Remove Item</h3></a>
+          {{ subform.prof_sub1.label }}<br>
+          {{ subform.prof_sub1 }}<br>
+          {{ subform.prof_sub2.label }}<br>
+          {{ subform.prof_sub2 }}<br>
+          {{ subform.prof_sub3.label }}<br>
+          {{ subform.prof_sub3 }}<br>
+          {{ subform.prof_sub4.label }}<br>
+          {{ subform.prof_sub4 }}<br>
+          {{ subform.prof_sub5.label }}<br>
+          {{ subform.prof_sub5 }}<br>
+          <a class="remove" href="#">Remove above entries</a>
+          <hr/>
+      </div>
+  {%- endmacro %}
+  {%- macro render_lap2_form(subform2, index) %}
+      <div id="lap-{{ index }}-form" class="{% if index != '_' %}subform2{% else %}is-hidden{% endif %}" data-index="{{ index }}">
+        <strong>{{ subform2.disbursement_amount.label}}</strong>
+        {{ subform2.disbursement_amount}}
+          {{ subform2.disb_heading.label}}
+              {{ subform2.disb_heading }}  
+          {{ subform2.disb_sub1.label }}<br>
+          {{ subform2.disb_sub1 }}<br>
+          {{ subform2.disb_sub2.label }}<br>
+          {{ subform2.disb_sub2 }}<br>
+          {{ subform2.disb_sub3.label }}<br>
+          {{ subform2.disb_sub3 }}<br>
+
+          <a class="remove" href="#">Remove the above entries</a>
           <hr/>
       </div>
   {%- endmacro %}

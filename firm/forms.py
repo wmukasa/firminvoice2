@@ -77,20 +77,29 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('Reset password')
-    
+
 class LapForm(Form):
-    """Subform.
 
-    CSRF is disabled for this subform (using `Form` as parent class) because
-    it is never used by itself.
-   
-    item_name= StringField('Item name',validators=[validators.InputRequired(), validators.Length(max=100)])
-    """ 
-    professional_desc =TextAreaField('Professional Description')
-    professional_amount =StringField('Professional Amount/Ug.shs')
-    disbursements_desc =TextAreaField('Disbursements Description')
-    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
-
+    prof_heading = TextAreaField(
+        'PROFESSIONAL FEES HEADING',
+         validators=[validators.InputRequired(),validators.Length(max=255)]
+    )
+    prof_sub1= TextAreaField(
+        'professional subheading1',
+        validators=[validators.Length(max=100)]
+    )
+    prof_sub2= TextAreaField(
+        'professional subheading2',[validators.Length(max=100)]
+    )
+    prof_sub3= TextAreaField(
+        'professional subheading3',[validators.Length(max=100)]
+    )
+    prof_sub4= TextAreaField(
+        'professional subheading4',[validators.Length(max=100)]
+    )
+    prof_sub5= TextAreaField(
+        'professional subheading5',[validators.Length(max=100)]
+    )
 class MainForm(FlaskForm):
     """Parent form."""
     invoice_title= StringField('Title')
@@ -106,10 +115,38 @@ class MainForm(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
+    #the added infor
+    professional_amount=StringField(
+        'Professional amount',validators=[validators.InputRequired(), validators.Length(min=2,max=60)])
     laps = FieldList(
         FormField(LapForm),
         min_entries=1,
         max_entries=8
+    )
+class DisbursementForm(Form):
+
+    disb_heading = TextAreaField(
+        'DISBURSEMENT HEADING FEES',
+         validators=[validators.Length(max=255)]
+    )
+    disb_sub1= TextAreaField(
+        'Disbursement subheading1',
+        validators=[ validators.Length(max=100)]
+    )
+    disb_sub2= TextAreaField(
+        'Disbursement subheading2',[validators.Length(max=100)]
+    )
+    disb_sub3= TextAreaField(
+        'Disbursement subheading3',[validators.Length(max=100)]
+    )
+
+    disbursement_amount=StringField('Disbursement amount' )
+class DisbursementMainForm(FlaskForm):
+
+    laps2 = FieldList(
+        FormField(DisbursementForm),
+        min_entries=1,
+        max_entries=20
     )
 
 class Invoice_Items(FlaskForm):
@@ -125,17 +162,23 @@ class Invoice_Items(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
-    professional_desc =TextAreaField('Professional Description')
-    professional_amount =StringField('Professional Amount/Ug.shs')
-    disbursements_desc =TextAreaField('Disbursements Description')
-    disbursements_amount =StringField('Disbursements Amount/Ug.shs')
+    professional_amount=StringField('Professional amount/Ug.shs')
+    prof_heading =TextAreaField('Professional Description')
+    prof_sub1 =StringField('professional subheading1')
+    prof_sub2 =TextAreaField('professional subheading2')
+    prof_sub3 =StringField('professional subheading3')
+    prof_sub4 =StringField('professional subheading4')
+    prof_sub5 =StringField('professional subheading5')
 
-    professional_desc2 =TextAreaField('Professional Description')
-    professional_amount2 =StringField('Professional Amount/Ug.shs')
-    disbursements_desc2 =TextAreaField('Disbursements Description')
-    disbursements_amount2 =StringField('Disbursements Amount/Ug.shs')
-
+    disbursement_amount =StringField('Disbursement_amount/Ug.shs')
+    disb_heading =TextAreaField('Professional Description')
+    disb_sub1=StringField('professional subheading1')
+    disb_sub2=StringField('professional subheading2')
+    disb_sub3=StringField('professional subheading3')
+    
     submit = SubmitField('Update')
+
+
 class Invoice_Items2(FlaskForm):
     name_to= StringField('Name', validators=[DataRequired(), Length(min=2, max=100)])
     company_name = StringField('Company if any')

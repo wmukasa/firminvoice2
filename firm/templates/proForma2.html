@@ -1,13 +1,12 @@
-
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Pro Forma Invoice</title><!--
+		<title>Pro forma Invoice</title><!--
 		<link rel="stylesheet" href="testing.css">-->
 	</head>
 	<body>
 		<header>
-			<h1>Pro Forma Invoice</h1>
+			<h1>Pro forma Invoice</h1>
 			<address >
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>
 				<p>1st Floor Block A-UAP<br>Nakawa Business Park</p>
@@ -26,14 +25,14 @@
 				<p>{{inv.name_to}}.</p>
 				<p>
                     {% if inv.company_name == '' %}
-                    {% else%}
+					{% else %}
 					{{inv.company_name}}
 					{% endif %}
                 </p>
 				<p>{{inv.address_to}}</p>
 				<p>
                     {% if inv.email_to == '' %}
-                    {% else%}
+                    {% else %}
 					Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}
 					{% endif %}
                 </p>
@@ -50,10 +49,10 @@
                     {% endif %}
                 </p>
 			</address>
+
 			<table class="meta">
-				<tr>
-					<th width=60%><span >Our Ref</span></th>
-					<td width=100%><span >{{ inv.ref_number }}</span></td>
+					<th><span >Our Ref:</span></th>
+					<td><span >{{ inv.ref_number }}</span></td>
 				</tr>
 				<tr>
 					<th><span >Issue Date</span></th>
@@ -75,23 +74,81 @@
 
 					</tr>
 				</thead>
-				<tbody>
-				{% for myItem in item %}
+				<tbody class="head">
+					<!--<colgroup>
+						<col> 
+						<col width="100px">
+						<col>
+						<col width="120px">
+					</colgroup>-->
 					<tr>
-						<td><span >{{myItem.professional_desc }}</span></td>
-						{% if myItem.professional_amount != 0.0%}
-						<td><span >{{ myItem.professional_amount }}&nbsp;/=</span></td>
-						{% else %}
-						<td></td>
-						{% endif%}
-						<td><span>{{myItem.disbursements_desc}}</span></td>
-						{% if myItem.disbursements_amount != 0.0%}
-						<td><span >{{ myItem.disbursements_amount }}&nbsp;/=</span></td>
-						{% else %}
-						<td></td>
-						{% endif%}
+                        <td><span>
+							{% for myItem in item %}
+							<ul class="a">
+							  <li>{{myItem.prof_heading }}
+								<ol type="1">
+								  {% if myItem.prof_sub1 !='' %}
+										<li>{{myItem.prof_sub1}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub2 !='' %}
+										<li>{{myItem.prof_sub2}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub3 !='' %}
+										<li>{{myItem.prof_sub3}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub4 !='' %}
+										<li>{{myItem.prof_sub4}}</li>
+								  {% else %}
+								  {% endif%}
+								  {% if myItem.prof_sub5 !='' %}
+										<li>{{myItem.prof_sub5}}</li>
+								  {% else %}
+								  {% endif%}
+								</ol>
+							  </li>
+							  
+							</ul>
+							{% endfor %}  
+						   </span></td>
+						   <td><span><br>{{inv.professional_amount}}&nbsp;/=</span></td>
+
+						   <td style="text-align:left;"><span>
+							{% for dbmt in dis %} 
+							 <ul class="a">
+							   <li>{{dbmt.disb_heading}} 
+								 <ol type="1">
+								  {% if dbmt.disb_sub1 !='' %}
+								  <li>{{dbmt.disb_sub1}}</li>
+										{% else %}
+								  {% endif%}
+								  {% if dbmt.disb_sub2 !='' %}
+								  <li>{{dbmt.disb_sub2}}</li>
+										{% else %}
+								  {% endif%}
+								  {% if dbmt.disb_sub3 !='' %}
+								  <li>{{dbmt.disb_sub3}}</li>
+										{% else %}
+								  {% endif%}
+								  </ol>
+							   </li>
+							  </ul>
+								{% endfor %}
+							</span></td> 
+							  <td><span>
+								{% for dbmt in dis %} 
+								{% if dbmt.disbursement_amount != 0.0%}
+								<br><br>
+								{{dbmt.disbursement_amount}}&nbsp;/=
+								{% else %}
+								<td></td>
+									   {% endif%}
+								{% endfor %}
+							</span></td>
 					</tr>
-					{% endfor %}  
+				
 					<tr>
 						<td class="note" ><a class="cut">-</a><span >To 18% VAT</span></td>
 						<td><span >{{VAT}}&nbsp;/=</span></td>
@@ -99,10 +156,9 @@
 					
 					<tr>
 						<td class="note" ><a class="cut">-</a><span >SubTotal</span></td>
-						<td><span >{{grandtotal_pr}}&nbsp;/=</span></td>
+						<td><span >{{subtotal_pr}}&nbsp;/=</span></td>
                         <td><span >SubTotal </span></td>
 						<td><span >{{subtotal_db}}&nbsp;/=</span></td>
-                        
 					</tr>
 				</tbody>
 			</table>

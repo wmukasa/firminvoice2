@@ -2,10 +2,11 @@ import os, sys, subprocess, platform
 import pdfkit
 from datetime import datetime, date
 from flask import Flask,render_template,request,url_for,flash,redirect, make_response 
-from firm.models import User,Invoice,InvoiceLineItem,Receipt
+from firm.models import User,Invoice,InvoiceLineItem,Receipt,disbursements
 from firm.forms import( RegistrationForm, LoginForm,UpdateAccountForm,ReceiptForm,RequestResetForm,
                 ResetPasswordForm,Invoice_Items,LapForm,MainForm,Invoice_Items2,Invoice_Items3,
-                Invoice_Items4,Invoice_Items5,Invoice_Items6,Invoice_Items7)
+                Invoice_Items4,Invoice_Items5,Invoice_Items6,Invoice_Items7,DisbursementMainForm,
+                DisbursementForm)
 from sqlalchemy import desc,or_
 from firm import db,bcrypt,app,mail
 from flask_login import login_user,current_user,logout_user,login_required
@@ -131,29 +132,21 @@ def saved_invoice(inv_id):
     grandtotal =0
     myPro =0
     inv = Invoice.query.filter( Invoice.id== inv_id).first()
-    #myVat=(float(inv.vat))/100 
     item = InvoiceLineItem.query.filter_by(invoice=inv).all()
-    
-    for q in item:
-        subtotal_db +=float(q.disbursements_amount)
-        print(subtotal_db)
-        subtotal_pr +=q.professional_amount
-        #VAT is only on professional price 
-        myPro +=q.professional_amount 
-        #print(myPro)
-        VAT = (18/100)* float(myPro)
-        #VAT = myVat*subtotal
-        grandtotal_pr = float(VAT+subtotal_pr)
-        grandtotal = grandtotal_pr+subtotal_db 
-    #print(subtotal)
-    #print(VAT)
-    #(grandtotal)
+    dis = disbursements.query.filter_by(invoice=inv).all()
+    #VAT is only on professional price    
+    VAT = (18/100)* float(inv.professional_amount)
+    subtotal_pr = float(VAT+inv.professional_amount)
+    for q in dis:
+        subtotal_db +=float(q.disbursement_amount)
+    grandtotal = subtotal_pr+subtotal_db 
+
     '''
     return render_template('saved_invoice.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
                         subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,len=len,title='SavedInvoice')
     '''
     return render_template('invSecondPage.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
-                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,grandtotal_pr=grandtotal_pr,
+                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
                         grandtotal=grandtotal ,VAT=VAT,len=len,title='SavedInvoice')
 
 @app.route('/get_pdf/<inv_id>', methods=['POST'])
@@ -166,21 +159,17 @@ def get_pdf(inv_id,options=wk_options):
     myPro =0
     if request.method =="POST":
         inv = Invoice.query.filter( Invoice.id== inv_id).first()
-        #myVat=(float(inv.vat))/100 
-        item = InvoiceLineItem.query.filter_by(invoice=inv).all() 
-        for q in item:
-            subtotal_db +=float(q.disbursements_amount)
-            subtotal_pr +=q.professional_amount
-            #VAT is only on professional price 
-            myPro +=q.professional_amount 
-            VAT = (18/100)* float(myPro)
-            #print(VAT)
-            #VAT = myVat*subtotal
-            grandtotal_pr = float(VAT+myPro)
-            grandtotal = grandtotal_pr+subtotal_db 
+        item = InvoiceLineItem.query.filter_by(invoice=inv).all()
+        dis = disbursements.query.filter_by(invoice=inv).all()
+        #VAT is only on professional price    
+        VAT = (18/100)* float(inv.professional_amount)
+        subtotal_pr = float(VAT+inv.professional_amount) 
+        for q in dis:
+            subtotal_db +=float(q.disbursement_amount)
+        grandtotal = subtotal_pr+subtotal_db 
         rendered=render_template('newLookInvoice.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
-                            subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,grandtotal_pr=grandtotal_pr,
-                            grandtotal=grandtotal ,VAT=VAT,len=len)
+                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
+                        grandtotal=grandtotal ,VAT=VAT,len=len)
         css = ['firm/static/css/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
@@ -192,41 +181,27 @@ def get_pdf(inv_id,options=wk_options):
 @app.route('/getProForma_pdf/<inv_id>', methods=['POST'])
 @login_required
 def getProForma_pdf(inv_id,options=wk_options):
-    '''
-    subtotal = 0
-    VAT =0
-    myPro =0
-    grandtotal =0
-    if request.method =="POST":
-        inv = Invoice.query.filter( Invoice.id== inv_id).first()
-        item = InvoiceLineItem.query.filter_by(invoice=inv).all()
-        for q in item:
-            subtotal +=float(q.amount)
-            myPro +=q.professional_fees 
-            VAT = (18/100)* float(myPro)
-            grandtotal = float(VAT+subtotal)
-    '''
+
     subtotal_pr = 0
     subtotal_db = 0
     VAT =0
     grandtotal =0
     myPro =0
+    inv = Invoice.query.filter( Invoice.id== inv_id).first()
+
     if request.method =="POST":
         inv = Invoice.query.filter( Invoice.id== inv_id).first()
-        #myVat=(float(inv.vat))/100 
         item = InvoiceLineItem.query.filter_by(invoice=inv).all()
-        for q in item:
-            subtotal_db +=float(q.disbursements_amount)
-            subtotal_pr +=q.professional_amount
-            #VAT is only on professional price 
-            myPro +=q.professional_amount 
-            VAT = (18/100)* float(myPro)
-            #print(VAT)
-            #VAT = myVat*subtotal
-            grandtotal_pr = float(VAT+myPro)
-            grandtotal = grandtotal_pr+subtotal_db 
-        rendered=render_template('proForma2.html',myPro= myPro,subtotal_db=subtotal_db,grandtotal_pr=grandtotal_pr,
-                                        subtotal_pr=subtotal_pr,grandtotal=grandtotal,VAT=VAT,inv=inv,item=item,len=len)
+        dis = disbursements.query.filter_by(invoice=inv).all()
+        #VAT is only on professional price    
+        VAT = (18/100)* float(inv.professional_amount)
+        subtotal_pr = float(VAT+inv.professional_amount) 
+        for q in dis:
+            subtotal_db +=float(q.disbursement_amount)
+        grandtotal = subtotal_pr+subtotal_db 
+        rendered=render_template('proForma2.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
+                                                subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
+                                                grandtotal=grandtotal ,VAT=VAT,len=len)
         css = ['firm/static/css/testing.css']
         pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
         response = make_response(pdf)
@@ -250,8 +225,11 @@ def export_pdf(request):
 @app.route('/Create Invoice', methods=['GET', 'POST'])
 @login_required
 def create_invoice():
+    #form = MainForm()
     form = MainForm()
+    #template_form = LapForm(prefix='laps-_-')
     template_form = LapForm(prefix='laps-_-')
+
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
         x: int = get_id.id + 1
@@ -262,40 +240,62 @@ def create_invoice():
         ref_number = str(date.today().strftime("%y%m") + str(1).zfill(3))
     finally:
         if form.validate_on_submit():
-            author = current_user
-            ref_number = ref_number
-            name_to = request.form['name_to']
-            address_to = request.form['address_to']
-            email_to = request.form['email_to']
-            telephone_to = request.form['telephone_to']
-            company_name = request.form['company_name']
-            box_number_to = request.form['box_number_to']
-            vat = request.form['vat']
-            terms = request.form['terms']
-            issue_date = request.form['issue_date']
-            due_date = request.form['due_date']
-
-            new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,company_name,email_to,box_number_to,vat,terms,issue_date,due_date,current_user.id)
-
-            db.session.add(new_invoice)
-
-            for lap in form.laps.data:
-                new_lap = InvoiceLineItem(**lap)
-
-                # Add to race
-                new_invoice.laps.append(new_lap)
-
-            db.session.commit()
-            return redirect(url_for('dashboard'))
-
-    invoice = Invoice.query.all()
+                author = current_user
+                ref_number = ref_number
+                name_to = request.form['name_to']
+                address_to = request.form['address_to']
+                email_to = request.form['email_to']
+                telephone_to = request.form['telephone_to']
+                company_name = request.form['company_name']
+                box_number_to = request.form['box_number_to']
+                vat = request.form['vat']
+                terms = request.form['terms']
+                issue_date = request.form['issue_date']
+                due_date = request.form['due_date']
+                professional_amount = request.form['professional_amount']
+                new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,company_name,email_to,box_number_to,vat,terms,issue_date,due_date,professional_amount,current_user.id)
+                db.session.add(new_invoice)
+                for lap in form.laps.data:
+                    new_lap = InvoiceLineItem(**lap)
+                    # Add to race
+                    new_invoice.laps.append(new_lap)
+                db.session.commit()
+                return redirect(url_for('disbursement'))
+        #invoice = Invoice.query.all()
 
     return render_template(
         'invoice_items.html',
+        #'creating_items.html',
+        #'create_disbur.html',
         form=form,
-        invoice=invoice,
+        #invoice=invoice,
         _template=template_form
     )
+@app.route('/disbursement', methods=['GET', 'POST'])
+#@login_required
+def disbursement():
+    form = DisbursementMainForm()
+    template_form = DisbursementForm(prefix='laps2-_-')
+    if form.validate_on_submit():
+        # Create rac
+        get_id = Invoice.query.order_by(desc('id')).first()
+        for lap in form.laps2.data:
+            new_lap = disbursements(**lap)
+            # Add to race
+            #print(get_id)
+            get_id.laps2.append(new_lap)
+            
+        #db.session.add(new_lap)
+        db.session.commit()
+        return redirect(url_for('dashboard'))
+
+    return render_template(
+        'disbursement.html',
+        form=form,
+        #races=races,
+        _template=template_form
+    )
+
 #for second template during creating
 @app.route('/ProformaInvoice-<int:inv_id>')
 @login_required
@@ -306,27 +306,22 @@ def proform_invoice(inv_id):
     grandtotal =0
     myPro =0
     inv = Invoice.query.filter( Invoice.id== inv_id).first()
-    #myVat=(float(inv.vat))/100 
+
+    print(inv.professional_amount)
     item = InvoiceLineItem.query.filter_by(invoice=inv).all()
-    
-    for q in item:
-        subtotal_db +=float(q.disbursements_amount)
-        subtotal_pr +=q.professional_amount
-        #VAT is only on professional price 
-        myPro +=q.professional_amount 
-        VAT = (18/100)* float(myPro)
-        #VAT = myVat*subtotal
-        grandtotal_pr = float(VAT+subtotal_pr)
-        grandtotal = grandtotal_pr+subtotal_db 
-    #print(subtotal)
-    #print(VAT)
-    #(grandtotal)
+    dis = disbursements.query.filter_by(invoice=inv).all()
+    #VAT is only on professional price    
+    VAT = (18/100)* float(inv.professional_amount)
+    subtotal_pr = float(VAT+inv.professional_amount)
+    for q in dis:
+        subtotal_db +=float(q.disbursement_amount)
+    grandtotal = subtotal_pr+subtotal_db 
     '''
     return render_template('proforma_invoice.html',inv=inv,item=item,VAT=VAT,myPro=myPro,
                         subtotal=subtotal,grandtotal=grandtotal,len=len,title='Pro forma Invoice')
     '''
     return render_template('proforma_invoice2.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
-                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,grandtotal_pr=grandtotal_pr,
+                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
                         grandtotal=grandtotal ,VAT=VAT,len=len,title='Pro forma Invoice')
 
 @app.route("/Invoice-<int:inv_id>-Update", methods=['GET', 'POST'])
@@ -334,11 +329,8 @@ def proform_invoice(inv_id):
 def update_invoice(inv_id):
     today = date.today()
     updt_inv = Invoice.query.get_or_404(inv_id)
-    #print(updt_inv)
-    #print(updt_inv.name_to)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
-    #for p in item:
-        #print (p.item_name)
+    dis = disbursements.query.filter_by(invoice=updt_inv).all()
     form1=Invoice_Items()
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
@@ -363,12 +355,20 @@ def update_invoice(inv_id):
             updt_inv.terms = form1.terms.data 
             updt_inv.issue_date = form1.issue_date.data
             updt_inv.due_date = form1.due_date.data   
+            updt_inv.professional_amount = form1.professional_amount.data   
             for p in item: 
-                p.professional_desc = form1.professional_desc.data
-                p.professional_amount = form1.professional_amount.data
-                p.disbursements_desc = form1.disbursements_desc.data
-                p.disbursements_amount = form1.disbursements_amount.data
-        
+                p.prof_heading = form1.prof_heading.data
+                p.prof_sub1 = form1.prof_sub1.data
+                p.prof_sub2 = form1.prof_sub2.data
+                p.prof_sub3 = form1.prof_sub3.data
+                p.prof_sub4 = form1.prof_sub4.data
+                p.prof_sub5 = form1.prof_sub5.data
+            for q in dis:
+                q.disbursement_amount =form1.disbursement_amount.data
+                q.disb_heading=form1.disb_heading.data 
+                q.disb_sub1=form1.disb_sub1.data 
+                q.disb_sub2=form1.disb_sub2.data 
+                q.disb_sub3=form1.disb_sub3.data 
             db.session.commit()
             flash('Your log has been updated!', 'success')
             return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
@@ -385,15 +385,26 @@ def update_invoice(inv_id):
             form1.issue_date.data = updt_inv.issue_date
             form1.due_date.data = updt_inv.due_date
             form1.vat.data = updt_inv.vat
+            form1.professional_amount.data = updt_inv.professional_amount
             #print(len(item))
             for p in item:
                 #print(p.id,p.invoice_id)
-                form1.professional_desc.data = p.professional_desc
-                form1.professional_amount.data = p.professional_amount
-                form1.disbursements_desc.data = p.disbursements_desc
-                form1.disbursements_amount.data = p.disbursements_amount
-    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                form1.prof_heading.data = p.prof_heading
+                form1.prof_sub1.data = p.prof_sub1
+                form1.prof_sub2.data = p.prof_sub2
+                form1.prof_sub3.data = p.prof_sub3
+                form1.prof_sub4.data = p.prof_sub4
+                form1.prof_sub5.data = p.prof_sub5
+            for q in dis:
+                form1.disbursement_amount.data = q.disbursement_amount
+                form1.disb_heading.data = q.disb_heading
+                form1.disb_sub1.data = q.disb_sub1
+                form1.disb_sub2.data = q.disb_sub2
+                form1.disb_sub3.data = q.disb_sub3
+                
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form1=form1,len=len,title='Update Invoice')
+#this ends the  updating system so far 
 
 @app.route("/Invoice2-<int:inv_id>-Update", methods=['GET', 'POST'])
 @login_required
@@ -401,6 +412,7 @@ def update_invoice2(inv_id):
     today = date.today()
     updt_inv = Invoice.query.get_or_404(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
+    dis = disbursements.query.filter_by(invoice=updt_inv).all()
     form2=Invoice_Items()
     
     try:
@@ -467,6 +479,7 @@ def update_invoice2(inv_id):
 
     return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
                             form2=form2,len=len,title='Update Invoice')
+                        
 @app.route("/Invoice3-<int:inv_id>-Update", methods=['GET', 'POST'])
 @login_required
 def update_invoice3(inv_id):
