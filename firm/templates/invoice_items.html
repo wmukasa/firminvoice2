@@ -312,7 +312,33 @@ input[type=submit]:hover {
          <!--(value='18',disabled="")-->
 					</div>
           </div>
-
+          <div class="row">
+            <div class="col-25">
+                  {{ form.bank.label }}
+            </div>
+            <div class="col-75">
+           {{ form.bank}}
+           <!--(value='18',disabled="")-->
+            </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                    {{ form.account_number.label }}
+              </div>
+              <div class="col-75">
+             {{ form.account_number}}
+             <!--(value='18',disabled="")-->
+              </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                      {{ form.swift_code.label }}
+                </div>
+                <div class="col-75">
+               {{ form.swift_code}}
+               <!--(value='18',disabled="")-->
+                </div>
+                </div>
           <div id="subforms-container">
             {% for subform in form.laps %}
              <h1>Please add Professional fees</h1>

@@ -1,8 +1,9 @@
+
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Tax Invoice</title><!--
-		<link rel="stylesheet" href="testing.css">-->
+		<title>Tax Invoice</title>
+		<!--<link rel="stylesheet" href="testing.css">-->
 	</head>
 	<body>
 		<header>
@@ -17,7 +18,7 @@
 			</address>
 			<location>			
 				<h2><strong>Invoice No:&nbsp;&nbsp;&nbsp;{{inv.vat}}</strong></h2>
-				<h3><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h3>
+				<!--<h3><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h3>-->
 		
 			</location>
 		</header>
@@ -70,29 +71,31 @@
 				<thead>
 					<tr>
 						<tr>
-							<th colspan="2"><span >Professional fees/Ugs.shs</span></th>
-							<th colspan="2"><span >Disbursements /Ugs.shs</span></th>
+							<th><span > VAT No:&nbsp;&nbsp;&nbsp;{{inv.vat}}</span><br>TIN:&nbsp;&nbsp;&nbsp;1017550332</th>
+							<th><span >Professional fees Ug.shs</span></th>
+							<th><span >Disbursement fees Ug.shs</span></th>
+							<!--<th><span >Total Amount Ug.shs</span></th>-->
 						</tr>
 
 					</tr>
 				</thead>
-				<tbody>
-					<!--<colgroup>
+				<tbody ><!--
+					<colgroup>
 						<col> 
-						<col width="60px">
+						<col width="100px">
 						<col>
 						<col width="120px">
 					</colgroup>-->
 					<tr>
-                        <td><span>
+                        <td style="text-align:left;"><span>
+						<h6> To Professional fees for </h6>
 							{% for myItem in item %}
 							<ul class="a">
-							  <li>{{myItem.prof_heading }}
+							  <li>Preparation of pleading
 								<ol type="1">
-								  {% if myItem.prof_sub1 !='' %}
-										<li>{{myItem.prof_sub1}}</li>
-								  {% else %}
-								  {% endif%}
+								 
+										<li>Appearance/Attendance</li>
+								
 								  {% if myItem.prof_sub2 !='' %}
 										<li>{{myItem.prof_sub2}}</li>
 								  {% else %}
@@ -114,10 +117,20 @@
 							  
 							</ul>
 							{% endfor %}  
-						   </span></td>
+						   </span>
+						   </td>
+						   
 						   <td><span><br>{{inv.professional_amount}}&nbsp;/=</span></td>
-
-						   <td style="text-align:left;"><span>
+							</tr>
+					<tr>
+						<td class="note" ><a class="cut">-</a><span >To 18% VAT</span></td>
+						<td><span >{{VAT}}&nbsp;/=</span></td>
+					</tr>	
+							<tr>
+							<td>
+													   
+						<span>
+						<h6> To Disbursement</h6>
 							{% for dbmt in dis %} 
 							 <ul class="a">
 							   <li>{{dbmt.disb_heading}} 
@@ -138,42 +151,34 @@
 							   </li>
 							  </ul>
 								{% endfor %}
-							</span></td> 
+						</span>
+							</td>
+								<td></td>
 							  <td><span>
 								{% for dbmt in dis %} 
 								{% if dbmt.disbursement_amount != 0.0%}
 								<br><br>
 								{{dbmt.disbursement_amount}}&nbsp;/=
 								{% else %}
-								<td></td>
+								
 									   {% endif%}
 								{% endfor %}
 							</span></td>
 					</tr>
 				
-					<tr>
-						<td class="note" ><a class="cut">-</a><span >To 18% VAT</span></td>
-						<td><span >{{VAT}}&nbsp;/=</span></td>
-					</tr>
-					
-					<tr>
-						<td class="note" ><a class="cut">-</a><span >SubTotal</span></td>
-						<td><span >{{subtotal_pr}}&nbsp;/=</span></td>
-                        <td><span >SubTotal </span></td>
-						<td><span >{{subtotal_db}}&nbsp;/=</span></td>
-					</tr>
+
 				</tbody>
 			</table>
 			<table class="balance">
 				<tr>
-					<th><span >Grandtotal</span><span data-prefix>/Ug.shs</span></th>
+					<th><span >Total</span><span data-prefix>/Ug.shs</span></th>
 					<td><span>{{grandtotal }}&nbsp;/=</span></td>
 				</tr>
 			</table>
 		</article>
 		<aside>
-			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
-			<h6><span>Bank: &nbsp;&nbsp; POST BANK</span>&nbsp;&nbsp;/<span>Account No:&nbsp;&nbsp; 10305024837</span>&nbsp;&nbsp;/<span>swift code:&nbsp;&nbsp; QWERTY</span></h6>
+			<h3><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h3>
+            <strong><span>Bank:&nbsp; Centenary Bank</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; 10305024837</span>/&nbsp;&nbsp;<span>swift code:&nbsp;&nbsp; QWERTY</span></strong>
 			<!--<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 			<div class="line"><br>
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>

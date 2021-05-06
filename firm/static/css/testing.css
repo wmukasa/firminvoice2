@@ -4,7 +4,9 @@
 /* heading */
 
 h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
+h3 { font: 100% sans-serif; letter-spacing: 0.5em; text-align: center; text-transform: uppercase; }
 h2 { font-size: 150%; }
+h6 { font-size: 80%; }
 /* table */
 
 table { font-size: 100%; table-layout: auto; width: 100%; }

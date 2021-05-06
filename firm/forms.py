@@ -115,6 +115,16 @@ class MainForm(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
+    bank = SelectField('Bank',
+                choices=[('none', 'NONE'), ('Stanbic Bank', 'Stanbic Bank'),('DFCU Bank', 'DFCU Bank'),('Absa Bank Uganda','Absa Bank Uganda'),('Exim Bank','Exim Bank'),
+                            ('Centenary Bank', 'Centenary Bank'),('Standard Chartered Bank', 'Standard Chartered Bank'),('Bank of Baroda','Bank of Baroda'),
+                            ('Citibank','Citibank'),('Equity Bank','Equity Bank'),('Housing Finance Bank','Housing Finance Bank'),('Bank of Africa','Bank of Africa'),
+                            ('Finance Trust Bank','Finance Trust Bank'),('Orient Bank','Orient Bank'),('KCB Bank','KCB Bank'),('Ecobank Uganda','Ecobank Uganda'),
+                            ('Cairo Bank Uganda','Cairo Bank Uganda'),('Bank of India Uganda','Bank of India Uganda'),('ABC Bank Uganda','ABC Bank Uganda'),
+                            ('United Bank for Africa','United Bank for Africa'),('Guaranty Trust Bank','Guaranty Trust Bank'),('NCBA Bank Uganda','NCBA Bank Uganda'),
+                            ('Diamond Trust Bank','Diamond Trust Bank'),('Afriland First Bank Uganda','Afriland First Bank Uganda'),('Opportunity Bank ','Opportunity Bank')]) 
+    account_number=StringField('Account Number')
+    swift_code=StringField('Swift code')
     #the added infor
     professional_amount=StringField(
         'Professional amount',validators=[validators.InputRequired(), validators.Length(min=2,max=60)])
@@ -205,7 +215,7 @@ class Invoice_Items(FlaskForm):
     disb_sub16=StringField('Disbursement subheading1')
     disb_sub26=StringField('Disbursement subheading2')
     disb_sub36=StringField('Disbursement subheading3')
-    
+
     submit = SubmitField('Update')
 
 

@@ -117,23 +117,11 @@
                         <td>{{ myItem.amount }}</td>
                       </tr>
                       {% endfor %}
-                      <!--<tr><th><td>Subtotal:</td><td>{{subtotal}}shs</td></th></tr>
-                      <tr><th><td>VAT(18%):</td><td>{{VAT}}shs</td></th></tr>
-                      <tr><th><td>Grandtotal:</td><td>{{grandtotal}}shs</td></th></tr>-->
+
                     </tbody>   
                   </table>
                 </div>
-              </div><!--
-              <div class="row d-print-none mt-2">
-                <div class="col-12 text-right"><a class="btn btn-primary" href="javascript:window.print();" target="_blank"><i class="fa fa-print"></i> Print</a></div>
               </div>
-              <div class="form-group row">
-                <label class="control-label col-md-12">Amount in Words:&nbsp;<span>yhekhfkhafhehfkhfeihfhe</span></label>
-                <div class="row mb-4">
-                <div class="col-5">
-                  <p class="page-header"><input type="hidden" name="remark" value="{{remark}}"> {{ remark }}</p>
-                </div>
-              </div>-->
               <div class="container px-4">
                 <div class="row gx-5">
                   <div class="col">
@@ -151,6 +139,7 @@
             </section>
           </form>
           <div class="col-6">
+            <h2><span>Bank: POST BANK</span><span>Account No: 10305024837</span><span>swift code: QWERTY</span></h2>
           ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
           </div>
           </div>

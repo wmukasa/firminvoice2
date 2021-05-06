@@ -167,7 +167,8 @@ def get_pdf(inv_id,options=wk_options):
         for q in dis:
             subtotal_db +=float(q.disbursement_amount)
         grandtotal = subtotal_pr+subtotal_db 
-        rendered=render_template('newLookInvoice.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
+        #newLookInvoice.html
+        rendered=render_template('testing2.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
                         subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
                         grandtotal=grandtotal ,VAT=VAT,len=len)
         css = ['firm/static/css/testing.css']

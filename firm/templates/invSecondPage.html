@@ -131,7 +131,6 @@
                             {% endfor %}  
                            </td>
                             <td><br><br><br><br>{{inv.professional_amount}}&nbsp;/=</td>
-                     
                         <td>
                           {% for dbmt in dis %} 
                            <ul type = "circle">
@@ -154,8 +153,7 @@
                             </ul>
                               {% endfor %}
                           </td>
-                          
-                                
+  
                             <td>
                               {% for dbmt in dis %} 
                               {% if dbmt.disbursement_amount != 0.0%}
@@ -200,7 +198,8 @@
               </div>
             </section>
           </form>
-          <div class="col-6">
+          <div class="col-8">
+            <h6><span>Bank:&nbsp; Centenary Bank</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; 10305024837</span>/&nbsp;&nbsp;<span>swift code:&nbsp;&nbsp; QWERTY</span></h6>
             ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
             </div>
           </div>
