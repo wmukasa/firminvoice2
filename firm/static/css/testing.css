@@ -7,8 +7,8 @@ h1 { font: bold 100% sans-serif; letter-spacing: 0.5em; text-align: center; text
 h2 { font-size: 150%; }
 /* table */
 
-/*table { font-size: 100%; table-layout: fixed; width: 100%; }*/
-table { font-size: 100%; width: 100%;}
+table { font-size: 100%; table-layout: auto; width: 100%; }
+/*table { font-size: 100%; width: 100%;}*/
 table { border-collapse: separate; border-spacing: 2px; }
 th, td { border-width: 1px; padding: 0.5em; position: relative; text-align: left; }
 th, td { border-radius: 0.25em; border-style: solid; }
@@ -57,7 +57,7 @@ table.meta th { width: 40%; }
 table.meta td { width: 60%; }
 
 /* table items */
-
+/*
 table.inventory { clear: both; width: 100%; }
 table.inventory th { font-weight: bold; text-align: center; }
 
@@ -67,7 +67,7 @@ table.inventory td:nth-child(3) { text-align: right; width: 12%; }
 table.inventory td:nth-child(4) { text-align: right; width: 12%; }
 table.inventory td:nth-child(5) { text-align: right; width: 12%; }
 
-/* table balance */
+ table balance */
 
 table.balance th, table.balance td { width: 50%; }
 table.balance td { text-align: right; }
@@ -155,7 +155,7 @@ ol.d {
 	}
 .head{
     width: 100%;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: collapse;
     border-spacing: 0;
     empty-cells: show;
