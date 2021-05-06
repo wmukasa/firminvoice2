@@ -98,63 +98,217 @@
                           {{ form1.prof_heading.label(class="form-control-label") }}
                           {{ form1.prof_heading(class="form-control form-control-ls") }}
         
-                          {% if item.prof_sub1 =='' %}
+                          {% if p.prof_sub1 =='' %}
+                          {% elif p.prof_sub1 !='' %}
+                              {{ form1.prof_sub1.label(class="form-control-label") }}
+                              {{ form1.prof_sub1(class="form-control form-control-ls") }}
                            {% else%}
-                           {{ form1.prof_sub1.label(class="form-control-label") }}
-                           {{ form1.prof_sub1(class="form-control form-control-ls") }}
                           {% endif%}
         
-                          {% if item.prof_sub2 !='' %}
+                          {% if p.prof_sub2 =='' %}
+                          {% elif p.prof_sub2 !='' %}
+                              {{ form1.prof_sub2.label(class="form-control-label") }}
+                              {{ form1.prof_sub2(class="form-control form-control-ls") }}
                           {% else%}
-                          {{ form1.prof_sub2.label(class="form-control-label") }}
-                          {{ form1.prof_sub2(class="form-control form-control-ls") }}
                           {% endif%}
         
-                          {% if item.prof_sub3 !='' %}
+                          {% if p.prof_sub3 =='' %}
+                          {% elif p.prof_sub3 !='' %}
+                                {{ form1.prof_sub3.label(class="form-control-label") }}
+                                {{ form1.prof_sub3(class="form-control form-control-ls") }}
                           {% else%}
-        
-                          {{ form1.prof_sub3.label(class="form-control-label") }}
-                          {{ form1.prof_sub3(class="form-control form-control-ls") }}
+
                           {% endif%}
         
-                          {% if item.prof_sub4 !=''%}
+                          {% if p.prof_sub4 ==''%}
+                          {% elif p.prof_sub4 !='' %}
+                                  {{ form1.prof_sub4.label(class="form-control-label") }}
+                                  {{ form1.prof_sub4(class="form-control form-control-ls") }}
                           {% else%}
-                          {{ form1.prof_sub4.label(class="form-control-label") }}
-                          {{ form1.prof_sub4(class="form-control form-control-ls") }}
                           {% endif%}
                           
-                          {% if item.prof_sub5 !='' %}
+                          {% if p.prof_sub5 =='' %}
+                          {% elif p.prof_sub5 !='' %}
+                                {{ form1.prof_sub5.label(class="form-control-label") }}
+                                {{ form1.prof_sub5(class="form-control form-control-ls") }}
                           {% else%}
-                          {{ form1.prof_sub5.label(class="form-control-label") }}
-                          {{ form1.prof_sub5(class="form-control form-control-ls") }}
                           {% endif%}
                             {% endif %}
-                            {% endfor %}
+                        {% endfor %}
 
                         </td>
                         <td>
                           {% for q in dis %}
-                          {{ form1.disbursement_amount.label(class="form-control-label") }}
-                          {{ form1.disbursement_amount(class="form-control form-control-ls") }}
-                          {{ form1.disb_heading.label(class="form-control-label") }}
-                          {{ form1.disb_heading(class="form-control form-control-ls") }}
-                          {% if dis.disb_sub1 =='' %}
-                          {% else%}
-                          {{ form1.disb_sub1.label(class="form-control-label") }}
-                          {{ form1.disb_sub1(class="form-control form-control-ls") }}
-                          {% endif %}
+                              {% if ((dis.index(q)) == 0): %}
+                                      
+                                          {{ form1.disbursement_amount.label(class="form-control-label") }}
+                                          {{ form1.disbursement_amount(class="form-control form-control-ls") }}
 
-                          {% if dis.disb_sub2 !='' %}
-                          {% else%}
-                          {{ form1.disb_sub2.label(class="form-control-label") }}
-                          {{ form1.disb_sub2(class="form-control form-control-ls") }}
-                          {% endif %}
+                                          {{ form1.disb_heading.label(class="form-control-label") }}
+                                          {{ form1.disb_heading(class="form-control form-control-ls") }}
 
-                          {% if dis.disb_sub3 !='' %}
-                          {% else%}
-                          {{ form1.disb_sub3.label(class="form-control-label") }}
-                          {{ form1.disb_sub3(class="form-control form-control-ls") }}
-                          {% endif %}
+                                          {% if q.disb_sub1 == '' %}
+                                          {% elif q.disb_sub1 !='' %}
+                                              {{ form1.disb_sub1.label(class="form-control-label") }}
+                                              {{ form1.disb_sub1(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub2 == '' %}
+                                          {% elif q.disb_sub2 !='' %}
+                                              {{ form1.disb_sub2.label(class="form-control-label") }}
+                                              {{ form1.disb_sub2(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub3 == '' %}
+                                          {% elif q.disb_sub3 !='' %}
+                                              {{ form1.disb_sub3.label(class="form-control-label") }}
+                                              {{ form1.disb_sub3(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+                              {% endif %}
+                              {% if ((dis.index(q)) == 1): %}
+                                          {{ form1.disbursement_amount2.label(class="form-control-label") }}
+                                          {{ form1.disbursement_amount2(class="form-control form-control-ls") }}
+
+                                          {{ form1.disb_heading2.label(class="form-control-label") }}
+                                          {{ form1.disb_heading2(class="form-control form-control-ls") }}
+
+                                          {% if q.disb_sub1 == '' %}
+                                          {% elif q.disb_sub1 !='' %}
+                                          {{ form1.disb_sub12.label(class="form-control-label") }}
+                                          {{ form1.disb_sub12(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub2 == '' %}
+                                          {% elif q.disb_sub2 !='' %}
+                                          {{ form1.disb_sub22.label(class="form-control-label") }}
+                                          {{ form1.disb_sub22(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub3 == '' %}
+                                          {% elif q.disb_sub3 !='' %}
+                                          {{ form1.disb_sub32.label(class="form-control-label") }}
+                                          {{ form1.disb_sub32(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+                              {% endif %}
+                              {% if ((dis.index(q)) == 2): %}
+                                        {{ form1.disbursement_amount3.label(class="form-control-label") }}
+                                        {{ form1.disbursement_amount3(class="form-control form-control-ls") }}
+
+                                        {{ form1.disb_heading3.label(class="form-control-label") }}
+                                        {{ form1.disb_heading3(class="form-control form-control-ls") }}
+                                      
+                                        {% if q.disb_sub1 == '' %}
+                                        {% elif q.disb_sub1 !='' %}
+                                        {{ form1.disb_sub13.label(class="form-control-label") }}
+                                        {{ form1.disb_sub13(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+
+                                        {% if q.disb_sub2 == '' %}
+                                        {% elif q.disb_sub2 !='' %}
+                                        {{ form1.disb_sub23.label(class="form-control-label") }}
+                                        {{ form1.disb_sub23(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+
+                                        {% if q.disb_sub3 == '' %}
+                                        {% elif q.disb_sub3 !='' %}
+                                        {{ form1.disb_sub33.label(class="form-control-label") }}
+                                        {{ form1.disb_sub33(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+                                {% endif %}
+
+                                {% if ((dis.index(q)) == 3): %}
+                                      {{ form1.disbursement_amount4.label(class="form-control-label") }}
+                                      {{ form1.disbursement_amount4(class="form-control form-control-ls") }}
+
+                                      {{ form1.disb_heading4.label(class="form-control-label") }}
+                                      {{ form1.disb_heading4(class="form-control form-control-ls") }}
+                                    
+                                      {% if q.disb_sub1 == '' %}
+                                      {% elif q.disb_sub1 !='' %}
+                                      {{ form1.disb_sub14.label(class="form-control-label") }}
+                                      {{ form1.disb_sub14(class="form-control form-control-ls") }}
+                                      {% else %}
+                                      {% endif %}
+
+                                      {% if q.disb_sub2 == '' %}
+                                      {% elif q.disb_sub2 !='' %}
+                                      {{ form1.disb_sub24.label(class="form-control-label") }}
+                                      {{ form1.disb_sub24(class="form-control form-control-ls") }}
+                                      {% else %}
+                                      {% endif %}
+
+                                      {% if q.disb_sub3 == '' %}
+                                      {% elif q.disb_sub3 !='' %}
+                                      {{ form1.disb_sub34.label(class="form-control-label") }}
+                                      {{ form1.disb_sub34(class="form-control form-control-ls") }}
+                                      {% else %}
+                                      {% endif %}
+                                  {% endif %}
+                                  {% if ((dis.index(q)) == 4): %}
+                                        {{ form1.disbursement_amount5.label(class="form-control-label") }}
+                                        {{ form1.disbursement_amount5(class="form-control form-control-ls") }}
+
+                                        {{ form1.disb_heading5.label(class="form-control-label") }}
+                                        {{ form1.disb_heading5(class="form-control form-control-ls") }}
+                                      
+                                        {% if q.disb_sub1 == '' %}
+                                        {% elif q.disb_sub1 !='' %}
+                                        {{ form1.disb_sub15.label(class="form-control-label") }}
+                                        {{ form1.disb_sub15(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+
+                                        {% if q.disb_sub2 == '' %}
+                                        {% elif q.disb_sub2 !='' %}
+                                        {{ form1.disb_sub25.label(class="form-control-label") }}
+                                        {{ form1.disb_sub25(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+
+                                        {% if q.disb_sub3 == '' %}
+                                        {% elif q.disb_sub3 !='' %}
+                                        {{ form1.disb_sub35.label(class="form-control-label") }}
+                                        {{ form1.disb_sub35(class="form-control form-control-ls") }}
+                                        {% else %}
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if ((dis.index(q)) == 5): %}
+                                          {{ form1.disbursement_amount6.label(class="form-control-label") }}
+                                          {{ form1.disbursement_amount6(class="form-control form-control-ls") }}
+
+                                          {{ form1.disb_heading6.label(class="form-control-label") }}
+                                          {{ form1.disb_heading6(class="form-control form-control-ls") }}
+                                        
+                                          {% if q.disb_sub1 == '' %}
+                                          {% elif q.disb_sub1 !='' %}
+                                          {{ form1.disb_sub16.label(class="form-control-label") }}
+                                          {{ form1.disb_sub16(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub2 == '' %}
+                                          {% elif q.disb_sub2 !='' %}
+                                          {{ form1.disb_sub26.label(class="form-control-label") }}
+                                          {{ form1.disb_sub26(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+
+                                          {% if q.disb_sub3 == '' %}
+                                          {% elif q.disb_sub3 !='' %}
+                                          {{ form1.disb_sub36.label(class="form-control-label") }}
+                                          {{ form1.disb_sub36(class="form-control form-control-ls") }}
+                                          {% else %}
+                                          {% endif %}
+                                      {% endif %}
                           {% endfor %}
                         </td>
                         </tr>
@@ -188,29 +342,123 @@
               <table class="table">
                 <thead>
                   <tr>
-                    <th>Description</th>
-                    <th>Disbursements/&nbsp;ug.Shs</th>
                     <th>Professional fees/&nbsp;ug.Shs</th>
-                    <th>Amount/&nbsp;ug.Shs</th>
+                    <th>Disbursements fees</th>
                   </tr>
                 </thead>
                 <tbody>
-
+                  <td>{{ form2.professional_amount(class="form-control form-control-ls") }}</td>
                     {% for p in item %}
                   <tr>
+                    <td>
                       {% if ((item.index(p)) == 0) %}
-                          <td>{{ form2.professional_desc(class="form-control form-control-ls") }}</td>
-                          <td>{{ form2.professional_amount(class="form-control form-control-ls") }}</td>
-                          <td>{{ form2.disbursements_desc(class="form-control form-control-ls") }}</td>
-                          <td>{{ form2.disbursements_amount(class="form-control form-control-ls") }}</td>
+                      {{ form2.prof_heading.label(class="form-control-label") }}
+                      {{ form2.prof_heading(class="form-control form-control-ls") }}
+    
+                      {% if p.prof_sub1 =='' %}
+                      {% elif p.prof_sub1 !='' %}
+                      {{ form2.prof_sub1.label(class="form-control-label") }}
+                      {{ form2.prof_sub1(class="form-control form-control-ls") }}
+                       
+                       {% else%}
+                      {% endif%}
+    
+                      {% if p.prof_sub2 =='' %}
+                      {% elif p.prof_sub2 !='' %}
+                      {{ form2.prof_sub2.label(class="form-control-label") }}
+                      {{ form2.prof_sub2(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+    
+                      {% if p.prof_sub3 =='' %}
+                      {% elif p.prof_sub3 !='' %}
+                      {{ form2.prof_sub3.label(class="form-control-label") }}
+                      {{ form2.prof_sub3(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+    
+                      {% if p.prof_sub4 ==''%}
+                      {% elif p.prof_sub4 !='' %}
+                      {{ form2.prof_sub4.label(class="form-control-label") }}
+                      {{ form2.prof_sub4(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+                      
+                      {% if p.prof_sub5 =='' %}
+                      {% elif p.prof_sub5 !='' %}
+                      {{ form2.prof_sub5.label(class="form-control-label") }}
+                      {{ form2.prof_sub5(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
                         {% endif %}
+
                       {% if ((item.index(p)) == 1) %}
-                      <td>{{ form2.professional_desc2(class="form-control form-control-ls") }}</td>
-                      <td>{{ form2.professional_amount2(class="form-control form-control-ls") }}</td>
-                      <td>{{ form2.disbursements_desc2(class="form-control form-control-ls") }}</td>
-                      <td>{{ form2.disbursements_amount2(class="form-control form-control-ls") }}</td>
+                        {{ form2.prof_heading2.label(class="form-control-label") }}
+                        {{ form2.prof_heading2(class="form-control form-control-ls") }}
+    
+                      {% if p.prof_sub1 =='' %}
+                      {% elif p.prof_sub1 !='' %}
+                      {{ form2.prof_sub12.label(class="form-control-label") }}
+                      {{ form2.prof_sub12(class="form-control form-control-ls") }}
+                       {% else%}
                       {% endif %}
+    
+                      {% if p.prof_sub2 =='' %}
+                      {% elif p.prof_sub2 !='' %}
+                        {{ form2.prof_sub22.label(class="form-control-label") }}
+                        {{ form2.prof_sub22(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+    
+                      {% if p.prof_sub3 =='' %}
+                      {% elif p.prof_sub3 !='' %}
+                        {{ form2.prof_sub32.label(class="form-control-label") }}
+                        {{ form2.prof_sub32(class="form-control form-control-ls") }}
+                      {% else%}    
+                      {% endif%}
+    
+                      {% if p.prof_sub4 ==''%}
+                      {% elif p.prof_sub4 !='' %}
+                        {{ form2.prof_sub42.label(class="form-control-label") }}
+                        {{ form2.prof_sub42(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+                      
+                      {% if p.prof_sub5 =='' %}
+                      {% elif p.prof_sub5 !='' %}
+                        {{ form2.prof_sub52.label(class="form-control-label") }}
+                        {{ form2.prof_sub52(class="form-control form-control-ls") }}
+                      {% else%}
+                      {% endif%}
+                        {% endif %}
+
                       {% endfor %}
+                      </td>
+                      <td>
+                        {% for q in dis %}
+                        {{ form2.disbursement_amount.label(class="form-control-label") }}
+                        {{ form2.disbursement_amount(class="form-control form-control-ls") }}
+                        {{ form2.disb_heading.label(class="form-control-label") }}
+                        {{ form2.disb_heading(class="form-control form-control-ls") }}
+                        {% if dis.disb_sub1 =='' %}
+                        {% else%}
+                        {{ form2.disb_sub1.label(class="form-control-label") }}
+                        {{ form2.disb_sub1(class="form-control form-control-ls") }}
+                        {% endif %}
+
+                        {% if dis.disb_sub2 !='' %}
+                        {% else%}
+                        {{ form2.disb_sub2.label(class="form-control-label") }}
+                        {{ form2.disb_sub2(class="form-control form-control-ls") }}
+                        {% endif %}
+
+                        {% if dis.disb_sub3 !='' %}
+                        {% else%}
+                        {{ form2.disb_sub3.label(class="form-control-label") }}
+                        {{ form2.disb_sub3(class="form-control form-control-ls") }}
+                        {% endif %}
+                        {% endfor %}
+                      </td>
                     </tr>
  
                 </tbody>
@@ -240,37 +488,160 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Description</th>
-                <th>Disbursements/&nbsp;ug.Shs</th>
                 <th>Professional fees/&nbsp;ug.Shs</th>
-                <th>Amount/&nbsp;ug.Shs</th>
+                <th>Disbursements fees</th>
               </tr>
             </thead>
             <tbody>
-
+              <td>{{ form3.professional_amount(class="form-control form-control-ls") }}</td>
                 {% for p in item %}
               <tr>
+                <td>
                   {% if ((item.index(p)) == 0) %}
-                  <td>{{ form3.professional_desc(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.professional_amount(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_desc(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_amount(class="form-control form-control-ls") }}</td>
+                  {{ form3.prof_heading.label(class="form-control-label") }}
+                  {{ form3.prof_heading(class="form-control form-control-ls") }}
+
+                  {% if p.prof_sub1 =='' %}
+                  {{ form3.prof_sub1.label(class="form-control-label") }}
+                  {{ form3.prof_sub1(class="form-control form-control-ls") }}
+                   {% else%}
+
+                  {% endif%}
+
+                  {% if p.prof_sub2 !='' %}
+                  {{ form3.prof_sub2.label(class="form-control-label") }}
+                  {{ form3.prof_sub2(class="form-control form-control-ls") }}
+                  {% else%}
+                  {% endif%}
+
+                  {% if p.prof_sub3 !='' %}
+                  {{ form3.prof_sub3.label(class="form-control-label") }}
+                  {{ form3.prof_sub3(class="form-control form-control-ls") }}
+                  {% else%}
+                  {% endif%}
+
+                  {% if p.prof_sub4 !=''%}
+                  {{ form3.prof_sub4.label(class="form-control-label") }}
+                  {{ form3.prof_sub4(class="form-control form-control-ls") }}
+                  {% else%}
+
+                  {% endif%}
+                  
+                  {% if p.prof_sub5 !='' %}
+                  {{ form3.prof_sub5.label(class="form-control-label") }}
+                  {{ form3.prof_sub5(class="form-control form-control-ls") }}
+                  {% else%}
+                  {% endif%}
                     {% endif %}
-                  {% if ((item.index(p)) == 1) %}
-                  <td>{{ form3.professional_desc2(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.professional_amount2(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_desc2(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_amount2(class="form-control form-control-ls") }}</td>
+
+                    {% if ((item.index(p)) == 1) %}
+                    {{ form3.prof_heading2.label(class="form-control-label") }}
+                    {{ form3.prof_heading2(class="form-control form-control-ls") }}
+
+                  {% if p.prof_sub1 =='' %}
+                  {{ form3.prof_sub12.label(class="form-control-label") }}
+                  {{ form3.prof_sub12(class="form-control form-control-ls") }}
+                   {% else%}
                   {% endif %}
+
+                  {% if p.prof_sub2 !='' %}
+                  {{ form3.prof_sub22.label(class="form-control-label") }}
+                  {{ form3.prof_sub22(class="form-control form-control-ls") }}
+                  {% else%}
+                  {{ form3.prof_sub22.label(class="form-control-label") }}
+                  {{ form3.prof_sub22(class="form-control form-control-ls") }}
+                  {% endif%}
+
+                  {% if p.prof_sub3 !='' %}
+                  {{ form3.prof_sub32.label(class="form-control-label") }}
+                  {{ form3.prof_sub32(class="form-control form-control-ls") }}
+                  {% else%}    
+
+                  {% endif%}
+
+                  {% if p.prof_sub4 !=''%}
+                  {{ form3.prof_sub42.label(class="form-control-label") }}
+                  {{ form3.prof_sub42(class="form-control form-control-ls") }}
+                  {% else%}
+                  {% endif%}
+                  
+                    {% if p.prof_sub5 !='' %}
+                  {{ form3.prof_sub52.label(class="form-control-label") }}
+                  {{ form3.prof_sub52(class="form-control form-control-ls") }}
+                      {% else%}
+                        {% endif%}
+                      {% endif %}
+                  
                   {% if ((item.index(p)) == 2) %}
-                  <td>{{ form3.professional_desc3(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.professional_amount3(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_desc3(class="form-control form-control-ls") }}</td>
-                  <td>{{ form3.disbursements_amount3(class="form-control form-control-ls") }}</td>
+                  {{ form3.prof_heading3.label(class="form-control-label") }}
+                  {{ form3.prof_heading3(class="form-control form-control-ls") }}
+
+                {% if p.prof_sub13 =='' %}
+                {{ form3.prof_sub13.label(class="form-control-label") }}
+                {{ form3.prof_sub13(class="form-control form-control-ls") }}
+                 {% else%}
+                 {{ form3.prof_sub13.label(class="form-control-label") }}
+                 {{ form3.prof_sub13(class="form-control form-control-ls") }}
+                {% endif %}
+
+                {% if p.prof_sub2 !='' %}
+                {{ form3.prof_sub23.label(class="form-control-label") }}
+                {{ form3.prof_sub23(class="form-control form-control-ls") }}
+                {% else%}
+                {% endif%}
+
+                {% if p.prof_sub3 !='' %}
+                {{ form3.prof_sub33.label(class="form-control-label") }}
+                {{ form3.prof_sub33(class="form-control form-control-ls") }}
+                {% else%}    
+                {% endif%}
+
+                {% if p.prof_sub4 !=''%}
+                {{ form3.prof_sub43.label(class="form-control-label") }}
+                {{ form3.prof_sub43(class="form-control form-control-ls") }}
+                {% else%}
+
+                {% endif%}
+                
+                {% if p.prof_sub5 !='' %}
+                {{ form3.prof_sub53.label(class="form-control-label") }}
+                {{ form3.prof_sub53(class="form-control form-control-ls") }}
+                {% else%}
+                {% endif%}
+                  {% endif %}
+                </td>
+                  {% endfor %}
+
+                <td>
+                  {% for q in dis %}
+                  {{ form3.disbursement_amount.label(class="form-control-label") }}
+                  {{ form3.disbursement_amount(class="form-control form-control-ls") }}
+                  {{ form3.disb_heading.label(class="form-control-label") }}
+                  {{ form3.disb_heading(class="form-control form-control-ls") }}
+                  {% if dis.disb_sub1 =='' %}
+                  {% else%}
+                  {{ form3.disb_sub1.label(class="form-control-label") }}
+                  {{ form3.disb_sub1(class="form-control form-control-ls") }}
+                  {% endif %}
+
+                  {% if dis.disb_sub2 !='' %}
+                  {{ form3.disb_sub2.label(class="form-control-label") }}
+                  {{ form3.disb_sub2(class="form-control form-control-ls") }}
+                  {% else%}
+                  {{ form3.disb_sub2.label(class="form-control-label") }}
+                  {{ form3.disb_sub2(class="form-control form-control-ls") }}
+                  {% endif %}
+
+                  {% if dis.disb_sub3 !='' %}
+                  {{ form3.disb_sub3.label(class="form-control-label") }}
+                  {{ form3.disb_sub3(class="form-control form-control-ls") }}
+                  {% else%}
+                  {{ form3.disb_sub3.label(class="form-control-label") }}
+                  {{ form3.disb_sub3(class="form-control form-control-ls") }}
                   {% endif %}
                   {% endfor %}
+                </td>
                 </tr>
-
             </tbody>
           </table>
         </div>
@@ -299,40 +670,196 @@
       <table class="table">
         <thead>
           <tr>
-            <th>Description</th>
-            <th>Disbursements/&nbsp;ug.Shs</th>
-            <th>Professional fees/&nbsp;ug.Shs</th>
-            <th>Amount/&nbsp;ug.Shs</th>
+            <tr>
+              <th>Professional fees/&nbsp;ug.Shs</th>
+              <th>Disbursements fees</th>
           </tr>
         </thead>
         <tbody>
-
+          <td>{{ form4.professional_amount(class="form-control form-control-ls") }}</td>
             {% for p in item %}
           <tr>
               {% if ((item.index(p)) == 0) %}
-              <td>{{ form4.professional_desc(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.professional_amount(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_desc(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_amount(class="form-control form-control-ls") }}</td>
+              {{ form4.prof_heading.label(class="form-control-label") }}
+              {{ form4.prof_heading(class="form-control form-control-ls") }}
+
+              {% if item.prof_sub1 =='' %}
+              {{ form4.prof_sub1.label(class="form-control-label") }}
+              {{ form4.prof_sub1(class="form-control form-control-ls") }}
+               {% else%}
+               {{ form4.prof_sub1.label(class="form-control-label") }}
+               {{ form4.prof_sub1(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub2 !='' %}
+              {{ form4.prof_sub2.label(class="form-control-label") }}
+              {{ form4.prof_sub2(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub2.label(class="form-control-label") }}
+              {{ form4.prof_sub2(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub3 !='' %}
+              {{ form4.prof_sub3.label(class="form-control-label") }}
+              {{ form4.prof_sub3(class="form-control form-control-ls") }}
+              {% else%}
+
+              {{ form4.prof_sub3.label(class="form-control-label") }}
+              {{ form4.prof_sub3(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub4 !=''%}
+              {{ form4.prof_sub4.label(class="form-control-label") }}
+              {{ form4.prof_sub4(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub4.label(class="form-control-label") }}
+              {{ form4.prof_sub4(class="form-control form-control-ls") }}
+              {% endif%}
+              
+              {% if item.prof_sub5 !='' %}
+              {{ form4.prof_sub5.label(class="form-control-label") }}
+              {{ form4.prof_sub5(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub5.label(class="form-control-label") }}
+              {{ form4.prof_sub5(class="form-control form-control-ls") }}
+              {% endif%}
                 {% endif %}
+
               {% if ((item.index(p)) == 1) %}
-              <td>{{ form4.professional_desc2(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.professional_amount2(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_desc2(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_amount2(class="form-control form-control-ls") }}</td>
-              {% endif %}
-              {% if ((item.index(p)) == 2) %}
-              <td>{{ form4.professional_desc3(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.professional_amount3(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_desc3(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_amount3(class="form-control form-control-ls") }}</td>
-              {% endif %}
+                    {{ form4.prof_heading2.label(class="form-control-label") }}
+                    {{ form4.prof_heading2(class="form-control form-control-ls") }}
+
+                  {% if item.prof_sub12 =='' %}
+                  {{ form4.prof_sub12.label(class="form-control-label") }}
+                  {{ form4.prof_sub12(class="form-control form-control-ls") }}
+                   {% else%}
+                   {{ form4.prof_sub12.label(class="form-control-label") }}
+                   {{ form4.prof_sub12(class="form-control form-control-ls") }}
+                  {% endif %}
+
+                  {% if item.prof_sub22 !='' %}
+                  {{ form4.prof_sub22.label(class="form-control-label") }}
+                  {{ form4.prof_sub22(class="form-control form-control-ls") }}
+                  {% else%}
+                  {{ form4.prof_sub22.label(class="form-control-label") }}
+                  {{ form4.prof_sub22(class="form-control form-control-ls") }}
+                  {% endif%}
+
+                  {% if item.prof_sub32 !='' %}
+                  {{ form4.prof_sub32.label(class="form-control-label") }}
+                  {{ form4.prof_sub32(class="form-control form-control-ls") }}
+                  {% else%}    
+                  {{ form4.prof_sub32.label(class="form-control-label") }}
+                  {{ form4.prof_sub32(class="form-control form-control-ls") }}
+                  {% endif%}
+
+                  {% if item.prof_sub42 !=''%}
+                  {{ form4.prof_sub42.label(class="form-control-label") }}
+                  {{ form4.prof_sub42(class="form-control form-control-ls") }}
+                  {% else%}
+                  {{ form4.prof_sub42.label(class="form-control-label") }}
+                  {{ form4.prof_sub42(class="form-control form-control-ls") }}
+                  {% endif%}
+                  
+                    {% if item.prof_sub52 !='' %}
+                  {{ form4.prof_sub52.label(class="form-control-label") }}
+                  {{ form4.prof_sub52(class="form-control form-control-ls") }}
+                      {% else%}
+                  {{ form4.prof_sub52.label(class="form-control-label") }}
+                  {{ form4.prof_sub52(class="form-control form-control-ls") }}
+                        {% endif%}
+                      {% endif %}
+                  
+                  {% if ((item.index(p)) == 2) %}
+                  {{ form4.prof_heading3.label(class="form-control-label") }}
+                  {{ form4.prof_heading3(class="form-control form-control-ls") }}
+
+                {% if item.prof_sub13 =='' %}
+                {{ form4.prof_sub13.label(class="form-control-label") }}
+                {{ form4.prof_sub13(class="form-control form-control-ls") }}
+                 {% else%}
+                 {{ form4.prof_sub13.label(class="form-control-label") }}
+                 {{ form4.prof_sub13(class="form-control form-control-ls") }}
+                {% endif %}
+
+                {% if item.prof_sub23 !='' %}
+                {{ form4.prof_sub23.label(class="form-control-label") }}
+                {{ form4.prof_sub23(class="form-control form-control-ls") }}
+                {% else%}
+                {{ form4.prof_sub23.label(class="form-control-label") }}
+                {{ form4.prof_sub23(class="form-control form-control-ls") }}
+                {% endif%}
+
+                {% if item.prof_sub33 !='' %}
+                {{ form4.prof_sub33.label(class="form-control-label") }}
+                {{ form4.prof_sub33(class="form-control form-control-ls") }}
+                {% else%}    
+                {{ form4.prof_sub33.label(class="form-control-label") }}
+                {{ form4.prof_sub33(class="form-control form-control-ls") }}
+                {% endif%}
+
+                {% if item.prof_sub43 !=''%}
+                {{ form4.prof_sub43.label(class="form-control-label") }}
+                {{ form4.prof_sub43(class="form-control form-control-ls") }}
+                {% else%}
+                {{ form4.prof_sub43.label(class="form-control-label") }}
+                {{ form4.prof_sub43(class="form-control form-control-ls") }}
+                {% endif%}
+                
+                {% if item.prof_sub53 !='' %}
+                {{ form4.prof_sub53.label(class="form-control-label") }}
+                {{ form4.prof_sub53(class="form-control form-control-ls") }}
+                {% else%}
+                {{ form4.prof_sub53.label(class="form-control-label") }}
+                {{ form4.prof_sub53(class="form-control form-control-ls") }}
+                {% endif%}
+                  {% endif %}
+             
               {% if ((item.index(p)) == 3) %}
-              <td>{{ form4.professional_desc4(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.professional_amount4(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_desc4(class="form-control form-control-ls") }}</td>
-              <td>{{ form4.disbursements_amount4(class="form-control form-control-ls") }}</td>
-              {% endif %}
+              {{ form4.prof_heading4.label(class="form-control-label") }}
+              {{ form4.prof_heading4(class="form-control form-control-ls") }}
+
+              {% if item.prof_sub14 =='' %}
+              {{ form4.prof_sub14abel(class="form-control-label") }}
+              {{ form4.prof_sub14(class="form-control form-control-ls") }}
+               {% else%}
+               {{ form4.prof_sub14.label(class="form-control-label") }}
+               {{ form4.prof_sub14(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub24 !='' %}
+              {{ form4.prof_sub24.label(class="form-control-label") }}
+              {{ form4.prof_sub24(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub24.label(class="form-control-label") }}
+              {{ form4.prof_sub24(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub34 !='' %}
+              {{ form4.prof_sub34.label(class="form-control-label") }}
+              {{ form4.prof_sub34(class="form-control form-control-ls") }}
+              {% else%}
+
+              {{ form4.prof_sub34.label(class="form-control-label") }}
+              {{ form4.prof_sub34(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub44 !=''%}
+              {{ form4.prof_sub44.label(class="form-control-label") }}
+              {{ form4.prof_sub44(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub44.label(class="form-control-label") }}
+              {{ form4.prof_sub44(class="form-control form-control-ls") }}
+              {% endif%}
+              
+              {% if item.prof_sub54!='' %}
+              {{ form4.prof_sub54.label(class="form-control-label") }}
+              {{ form4.prof_sub54(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form4.prof_sub54.label(class="form-control-label") }}
+              {{ form4.prof_sub54(class="form-control form-control-ls") }}
+              {% endif%}
+                {% endif %}
               {% endfor %}
             </tr>
 
@@ -363,46 +890,241 @@
     <table class="table">
       <thead>
         <tr>
-          <th>Description</th>
-          <th>Disbursements/&nbsp;ug.Shs</th>
           <th>Professional fees/&nbsp;ug.Shs</th>
-          <th>Amount/&nbsp;ug.Shs</th>
+          <th>Disbursements fees</th>
         </tr>
       </thead>
       <tbody>
-
+        <td>{{ form5.professional_amount(class="form-control form-control-ls") }}</td>
           {% for p in item %}
         <tr>
-            {% if ((item.index(p)) == 0) %}
-            <td>{{ form5.professional_desc(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.professional_amount(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_desc(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_amount(class="form-control form-control-ls") }}</td>
+          {% if ((item.index(p)) == 0) %}
+          {{ form5.prof_heading5label(class="form-control-label") }}
+          {{ form5.prof_heading5(class="form-control form-control-ls") }}
+
+          {% if item.prof_sub1 =='' %}
+          {{ form5.prof_sub1.label(class="form-control-label") }}
+          {{ form5.prof_sub1(class="form-control form-control-ls") }}
+           {% else%}
+           {{ form5.prof_sub1.label(class="form-control-label") }}
+           {{ form5.prof_sub1(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub2 !='' %}
+          {{ form5.prof_sub2.label(class="form-control-label") }}
+          {{ form5.prof_sub2(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub2.label(class="form-control-label") }}
+          {{ form5.prof_sub2(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub3 !='' %}
+          {{ form5.prof_sub3.label(class="form-control-label") }}
+          {{ form5.prof_sub3(class="form-control form-control-ls") }}
+          {% else%}
+
+          {{ form5.prof_sub3.label(class="form-control-label") }}
+          {{ form5.prof_sub3(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub4 !=''%}
+          {{ form5.prof_sub4.label(class="form-control-label") }}
+          {{ form5.prof_sub4(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub4.label(class="form-control-label") }}
+          {{ form5.prof_sub4(class="form-control form-control-ls") }}
+          {% endif%}
+          
+          {% if item.prof_sub5 !='' %}
+          {{ form5.prof_sub5.label(class="form-control-label") }}
+          {{ form5.prof_sub5(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub5.label(class="form-control-label") }}
+          {{ form5.prof_sub5(class="form-control form-control-ls") }}
+          {% endif%}
+            {% endif %}
+
+          {% if ((item.index(p)) == 1) %}
+                {{ form5.prof_heading2.label(class="form-control-label") }}
+                {{ form5.prof_heading2(class="form-control form-control-ls") }}
+
+              {% if item.prof_sub12 =='' %}
+              {{ form5.prof_sub12.label(class="form-control-label") }}
+              {{ form5.prof_sub12(class="form-control form-control-ls") }}
+               {% else%}
+               {{ form5.prof_sub12.label(class="form-control-label") }}
+               {{ form5.prof_sub12(class="form-control form-control-ls") }}
               {% endif %}
-            {% if ((item.index(p)) == 1) %}
-            <td>{{ form5.professional_desc2(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.professional_amount2(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_desc2(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_amount2(class="form-control form-control-ls") }}</td>
+
+              {% if item.prof_sub22 !='' %}
+              {{ form5.prof_sub22.label(class="form-control-label") }}
+              {{ form5.prof_sub22(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form5.prof_sub22.label(class="form-control-label") }}
+              {{ form5.prof_sub22(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub32 !='' %}
+              {{ form5.prof_sub32.label(class="form-control-label") }}
+              {{ form5.prof_sub32(class="form-control form-control-ls") }}
+              {% else%}    
+              {{ form5.prof_sub32.label(class="form-control-label") }}
+              {{ form5.prof_sub32(class="form-control form-control-ls") }}
+              {% endif%}
+
+              {% if item.prof_sub42 !=''%}
+              {{ form5.prof_sub42.label(class="form-control-label") }}
+              {{ form5.prof_sub42(class="form-control form-control-ls") }}
+              {% else%}
+              {{ form5.prof_sub42.label(class="form-control-label") }}
+              {{ form5.prof_sub42(class="form-control form-control-ls") }}
+              {% endif%}
+              
+                {% if item.prof_sub52 !='' %}
+              {{ form5.prof_sub52.label(class="form-control-label") }}
+              {{ form5.prof_sub52(class="form-control form-control-ls") }}
+                  {% else%}
+              {{ form5.prof_sub52.label(class="form-control-label") }}
+              {{ form5.prof_sub52(class="form-control form-control-ls") }}
+                    {% endif%}
+                  {% endif %}
+              
+              {% if ((item.index(p)) == 2) %}
+              {{ form5.prof_heading3.label(class="form-control-label") }}
+              {{ form5.prof_heading3(class="form-control form-control-ls") }}
+
+            {% if item.prof_sub13 =='' %}
+            {{ form5.prof_sub13.label(class="form-control-label") }}
+            {{ form5.prof_sub13(class="form-control form-control-ls") }}
+             {% else%}
+             {{ form5.prof_sub13.label(class="form-control-label") }}
+             {{ form5.prof_sub13(class="form-control form-control-ls") }}
             {% endif %}
-            {% if ((item.index(p)) == 2) %}
-            <td>{{ form5.professional_desc3(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.professional_amount3(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_desc3(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_amount3(class="form-control form-control-ls") }}</td>
+
+            {% if item.prof_sub23 !='' %}
+            {{ form5.prof_sub23.label(class="form-control-label") }}
+            {{ form5.prof_sub23(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub23.label(class="form-control-label") }}
+            {{ form5.prof_sub23(class="form-control form-control-ls") }}
+            {% endif%}
+
+            {% if item.prof_sub33 !='' %}
+            {{ form5.prof_sub33.label(class="form-control-label") }}
+            {{ form5.prof_sub33(class="form-control form-control-ls") }}
+            {% else%}    
+            {{ form5.prof_sub33.label(class="form-control-label") }}
+            {{ form5.prof_sub33(class="form-control form-control-ls") }}
+            {% endif%}
+
+            {% if item.prof_sub43 !=''%}
+            {{ form5.prof_sub43.label(class="form-control-label") }}
+            {{ form5.prof_sub43(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub43.label(class="form-control-label") }}
+            {{ form5.prof_sub43(class="form-control form-control-ls") }}
+            {% endif%}
+            
+            {% if item.prof_sub53 !='' %}
+            {{ form5.prof_sub53.label(class="form-control-label") }}
+            {{ form5.prof_sub53(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub53.label(class="form-control-label") }}
+            {{ form5.prof_sub53(class="form-control form-control-ls") }}
+            {% endif%}
+              {% endif %}
+         
+          {% if ((item.index(p)) == 3) %}
+          {{ form5.prof_heading4.label(class="form-control-label") }}
+          {{ form5.prof_heading4(class="form-control form-control-ls") }}
+
+          {% if item.prof_sub14 =='' %}
+          {{ form5.prof_sub14abel(class="form-control-label") }}
+          {{ form5.prof_sub14(class="form-control form-control-ls") }}
+           {% else%}
+           {{ form5.prof_sub14.label(class="form-control-label") }}
+           {{ form5.prof_sub14(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub24 !='' %}
+          {{ form5.prof_sub24.label(class="form-control-label") }}
+          {{ form5.prof_sub24(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub24.label(class="form-control-label") }}
+          {{ form5.prof_sub24(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub34 !='' %}
+          {{ form5.prof_sub34.label(class="form-control-label") }}
+          {{ form5.prof_sub34(class="form-control form-control-ls") }}
+          {% else%}
+
+          {{ form5.prof_sub34.label(class="form-control-label") }}
+          {{ form5.prof_sub34(class="form-control form-control-ls") }}
+          {% endif%}
+
+          {% if item.prof_sub44 !=''%}
+          {{ form5.prof_sub44.label(class="form-control-label") }}
+          {{ form5.prof_sub44(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub44.label(class="form-control-label") }}
+          {{ form5.prof_sub44(class="form-control form-control-ls") }}
+          {% endif%}
+          
+          {% if item.prof_sub54!='' %}
+          {{ form5.prof_sub54.label(class="form-control-label") }}
+          {{ form5.prof_sub54(class="form-control form-control-ls") }}
+          {% else%}
+          {{ form5.prof_sub54.label(class="form-control-label") }}
+          {{ form5.prof_sub54(class="form-control form-control-ls") }}
+          {% endif%}
             {% endif %}
-            {% if ((item.index(p)) == 3) %}
-            <td>{{ form5.professional_desc4(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.professional_amount4(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_desc4(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_amount4(class="form-control form-control-ls") }}</td>
-            {% endif %}
+
             {% if ((item.index(p)) == 4) %}
-            <td>{{ form5.professional_desc5(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.professional_amount5(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_desc5(class="form-control form-control-ls") }}</td>
-            <td>{{ form5.disbursements_amount5(class="form-control form-control-ls") }}</td>
-            {% endif %}
+            {{ form5.prof_heading5.label(class="form-control-label") }}
+            {{ form5.prof_heading5(class="form-control form-control-ls") }}
+  
+            {% if item.prof_sub15 =='' %}
+            {{ form5.prof_sub15abel(class="form-control-label") }}
+            {{ form5.prof_sub15(class="form-control form-control-ls") }}
+             {% else%}
+             {{ form5.prof_sub15.label(class="form-control-label") }}
+             {{ form5.prof_sub15(class="form-control form-control-ls") }}
+            {% endif%}
+  
+            {% if item.prof_sub25 !='' %}
+            {{ form5.prof_sub25.label(class="form-control-label") }}
+            {{ form5.prof_sub25(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub25.label(class="form-control-label") }}
+            {{ form5.prof_sub25(class="form-control form-control-ls") }}
+            {% endif%}
+  
+            {% if item.prof_sub35 !='' %}
+            {{ form5.prof_sub35.label(class="form-control-label") }}
+            {{ form5.prof_sub35(class="form-control form-control-ls") }}
+            {% else%}
+  
+            {{ form5.prof_sub35.label(class="form-control-label") }}
+            {{ form5.prof_sub35(class="form-control form-control-ls") }}
+            {% endif%}
+  
+            {% if item.prof_sub45 !=''%}
+            {{ form5.prof_sub45.label(class="form-control-label") }}
+            {{ form5.prof_sub45(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub45.label(class="form-control-label") }}
+            {{ form5.prof_sub45(class="form-control form-control-ls") }}
+            {% endif%}
+            
+            {% if item.prof_sub55!='' %}
+            {{ form5.prof_sub55.label(class="form-control-label") }}
+            {{ form5.prof_sub55(class="form-control form-control-ls") }}
+            {% else%}
+            {{ form5.prof_sub55.label(class="form-control-label") }}
+            {{ form5.prof_sub55(class="form-control form-control-ls") }}
+            {% endif%}
+              {% endif %}
             {% endfor %}
           </tr>
 

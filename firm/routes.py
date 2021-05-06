@@ -364,11 +364,43 @@ def update_invoice(inv_id):
                 p.prof_sub4 = form1.prof_sub4.data
                 p.prof_sub5 = form1.prof_sub5.data
             for q in dis:
-                q.disbursement_amount =form1.disbursement_amount.data
-                q.disb_heading=form1.disb_heading.data 
-                q.disb_sub1=form1.disb_sub1.data 
-                q.disb_sub2=form1.disb_sub2.data 
-                q.disb_sub3=form1.disb_sub3.data 
+                if ((dis.index(q)) == 0):
+                    q.disbursement_amount =form1.disbursement_amount.data
+                    q.disb_heading=form1.disb_heading.data 
+                    q.disb_sub1=form1.disb_sub1.data 
+                    q.disb_sub2=form1.disb_sub2.data 
+                    q.disb_sub3=form1.disb_sub3.data 
+
+                if ((dis.index(q)) == 1):
+                    q.disbursement_amount =form1.disbursement_amount2.data
+                    q.disb_heading=form1.disb_heading2.data 
+                    q.disb_sub1=form1.disb_sub12.data 
+                    q.disb_sub2=form1.disb_sub22.data 
+                    q.disb_sub3=form1.disb_sub32.data
+                if ((dis.index(q)) == 2):
+                    q.disbursement_amount =form1.disbursement_amount3.data
+                    q.disb_heading=form1.disb_heading3.data 
+                    q.disb_sub1=form1.disb_sub13.data 
+                    q.disb_sub2=form1.disb_sub23.data 
+                    q.disb_sub3=form1.disb_sub33.data 
+                if ((dis.index(q)) == 3):
+                    q.disbursement_amount =form1.disbursement_amount4.data
+                    q.disb_heading=form1.disb_heading4.data 
+                    q.disb_sub1=form1.disb_sub14.data 
+                    q.disb_sub2=form1.disb_sub24.data 
+                    q.disb_sub3=form1.disb_sub34.data
+                if ((dis.index(q)) == 4):
+                    q.disbursement_amount =form1.disbursement_amount5.data
+                    q.disb_heading=form1.disb_heading5.data 
+                    q.disb_sub1=form1.disb_sub15.data 
+                    q.disb_sub2=form1.disb_sub25.data 
+                    q.disb_sub3=form1.disb_sub35.data 
+                if ((dis.index(q)) == 5):
+                    q.disbursement_amount =form1.disbursement_amount6.data
+                    q.disb_heading=form1.disb_heading6.data 
+                    q.disb_sub1=form1.disb_sub16.data 
+                    q.disb_sub2=form1.disb_sub26.data 
+                    q.disb_sub3=form1.disb_sub36.data
             db.session.commit()
             flash('Your log has been updated!', 'success')
             return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
@@ -396,12 +428,42 @@ def update_invoice(inv_id):
                 form1.prof_sub4.data = p.prof_sub4
                 form1.prof_sub5.data = p.prof_sub5
             for q in dis:
-                form1.disbursement_amount.data = q.disbursement_amount
-                form1.disb_heading.data = q.disb_heading
-                form1.disb_sub1.data = q.disb_sub1
-                form1.disb_sub2.data = q.disb_sub2
-                form1.disb_sub3.data = q.disb_sub3
-                
+                if ((dis.index(q)) == 0):
+                    form1.disbursement_amount.data = q.disbursement_amount
+                    form1.disb_heading.data = q.disb_heading
+                    form1.disb_sub1.data = q.disb_sub1
+                    form1.disb_sub2.data = q.disb_sub2
+                    form1.disb_sub3.data = q.disb_sub3
+                if ((dis.index(q)) == 1):
+                    form1.disbursement_amount2.data = q.disbursement_amount
+                    form1.disb_heading2.data = q.disb_heading
+                    form1.disb_sub12.data = q.disb_sub1
+                    form1.disb_sub22.data = q.disb_sub2
+                    form1.disb_sub32.data = q.disb_sub3
+                if ((dis.index(q)) == 2):
+                    form1.disbursement_amount3.data = q.disbursement_amount
+                    form1.disb_heading3.data = q.disb_heading
+                    form1.disb_sub13.data = q.disb_sub1
+                    form1.disb_sub23data = q.disb_sub2
+                    form1.disb_sub33.data = q.disb_sub3
+                if ((dis.index(q)) == 3):
+                    form1.disbursement_amount4.data = q.disbursement_amount
+                    form1.disb_heading4.data = q.disb_heading
+                    form1.disb_sub14.data = q.disb_sub1
+                    form1.disb_sub24.data = q.disb_sub2
+                    form1.disb_sub34.data = q.disb_sub3
+                if ((dis.index(q)) == 4):
+                    form1.disbursement_amount5.data = q.disbursement_amount
+                    form1.disb_heading5.data = q.disb_heading
+                    form1.disb_sub15.data = q.disb_sub1
+                    form1.disb_sub25.data = q.disb_sub2
+                    form1.disb_sub35.data = q.disb_sub3
+                if ((dis.index(q)) == 5):
+                    form1.disbursement_amount6.data = q.disbursement_amount
+                    form1.disb_heading6.data = q.disb_heading
+                    form1.disb_sub16.data = q.disb_sub1
+                    form1.disb_sub26.data = q.disb_sub2
+                    form1.disb_sub36.data = q.disb_sub3
     return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form1=form1,len=len,title='Update Invoice')
 #this ends the  updating system so far 
@@ -413,7 +475,7 @@ def update_invoice2(inv_id):
     updt_inv = Invoice.query.get_or_404(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
     dis = disbursements.query.filter_by(invoice=updt_inv).all()
-    form2=Invoice_Items()
+    form2=Invoice_Items2()
     
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
@@ -436,18 +498,28 @@ def update_invoice2(inv_id):
             updt_inv.terms = form2.terms.data 
             updt_inv.issue_date = form2.issue_date.data
             updt_inv.due_date = form2.due_date.data 
-           
+            updt_inv.professional_amount = form2.professional_amount.data   
             for p in item:
                 if ((item.index(p)) == 0):
-                    p.professional_desc = form2.professional_desc.data
-                    p.professional_amount = form2.professional_amount.data
-                    p.disbursements_desc = form2.disbursements_desc.data
-                    p.disbursements_amount = form2.disbursements_amount.data
+                    p.prof_heading = form2.prof_heading.data
+                    p.prof_sub1 = form2.prof_sub1.data
+                    p.prof_sub2 = form2.prof_sub2.data
+                    p.prof_sub3 = form2.prof_sub3.data
+                    p.prof_sub4 = form2.prof_sub4.data
+                    p.prof_sub5 = form2.prof_sub5.data
                 if ((item.index(p)) == 1):
-                    p.professional_desc = form2.professional_desc2.data
-                    p.professional_amount = form2.professional_amount2.data
-                    p.disbursements_desc = form2.disbursements_desc2.data
-                    p.disbursements_amount = form2.disbursements_amount2.data
+                    p.prof_heading = form2.prof_heading2.data
+                    p.prof_sub1 = form2.prof_sub12.data
+                    p.prof_sub2 = form2.prof_sub22.data
+                    p.prof_sub3 = form2.prof_sub32.data
+                    p.prof_sub4 = form2.prof_sub42.data
+                    p.prof_sub5 = form2.prof_sub52.data
+            for q in dis:
+                q.disbursement_amount =form2.disbursement_amount.data
+                q.disb_heading=form2.disb_heading.data 
+                q.disb_sub1=form2.disb_sub1.data 
+                q.disb_sub2=form2.disb_sub2.data 
+                q.disb_sub3=form2.disb_sub3.data 
         
             db.session.commit()
             flash('Your log has been updated!', 'success')
@@ -464,20 +536,31 @@ def update_invoice2(inv_id):
             form2.due_date.data = updt_inv.due_date
             form2.box_number_to.data = updt_inv.box_number_to
             form2.vat.data = updt_inv.vat  
+            form2.professional_amount.data = updt_inv.professional_amount
             for p in item:
                 #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
-                    form2.professional_desc.data = p.professional_desc
-                    form2.professional_amount.data = p.professional_amount
-                    form2.disbursements_desc.data = p.disbursements_desc
-                    form2.disbursements_amount.data = p.disbursements_amount
+                    form2.prof_heading.data = p.prof_heading
+                    form2.prof_sub1.data = p.prof_sub1
+                    form2.prof_sub2.data = p.prof_sub2
+                    form2.prof_sub3.data = p.prof_sub3
+                    form2.prof_sub4.data = p.prof_sub4
+                    form2.prof_sub5.data = p.prof_sub5
                 if ((item.index(p)) == 1):
-                    form2.professional_desc2.data = p.professional_desc
-                    form2.professional_amount2.data = p.professional_amount
-                    form2.disbursements_desc2.data = p.disbursements_desc
-                    form2.disbursements_amount2.data = p.disbursements_amount
+                    form2.prof_heading2.data = p.prof_heading
+                    form2.prof_sub12.data = p.prof_sub1
+                    form2.prof_sub22.data = p.prof_sub2
+                    form2.prof_sub32.data = p.prof_sub3
+                    form2.prof_sub42.data = p.prof_sub4
+                    form2.prof_sub52.data = p.prof_sub5
+            for q in dis:
+                form2.disbursement_amount.data = q.disbursement_amount
+                form2.disb_heading.data = q.disb_heading
+                form2.disb_sub1.data = q.disb_sub1
+                form2.disb_sub2.data = q.disb_sub2
+                form2.disb_sub3.data = q.disb_sub3
 
-    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form2=form2,len=len,title='Update Invoice')
                         
 @app.route("/Invoice3-<int:inv_id>-Update", methods=['GET', 'POST'])
@@ -486,7 +569,8 @@ def update_invoice3(inv_id):
     today = date.today()
     updt_inv = Invoice.query.get_or_404(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
-    form3=Invoice_Items2()
+    dis = disbursements.query.filter_by(invoice=updt_inv).all()
+    form3=Invoice_Items3()
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
         x: int = get_id.id + 1
@@ -507,23 +591,37 @@ def update_invoice3(inv_id):
             updt_inv.vat = form3.vat.data 
             updt_inv.terms = form3.terms.data 
             updt_inv.issue_date = form3.issue_date.data
-            updt_inv.due_date = form3.due_date.data   
+            updt_inv.due_date = form3.due_date.data 
+            updt_inv.professional_amount = form3.professional_amount.data   
+
             for p in item:
                 if ((item.index(p)) == 0):
-                    p.professional_desc = form3.professional_desc.data
-                    p.professional_amount = form3.professional_amount.data
-                    p.disbursements_desc = form3.disbursements_desc.data
-                    p.disbursements_amount = form3.disbursements_amount.data
+                    p.prof_heading = form3.prof_heading.data
+                    p.prof_sub1 = form3.prof_sub1.data
+                    p.prof_sub2 = form3.prof_sub2.data
+                    p.prof_sub3 = form3.prof_sub3.data
+                    p.prof_sub4 = form3.prof_sub4.data
+                    p.prof_sub5 = form3.prof_sub5.data
                 if ((item.index(p)) == 1):
-                    p.professional_desc = form3.professional_desc2.data
-                    p.professional_amount = form3.professional_amount2.data
-                    p.disbursements_desc = form3.disbursements_desc2.data
-                    p.disbursements_amount = form3.disbursements_amount2.data
+                    p.prof_heading = form3.prof_heading2.data
+                    p.prof_sub1 = form3.prof_sub12.data
+                    p.prof_sub2 = form3.prof_sub22.data
+                    p.prof_sub3 = form3.prof_sub32.data
+                    p.prof_sub4 = form3.prof_sub42.data
+                    p.prof_sub5 = form3.prof_sub52.data
                 if ((item.index(p)) == 2):
-                    p.professional_desc = form3.professional_desc3.data
-                    p.professional_amount = form3.professional_amount3.data
-                    p.disbursements_desc = form3.disbursements_desc3.data
-                    p.disbursements_amount = form3.disbursements_amount3.data
+                    p.prof_heading = form3.prof_heading2.data
+                    p.prof_sub1 = form3.prof_sub13.data
+                    p.prof_sub2 = form3.prof_sub23.data
+                    p.prof_sub3 = form3.prof_sub33.data
+                    p.prof_sub4 = form3.prof_sub43.data
+                    p.prof_sub5 = form3.prof_sub53.data
+            for q in dis:
+                q.disbursement_amount =form3.disbursement_amount.data
+                q.disb_heading=form3.disb_heading.data 
+                q.disb_sub1=form3.disb_sub1.data 
+                q.disb_sub2=form3.disb_sub2.data 
+                q.disb_sub3=form3.disb_sub3.data 
             db.session.commit()
             flash('Your log has been updated!', 'success')
             return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
@@ -540,24 +638,36 @@ def update_invoice3(inv_id):
             form3.due_date.data = updt_inv.due_date
             form3.box_number_to.data = updt_inv.box_number_to
             form3.vat.data = updt_inv.vat 
+            form3.professional_amount.data = updt_inv.professional_amount  
             for p in item:
-                #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
-                    form3.professional_desc.data = p.professional_desc
-                    form3.professional_amount.data = p.professional_amount
-                    form3.disbursements_desc.data = p.disbursements_desc
-                    form3.disbursements_amount.data = p.disbursements_amount
+                    form3.prof_heading.data = p.prof_heading
+                    form3.prof_sub1.data = p.prof_sub1
+                    form3.prof_sub2.data = p.prof_sub2
+                    form3.prof_sub3.data = p.prof_sub3
+                    form3.prof_sub4.data = p.prof_sub4
+                    form3.prof_sub5.data = p.prof_sub5
                 if ((item.index(p)) == 1):
-                    form3.professional_desc2.data = p.professional_desc
-                    form3.professional_amount2.data = p.professional_amount
-                    form3.disbursements_desc2.data = p.disbursements_desc
-                    form3.disbursements_amount2.data = p.disbursements_amount
+                    form3.prof_heading2.data = p.prof_heading
+                    form3.prof_sub12.data = p.prof_sub1
+                    form3.prof_sub22.data = p.prof_sub2
+                    form3.prof_sub32.data = p.prof_sub3
+                    form3.prof_sub42.data = p.prof_sub4
+                    form3.prof_sub52.data = p.prof_sub5
                 if ((item.index(p)) == 2):
-                    form3.professional_desc3.data = p.professional_desc
-                    form3.professional_amount3.data = p.professional_amount
-                    form3.disbursements_desc3.data = p.disbursements_desc
-                    form3.disbursements_amount3.data = p.disbursements_amount
-    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                    form3.prof_heading3.data = p.prof_heading
+                    form3.prof_sub13.data = p.prof_sub1
+                    form3.prof_sub23.data = p.prof_sub2
+                    form3.prof_sub33.data = p.prof_sub3
+                    form3.prof_sub43.data = p.prof_sub4
+                    form3.prof_sub53.data = p.prof_sub5
+            for q in dis:
+               form3.disbursement_amount.data = q.disbursement_amount
+               form3.disb_heading.data = q.disb_heading
+               form3.disb_sub1.data = q.disb_sub1
+               form3.disb_sub2.data = q.disb_sub2
+               form3.disb_sub3.data = q.disb_sub3
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form3=form3,len=len,title='Update Invoice')
 @app.route("/Invoice4-<int:inv_id>-Update", methods=['GET', 'POST'])
 @login_required
@@ -565,7 +675,8 @@ def update_invoice4(inv_id):
     today = date.today()
     updt_inv = Invoice.query.get_or_404(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
-    form4=Invoice_Items3()
+    dis = disbursements.query.filter_by(invoice=updt_inv).all()
+    form4=Invoice_Items4()
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
         x: int = get_id.id + 1
@@ -587,27 +698,42 @@ def update_invoice4(inv_id):
             updt_inv.terms = form4.terms.data 
             updt_inv.issue_date = form4.issue_date.data
             updt_inv.due_date = form4.due_date.data   
+            updt_inv.professional_amount = form4.professional_amount.data   
             for p in item:
                 if ((item.index(p)) == 0):
-                    p.professional_desc = form4.professional_desc.data
-                    p.professional_amount = form4.professional_amount.data
-                    p.disbursements_desc = form4.disbursements_desc.data
-                    p.disbursements_amount = form4.disbursements_amount.data
+                    p.prof_heading = form4.prof_heading.data
+                    p.prof_sub1 = form4.prof_sub1.data
+                    p.prof_sub2 = form4.prof_sub2.data
+                    p.prof_sub3 = form4.prof_sub3.data
+                    p.prof_sub4 = form4.prof_sub4.data
+                    p.prof_sub5 = form4.prof_sub5.data
                 if ((item.index(p)) == 1):
-                    p.professional_desc = form4.professional_desc2.data
-                    p.professional_amount = form4.professional_amount2.data
-                    p.disbursements_desc = form4.disbursements_desc2.data
-                    p.disbursements_amount = form4.disbursements_amount2.data
+                    p.prof_heading = form4.prof_heading2.data
+                    p.prof_sub1 = form4.prof_sub12.data
+                    p.prof_sub2 = form4.prof_sub22.data
+                    p.prof_sub3 = form4.prof_sub32.data
+                    p.prof_sub4 = form4.prof_sub42.data
+                    p.prof_sub5 = form4.prof_sub52.data
                 if ((item.index(p)) == 2):
-                    p.professional_desc = form4.professional_desc3.data
-                    p.professional_amount = form4.professional_amount3.data
-                    p.disbursements_desc = form4.disbursements_desc3.data
-                    p.disbursements_amount = form4.disbursements_amount3.data
+                    p.prof_heading = form4.prof_heading3.data
+                    p.prof_sub1 = form4.prof_sub13.data
+                    p.prof_sub2 = form4.prof_sub23.data
+                    p.prof_sub3 = form4.prof_sub33.data
+                    p.prof_sub4 = form4.prof_sub43.data
+                    p.prof_sub5 = form4.prof_sub53.data
                 if ((item.index(p)) == 3):
-                    p.professional_desc = form4.professional_desc4.data
-                    p.professional_amount = form4.professional_amount4.data
-                    p.disbursements_desc = form4.disbursements_desc4.data
-                    p.disbursements_amount = form4.disbursements_amount4.data
+                    p.prof_heading = form4.prof_heading4.data
+                    p.prof_sub1 = form4.prof_sub14.data
+                    p.prof_sub2 = form4.prof_sub24.data
+                    p.prof_sub3 = form4.prof_sub34.data
+                    p.prof_sub4 = form4.prof_sub44.data
+                    p.prof_sub5 = form4.prof_sub54.data
+            for q in dis:
+                q.disbursement_amount =form4.disbursement_amount.data
+                q.disb_heading=form4.disb_heading.data 
+                q.disb_sub1=form4.disb_sub1.data 
+                q.disb_sub2=form4.disb_sub2.data 
+                q.disb_sub3=form4.disb_sub3.data 
             db.session.commit()
             flash('Your log has been updated!', 'success')
             return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
@@ -626,27 +752,41 @@ def update_invoice4(inv_id):
             for p in item:
                 #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
-                    form4.professional_desc.data = p.professional_desc
-                    form4.professional_amount.data = p.professional_amount
-                    form4.disbursements_desc.data = p.disbursements_desc
-                    form4.disbursements_amount.data = p.disbursements_amount
+                    form4.prof_heading.data = p.prof_heading
+                    form4.prof_sub1.data = p.prof_sub1
+                    form4.prof_sub2.data = p.prof_sub2
+                    form4.prof_sub3.data = p.prof_sub3
+                    form4.prof_sub4.data = p.prof_sub4
+                    form4.prof_sub5.data = p.prof_sub5
                 if ((item.index(p)) == 1):
-                    form4.professional_desc2.data = p.professional_desc
-                    form4.professional_amount2.data = p.professional_amount
-                    form4.disbursements_desc2.data = p.disbursements_desc
-                    form4.disbursements_amount2.data = p.disbursements_amount
+                    form4.prof_heading2.data = p.prof_heading
+                    form4.prof_sub12.data = p.prof_sub1
+                    form4.prof_sub22.data = p.prof_sub2
+                    form4.prof_sub32.data = p.prof_sub3
+                    form4.prof_sub42.data = p.prof_sub4
+                    form4.prof_sub52.data = p.prof_sub5
                 if ((item.index(p)) == 2):
-                    form4.professional_desc3.data = p.professional_desc
-                    form4.professional_amount3.data = p.professional_amount
-                    form4.disbursements_desc3.data = p.disbursements_desc
-                    form4.disbursements_amount3.data = p.disbursements_amount
+                    form4.prof_heading3.data = p.prof_heading
+                    form4.prof_sub13.data = p.prof_sub1
+                    form4.prof_sub23.data = p.prof_sub2
+                    form4.prof_sub33.data = p.prof_sub3
+                    form4.prof_sub43.data = p.prof_sub4
+                    form4.prof_sub53.data = p.prof_sub5
                 if ((item.index(p)) == 3):
-                    form4.professional_desc4.data = p.professional_desc
-                    form4.professional_amount4.data = p.professional_amount
-                    form4.disbursements_desc4.data = p.disbursements_desc
-                    form4.disbursements_amount4.data = p.disbursements_amountt
+                    form4.prof_heading4.data = p.prof_heading
+                    form4.prof_sub14.data = p.prof_sub1
+                    form4.prof_sub24.data = p.prof_sub2
+                    form4.prof_sub34.data = p.prof_sub3
+                    form4.prof_sub44.data = p.prof_sub4
+                    form4.prof_sub54.data = p.prof_sub5
+            for q in dis:
+               form4.disbursement_amount.data = q.disbursement_amount
+               form4.disb_heading.data = q.disb_heading
+               form4.disb_sub1.data = q.disb_sub1
+               form4.disb_sub2.data = q.disb_sub2
+               form4.disb_sub3.data = q.disb_sub3
 
-    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form4=form4,len=len,title='Update Invoice')
 
 @app.route("/Invoice5-<int:inv_id>-Update", methods=['GET', 'POST'])
@@ -655,7 +795,8 @@ def update_invoice5(inv_id):
     today = date.today()
     updt_inv = Invoice.query.get_or_404(inv_id)
     item = InvoiceLineItem.query.filter_by(invoice=updt_inv).all()
-    form5=Invoice_Items4()
+    dis = disbursements.query.filter_by(invoice=updt_inv).all()
+    form5=Invoice_Items5()
     try:
         get_id = Invoice.query.order_by(desc('id')).first()
         x: int = get_id.id + 1
@@ -676,32 +817,51 @@ def update_invoice5(inv_id):
             updt_inv.terms = form5.terms.data 
             updt_inv.issue_date = form5.issue_date.data
             updt_inv.due_date = form5.due_date.data   
+            updt_inv.professional_amount = form5.professional_amount.data   
             for p in item:
+                #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
-                    p.professional_desc = form5.professional_desc.data
-                    p.professional_amount = form5.professional_amount.data
-                    p.disbursements_desc = form5.disbursements_desc.data
-                    p.disbursements_amount = form5.disbursements_amount.data
+                    form5.prof_heading.data = p.prof_heading
+                    form5.prof_sub1.data = p.prof_sub1
+                    form5.prof_sub2.data = p.prof_sub2
+                    form5.prof_sub3.data = p.prof_sub3
+                    form5.prof_sub4.data = p.prof_sub4
+                    form5.prof_sub5.data = p.prof_sub5
                 if ((item.index(p)) == 1):
-                    p.professional_desc = form5.professional_desc2.data
-                    p.professional_amount = form5.professional_amount2.data
-                    p.disbursements_desc = form5.disbursements_desc2.data
-                    p.disbursements_amount = form5.disbursements_amount2.data
+                    form5.prof_heading2.data = p.prof_heading
+                    form5.prof_sub12.data = p.prof_sub1
+                    form5.prof_sub22.data = p.prof_sub2
+                    form5.prof_sub32.data = p.prof_sub3
+                    form5.prof_sub42.data = p.prof_sub4
+                    form5.prof_sub52.data = p.prof_sub5
                 if ((item.index(p)) == 2):
-                    p.professional_desc = form5.professional_desc3.data
-                    p.professional_amount = form5.professional_amount3.data
-                    p.disbursements_desc = form5.disbursements_desc3.data
-                    p.disbursements_amount = form5.disbursements_amount3.data
+                    form5.prof_heading3.data = p.prof_heading
+                    form5.prof_sub13.data = p.prof_sub1
+                    form5.prof_sub23.data = p.prof_sub2
+                    form5.prof_sub33.data = p.prof_sub3
+                    form5.prof_sub43.data = p.prof_sub4
+                    form5.prof_sub53.data = p.prof_sub5
                 if ((item.index(p)) == 3):
-                    p.professional_desc = form5.professional_desc4.data
-                    p.professional_amount = form5.professional_amount4.data
-                    p.disbursements_desc = form5.disbursements_desc4.data
-                    p.disbursements_amount = form5.disbursements_amount4.data
+                    form5.prof_heading4.data = p.prof_heading
+                    form5.prof_sub14.data = p.prof_sub1
+                    form5.prof_sub24.data = p.prof_sub2
+                    form5.prof_sub34.data = p.prof_sub3
+                    form5.prof_sub44.data = p.prof_sub4
+                    form5.prof_sub54.data = p.prof_sub5
                 if ((item.index(p)) == 4):
-                    p.professional_desc = form5.professional_desc5.data
-                    p.professional_amount = form5.professional_amount5.data
-                    p.disbursements_desc = form5.disbursements_desc5.data
-                    p.disbursements_amount = form5.disbursements_amount5.data
+                    form5.prof_heading5.data = p.prof_heading
+                    form5.prof_sub15.data = p.prof_sub1
+                    form5.prof_sub25.data = p.prof_sub2
+                    form5.prof_sub35.data = p.prof_sub3
+                    form5.prof_sub45.data = p.prof_sub4
+                    form5.prof_sub55.data = p.prof_sub5
+
+            for q in dis:
+                    q.disbursement_amount =form5.disbursement_amount.data
+                    q.disb_heading=form5.disb_heading.data 
+                    q.disb_sub1=form5.disb_sub1.data 
+                    q.disb_sub2=form5.disb_sub2.data 
+                    q.disb_sub3=form5.disb_sub3.data 
             db.session.commit()
             flash('Your log has been updated!', 'success')
             return redirect(url_for('saved_invoice',inv_id=inv_id,today=today))
@@ -718,34 +878,50 @@ def update_invoice5(inv_id):
             form5.box_number_to.data = updt_inv.box_number_to
             form5.vat.data = updt_inv.vat 
             for p in item:
-                #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
-                    form5.professional_desc.data = p.professional_desc
-                    form5.professional_amount.data = p.professional_amount
-                    form5.disbursements_desc.data = p.disbursements_desc
-                    form5.disbursements_amount.data = p.disbursements_amount
+                    form5.prof_heading.data = p.prof_heading
+                    form5.prof_sub1.data = p.prof_sub1
+                    form5.prof_sub2.data = p.prof_sub2
+                    form5.prof_sub3.data = p.prof_sub3
+                    form5.prof_sub4.data = p.prof_sub4
+                    form5.prof_sub5.data = p.prof_sub5
                 if ((item.index(p)) == 1):
-                    form5.professional_desc2.data = p.professional_desc
-                    form5.professional_amount2.data = p.professional_amount
-                    form5.disbursements_desc2.data = p.disbursements_desc
-                    form5.disbursements_amount2.data = p.disbursements_amount
+                    form5.prof_heading2.data = p.prof_heading
+                    form5.prof_sub12.data = p.prof_sub1
+                    form5.prof_sub22.data = p.prof_sub2
+                    form5.prof_sub32.data = p.prof_sub3
+                    form5.prof_sub42.data = p.prof_sub4
+                    form5.prof_sub52.data = p.prof_sub5
                 if ((item.index(p)) == 2):
-                    form5.professional_desc3.data = p.professional_desc
-                    form5.professional_amount3.data = p.professional_amount
-                    form5.disbursements_desc3.data = p.disbursements_desc
-                    form5.disbursements_amount3.data = p.disbursements_amount
+                    form5.prof_heading3.data = p.prof_heading
+                    form5.prof_sub13.data = p.prof_sub1
+                    form5.prof_sub23.data = p.prof_sub2
+                    form5.prof_sub33.data = p.prof_sub3
+                    form5.prof_sub43.data = p.prof_sub4
+                    form5.prof_sub53.data = p.prof_sub5
                 if ((item.index(p)) == 3):
-                    form5.professional_desc4.data = p.professional_desc
-                    form5.professional_amount4.data = p.professional_amount
-                    form5.disbursements_desc4.data = p.disbursements_desc
-                    form5.disbursements_amount4.data = p.disbursements_amount
+                    form5.prof_heading4.data = p.prof_heading
+                    form5.prof_sub14.data = p.prof_sub1
+                    form5.prof_sub24.data = p.prof_sub2
+                    form5.prof_sub34.data = p.prof_sub3
+                    form5.prof_sub44.data = p.prof_sub4
+                    form5.prof_sub54.data = p.prof_sub5
 
                 if ((item.index(p)) == 4):
-                    form5.professional_desc5.data = p.professional_desc
-                    form5.professional_amount5.data = p.professional_amount
-                    form5.disbursements_desc5.data = p.disbursements_desc
-                    form5.disbursements_amount5.data = p.disbursements_amount
-    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,inv_id=inv_id,
+                    form5.prof_heading5.data = p.prof_heading
+                    form5.prof_sub15.data = p.prof_sub1
+                    form5.prof_sub25.data = p.prof_sub2
+                    form5.prof_sub35.data = p.prof_sub3
+                    form5.prof_sub45.data = p.prof_sub4
+                    form5.prof_sub55.data = p.prof_sub5
+
+            for q in dis:
+               form5.disbursement_amount.data = q.disbursement_amount
+               form5.disb_heading.data = q.disb_heading
+               form5.disb_sub1.data = q.disb_sub1
+               form5.disb_sub2.data = q.disb_sub2
+               form5.disb_sub3.data = q.disb_sub3
+    return render_template('invoice_update.html',updt_inv=updt_inv,item=item,dis=dis,inv_id=inv_id,
                             form5=form5,len=len,title='Update Invoice')
 
 @app.route("/Invoice6-<int:inv_id>-Update", methods=['GET', 'POST'])
