@@ -58,6 +58,10 @@ class Invoice(db.Model):
     issue_date = db.Column(db.Date, nullable=False)
     due_date =db.Column(db.Date,nullable=False)
     vat = db.Column(db.String, nullable=True)
+    bank =db.Column(db.String,nullable=True)
+    bank_branch =db.Column(db.String,nullable=True)
+    swift_code =db.Column(db.String,nullable=True)
+    account_number =db.Column(db.String,nullable=True)
     professional_amount =db.Column(db.Float, default='0.0')
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='SET NULL'), nullable= False)
     def get_last_id():
@@ -69,7 +73,8 @@ class Invoice(db.Model):
 
         return q_custom_id
 
-    def __init__(self,ref_number,name_to,address_to,telephone_to,company_name,email_to, box_number_to,vat,terms,issue_date,due_date,professional_amount,user_id):
+    def __init__(self,ref_number,name_to,address_to,telephone_to,company_name,email_to,
+                 box_number_to,vat,terms,issue_date,due_date,bank,bank_branch,swift_code,account_number,professional_amount,user_id):
         self.ref_number = ref_number
         self.name_to = name_to
         self.address_to = address_to
@@ -81,6 +86,10 @@ class Invoice(db.Model):
         self.terms=terms
         self.issue_date =issue_date
         self.due_date=due_date
+        self.bank
+        self.bank_branch
+        self.swift_code
+        self.account_number
         self.professional_amount=professional_amount
         self.user_id=user_id
 

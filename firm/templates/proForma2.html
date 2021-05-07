@@ -16,11 +16,10 @@
 				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
 			</address>
 			<location>			
-				<h3><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h3>
+				<h6><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h6>
 			</location>
 		</header>
 		<article>
-			<h1>Recipient</h1>
 			<address >
 				<p>{{inv.name_to}}.</p>
 				<p>
@@ -58,11 +57,11 @@
 					<th><span >Issue Date</span></th>
 					<td><span >{{ inv.issue_date }}</span></td>
 				</tr>
-
+<!--
 				<tr>
 					<th><span >Payment Terms</span></th>
 					<td><span >{{inv.terms }}</span></td>
-				</tr>
+				</tr>-->
 			</table>
 			<table class="inventory">
 				<thead>
@@ -171,6 +170,7 @@
 		</article>
 		<aside>
 			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
+			<strong><span>Bank:&nbsp;{{inv.bank }}</span>&nbsp;<span>{{inv.bank_branch }}</span>/&nbsp;&nbsp;<span></span><span>swift code:&nbsp;&nbsp;{{inv.swift_code }}</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; {{inv.account_number}}</span></strong>
 			<!--<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 			<div class="line"><br>
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>

@@ -16,13 +16,12 @@
 				<p>Email:&nbsp;&nbsp;&nbsp;canaanadvocates@gmail.com</p>
 			</address>
 			<location>			
-				<h2><strong>Invoice No:&nbsp;&nbsp;&nbsp;{{inv.vat}}</strong></h2>
-				<h3><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h3>
-		
+				<!--<h2><strong>Invoice No:&nbsp;&nbsp;&nbsp;</strong></h2>-->
+				<h6><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h6>
 			</location>
 		</header>
 		<article>
-			<h1>Recipient</h1>
+			<!--<h1>Recipient</h1>-->
 			<address >
 				<p>{{inv.name_to}}.</p>
 				<p>
@@ -61,10 +60,10 @@
 					<td><span >{{ inv.issue_date }}</span></td>
 				</tr>
 
-				<tr>
+				<!--<tr>
 					<th><span >Payment Terms</span></th>
-					<td><span >{{inv.terms }}</span></td>
-				</tr>
+					<td><span ></span></td>
+				</tr>-->
 			</table>
 			<table class="inventory">
 				<thead>
@@ -173,7 +172,7 @@
 		</article>
 		<aside>
 			<h1><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h1>
-			<h6><span>Bank: &nbsp;&nbsp; POST BANK</span>&nbsp;&nbsp;/<span>Account No:&nbsp;&nbsp; 10305024837</span>&nbsp;&nbsp;/<span>swift code:&nbsp;&nbsp; QWERTY</span></h6>
+			<strong><span>Bank:&nbsp;{{inv.bank }}</span>&nbsp;<span>{{inv.bank_branch }}</span>/&nbsp;&nbsp;<span></span><span>swift code:&nbsp;&nbsp;{{inv.swift_code }}</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; {{inv.account_number}}</span></strong>
 			<!--<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 			<div class="line"><br>
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>

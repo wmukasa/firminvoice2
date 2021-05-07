@@ -79,6 +79,8 @@
                   </div>
                 <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form1.issue_date(class="form-control form-control-ls") }}Payment Terms: {{ form1.terms(class="form-control form-control-ls") }}
               </div>
+              <div class="col-4">Bank:{{ form1.bank(class="form-control form-control-ls") }}<br>Bank branch: {{ form1.bank_branch(class="form-control form-control-ls") }}Swift code: {{ form1.swift_code(class="form-control form-control-ls") }}Account Number: {{ form1.account_number(class="form-control form-control-ls") }}
+              </div>
               </div>
               <div class="row">
                 <div class="col-12 table-responsive">
@@ -336,6 +338,8 @@
            
             <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form2.issue_date(class="form-control form-control-ls") }}Payment Terms:{{ form2.terms(class="form-control form-control-ls") }}
             </div>
+            <div class="col-4">Bank:{{ form2.bank(class="form-control form-control-ls") }}<br>Bank branch: {{ form2.bank_branch(class="form-control form-control-ls") }}Swift code: {{ form2.swift_code(class="form-control form-control-ls") }}Account Number: {{ form2.account_number(class="form-control form-control-ls") }}
+            </div>
           </div>
           <div class="row">
             <div class="col-12 table-responsive">
@@ -481,6 +485,8 @@
           <address><strong>{{form3.name_to(class="form-control form-control-ls")}}</strong><br>{% if updt_inv.company_name == '' %}{% else%}{{form3.company_name(class="form-control form-control-ls")}}{% endif %}Address:{{form3.address_to(class="form-control form-control-ls")}}<br>{% if updt_inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{form3.email_to(class="form-control form-control-ls")}}{% endif %}{% if updt_inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{form3.telephone_to(class="form-control form-control-ls") }}{% endif %}{% if updt_inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{form3.box_number_to(class="form-control form-control-ls")}} {% endif %}</address>
         </div>
         <div class="col-4">Invoice #{{ updt_inv.ref_number}}<br>Issue Date: {{ form3.issue_date(class="form-control form-control-ls") }}Payment Terms: {{ form3.terms(class="form-control form-control-ls") }}
+        </div>
+        <div class="col-4">Bank:{{ form3.bank(class="form-control form-control-ls") }}<br>Bank branch: {{ form3.bank_branch(class="form-control form-control-ls") }}Swift code: {{ form3.swift_code(class="form-control form-control-ls") }}Account Number: {{ form3.account_number(class="form-control form-control-ls") }}
         </div>
       </div>
       <div class="row">
@@ -663,6 +669,8 @@
           </div>
      
       <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form4.issue_date(class="form-control form-control-ls") }}Payment Terms:{{ form4.terms(class="form-control form-control-ls") }}
+      </div>
+      <div class="col-4">Bank:{{ form4.bank(class="form-control form-control-ls") }}<br>Bank branch: {{ form4.bank_branch(class="form-control form-control-ls") }}Swift code: {{ form4.swift_code(class="form-control form-control-ls") }}Account Number: {{ form4.account_number(class="form-control form-control-ls") }}
       </div>
     </div>
   <div class="row">
@@ -883,6 +891,8 @@
     <address><strong>{{form5.name_to(class="form-control form-control-ls")}}.</strong><br>{% if updt_inv.company_name == '' %}{% else%}{{form5.company_name(class="form-control form-control-ls")}}{% endif %}Address:{{form5.address_to(class="form-control form-control-ls")}}<br>{% if updt_inv.email_to == '' %}{% else%}Email:&nbsp;&nbsp;&nbsp;{{form5.email_to(class="form-control form-control-ls")}}{% endif %}{% if updt_inv.telephone_to == '' %}{% else%}Phone: &nbsp;&nbsp;&nbsp;{{form5.telephone_to(class="form-control form-control-ls") }}{% endif %}{% if updt_inv.box_number_to == '' %}{% else%}P.0.Box&nbsp;&nbsp;{{form5.box_number_to(class="form-control form-control-ls")}} {% endif %}</address>
   </div>
   <div class="col-4">Invoice #{{ updt_inv.ref_number }}<br>Issue Date: {{ form5.issue_date(class="form-control form-control-ls") }}Payment Terms: {{ form5.terms(class="form-control form-control-ls") }}
+  </div>
+  <div class="col-4">Bank:{{ form5.bank(class="form-control form-control-ls") }}<br>Bank branch: {{ form5.bank_branch(class="form-control form-control-ls") }}Swift code: {{ form5.swift_code(class="form-control form-control-ls") }}Account Number: {{ form5.account_number(class="form-control form-control-ls") }}
   </div>
 </div>
 <div class="row">

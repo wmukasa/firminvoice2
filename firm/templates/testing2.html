@@ -19,11 +19,10 @@
 			<location>			
 				<h2><strong>Invoice No:&nbsp;&nbsp;&nbsp;{{inv.vat}}</strong></h2>
 				<!--<h3><strong>TIN No:&nbsp;&nbsp;1017550332</strong></h3>-->
-		
 			</location>
 		</header>
 		<article>
-			<h1>Recipient</h1>
+			<!--<h1>Recipient</h1>-->
 			<address >
 				<p>{{inv.name_to}}.</p>
 				<p>
@@ -52,7 +51,6 @@
                     {% endif %}
                 </p>
 			</address>
-
 			<table class="meta">
 					<th><span >Our Ref:</span></th>
 					<td><span >{{ inv.ref_number }}</span></td>
@@ -62,16 +60,16 @@
 					<td><span >{{ inv.issue_date }}</span></td>
 				</tr>
 
-				<tr>
+				<!--<tr>
 					<th><span >Payment Terms</span></th>
-					<td><span >{{inv.terms }}</span></td>
+					<td><span ></span></td>-->
 				</tr>
 			</table>
 			<table class="inventory">
 				<thead>
 					<tr>
 						<tr>
-							<th><span > VAT No:&nbsp;&nbsp;&nbsp;{{inv.vat}}</span><br>TIN:&nbsp;&nbsp;&nbsp;1017550332</th>
+							<th><span >TIN:&nbsp;&nbsp;&nbsp;1017550332</th>
 							<th><span >Professional fees Ug.shs</span></th>
 							<th><span >Disbursement fees Ug.shs</span></th>
 							<!--<th><span >Total Amount Ug.shs</span></th>-->
@@ -178,7 +176,7 @@
 		</article>
 		<aside>
 			<h3><span>ACCOUNTS ARE DUE WHEN RENDERED;</span></h3>
-            <strong><span>Bank:&nbsp; Centenary Bank</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; 10305024837</span>/&nbsp;&nbsp;<span>swift code:&nbsp;&nbsp; QWERTY</span></strong>
+            <strong><span>Bank:&nbsp;{{inv.bank }}</span>&nbsp;<span>{{inv.bank_branch }}</span>/&nbsp;&nbsp;<span></span><span>swift code:&nbsp;&nbsp;{{inv.swift_code }}</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; {{inv.account_number}}</span></strong>
 			<!--<h2>NOTE:&nbsp;&nbsp; VAT of 18% payable on all professional fees</h2>
 			<div class="line"><br>
 				<h2>Kamahoro,Kiboome & Kirunda Advocates</h2>

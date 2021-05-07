@@ -123,6 +123,7 @@ class MainForm(FlaskForm):
                             ('Cairo Bank Uganda','Cairo Bank Uganda'),('Bank of India Uganda','Bank of India Uganda'),('ABC Bank Uganda','ABC Bank Uganda'),
                             ('United Bank for Africa','United Bank for Africa'),('Guaranty Trust Bank','Guaranty Trust Bank'),('NCBA Bank Uganda','NCBA Bank Uganda'),
                             ('Diamond Trust Bank','Diamond Trust Bank'),('Afriland First Bank Uganda','Afriland First Bank Uganda'),('Opportunity Bank ','Opportunity Bank')]) 
+    bank_branch = StringField('Bank Branch if known')
     account_number=StringField('Account Number')
     swift_code=StringField('Swift code')
     #the added infor
@@ -171,6 +172,10 @@ class Invoice_Items(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
+    bank = StringField('Bank')
+    bank_branch = StringField('Bank Branch if known')          
+    swift_code=StringField('Swift code')
+    account_number=StringField('Account Number')
 
     professional_amount=StringField('Professional amount/Ug.shs')
     prof_heading =TextAreaField('Professional Description')
@@ -232,6 +237,11 @@ class Invoice_Items2(FlaskForm):
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
 
+    bank = StringField('Bank')
+    bank_branch = StringField('Bank Branch if known')          
+    swift_code=StringField('Swift code')
+    account_number=StringField('Account Number')
+
     professional_amount=StringField('Professional amount/Ug.shs')
     prof_heading =TextAreaField('Professional Description')
     prof_sub1 =StringField('professional subheading1')
@@ -266,6 +276,10 @@ class Invoice_Items3(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
+    bank = StringField('Bank')
+    bank_branch = StringField('Bank Branch if known')          
+    swift_code=StringField('Swift code')
+    account_number=StringField('Account Number')
 
     professional_amount=StringField('Professional amount/Ug.shs')
     prof_heading =TextAreaField('Professional Description')
@@ -308,6 +322,10 @@ class Invoice_Items4(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
+    bank = StringField('Bank')
+    bank_branch = StringField('Bank Branch if known')          
+    swift_code=StringField('Swift code')
+    account_number=StringField('Account Number')
 
     professional_amount=StringField('Professional amount/Ug.shs')
     prof_heading =TextAreaField('Professional Description')
@@ -358,7 +376,11 @@ class Invoice_Items5(FlaskForm):
     issue_date= DateField('Issue Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     due_date= DateField('Due Date/YR/MM/DD', format="%Y-%m-%d",default=datetime.now, validators=[validators.DataRequired()])
     vat = StringField('Tax Invoice Number ')
-
+    bank = StringField('Bank')
+    bank_branch = StringField('Bank Branch if known')          
+    swift_code=StringField('Swift code')
+    account_number=StringField('Account Number')
+    
     professional_amount=StringField('Professional amount/Ug.shs')
     prof_heading =TextAreaField('Professional Description')
     prof_sub1 =StringField('professional subheading1')

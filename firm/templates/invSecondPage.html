@@ -59,6 +59,9 @@
           <form method="POST" action="{{ url_for('get_pdf', inv_id=inv.id)}}">
             <button class="btn btn-outline-warning" type="submit" id="saveInvoice">Download Tax Invoice</button>&nbsp;
           </form>
+          <form method="POST" action="{{ url_for('get_pdf2', inv_id=inv.id)}}">
+            <button class="btn btn-outline-warning" type="submit" id="saveInvoice">Download NewVersion Tax Invoice</button>&nbsp;
+          </form>
         </nav>
         </div>
       <div class="row">
@@ -198,8 +201,8 @@
               </div>
             </section>
           </form>
-          <div class="col-8">
-            <h6><span>Bank:&nbsp; Centenary Bank</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; 10305024837</span>/&nbsp;&nbsp;<span>swift code:&nbsp;&nbsp; QWERTY</span></h6>
+          <div class="col-10">
+            <h6><span>Bank:&nbsp;{{inv.bank }}</span>&nbsp;<span>{{inv.bank_branch }}</span>/&nbsp;&nbsp;<span></span><span>swift code:&nbsp;&nbsp;{{inv.swift_code }}</span>/&nbsp;&nbsp;<span>Account No:&nbsp;&nbsp; {{inv.account_number}}</span></h6>
             ISSUED BY: <h6 class="text-left">{{inv.author.username}}</h6>
             </div>
           </div>

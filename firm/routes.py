@@ -140,7 +140,6 @@ def saved_invoice(inv_id):
     for q in dis:
         subtotal_db +=float(q.disbursement_amount)
     grandtotal = subtotal_pr+subtotal_db 
-
     '''
     return render_template('saved_invoice.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
                         subtotal=subtotal,grandtotal=grandtotal,VAT=VAT,len=len,title='SavedInvoice')
@@ -176,6 +175,36 @@ def get_pdf(inv_id,options=wk_options):
         response = make_response(pdf)
         response.headers['Content-Type']='application/pdf'
         response.headers['Content-Disposition']='inline; filename=TaxInvoice'+inv_id+'.pdf'
+        return response
+    return redirect(url_for('saved_invoice'))
+
+@app.route('/get_pdf/<inv_id>', methods=['POST'])
+@login_required
+def get_pdf2(inv_id,options=wk_options):
+    subtotal_pr = 0   
+    subtotal_db = 0
+    VAT =0
+    grandtotal =0
+    myPro =0
+    if request.method =="POST":
+        inv = Invoice.query.filter( Invoice.id== inv_id).first()
+        item = InvoiceLineItem.query.filter_by(invoice=inv).all()
+        dis = disbursements.query.filter_by(invoice=inv).all()
+        #VAT is only on professional price    
+        VAT = (18/100)* float(inv.professional_amount)
+        subtotal_pr = float(VAT+inv.professional_amount) 
+        for q in dis:
+            subtotal_db +=float(q.disbursement_amount)
+        grandtotal = subtotal_pr+subtotal_db 
+        #newLookInvoice.html
+        rendered=render_template('newLookInvoice.html.html',inv=inv,item=item,inv_id=inv_id, myPro= myPro,
+                        subtotal_pr=subtotal_pr,subtotal_db=subtotal_db,dis=dis,
+                        grandtotal=grandtotal ,VAT=VAT,len=len)
+        css = ['firm/static/css/testing.css']
+        pdf = pdfkit.from_string(rendered,False,css=css,configuration=_get_pdfkit_config(),options=options)
+        response = make_response(pdf)
+        response.headers['Content-Type']='application/pdf'
+        response.headers['Content-Disposition']='inline; filename=NewTaxInvoice'+inv_id+'.pdf'
         return response
     return redirect(url_for('saved_invoice'))
 
@@ -253,8 +282,13 @@ def create_invoice():
                 terms = request.form['terms']
                 issue_date = request.form['issue_date']
                 due_date = request.form['due_date']
+                bank = request.form['bank']
+                bank_branch = request.form['bank_branch']
+                swift_code = request.form['swift_code']
+                account_number = request.form['account_number']
                 professional_amount = request.form['professional_amount']
-                new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,company_name,email_to,box_number_to,vat,terms,issue_date,due_date,professional_amount,current_user.id)
+                new_invoice = Invoice(ref_number,name_to,address_to,telephone_to,company_name,email_to,box_number_to,vat,terms,
+                                        issue_date,due_date,bank,bank_branch,swift_code,account_number,professional_amount,current_user.id)
                 db.session.add(new_invoice)
                 for lap in form.laps.data:
                     new_lap = InvoiceLineItem(**lap)
@@ -355,7 +389,11 @@ def update_invoice(inv_id):
             updt_inv.vat = form1.vat.data 
             updt_inv.terms = form1.terms.data 
             updt_inv.issue_date = form1.issue_date.data
-            updt_inv.due_date = form1.due_date.data   
+            updt_inv.due_date = form1.due_date.data 
+            updt_inv.bank = form1.bank.data   
+            updt_inv.bank_branch = form1.bank_branch.data   
+            updt_inv.swift_code = form1.swift_code.data   
+            updt_inv.account_number = form1.account_number.data     
             updt_inv.professional_amount = form1.professional_amount.data   
             for p in item: 
                 p.prof_heading = form1.prof_heading.data
@@ -418,6 +456,10 @@ def update_invoice(inv_id):
             form1.issue_date.data = updt_inv.issue_date
             form1.due_date.data = updt_inv.due_date
             form1.vat.data = updt_inv.vat
+            form1.bank.data = updt_inv.bank
+            form1.bank_branch.data = updt_inv.bank_branch
+            form1.swift_code.data = updt_inv.swift_code
+            form1.account_number.data = updt_inv.account_number
             form1.professional_amount.data = updt_inv.professional_amount
             #print(len(item))
             for p in item:
@@ -498,7 +540,11 @@ def update_invoice2(inv_id):
             updt_inv.vat = form2.vat.data 
             updt_inv.terms = form2.terms.data 
             updt_inv.issue_date = form2.issue_date.data
-            updt_inv.due_date = form2.due_date.data 
+            updt_inv.due_date = form2.due_date.data
+            updt_inv.bank = form2.bank.data   
+            updt_inv.bank_branch = form2.bank_branch.data   
+            updt_inv.swift_code = form2.swift_code.data   
+            updt_inv.account_number = form2.account_number.data   
             updt_inv.professional_amount = form2.professional_amount.data   
             for p in item:
                 if ((item.index(p)) == 0):
@@ -536,7 +582,11 @@ def update_invoice2(inv_id):
             form2.issue_date.data = updt_inv.issue_date
             form2.due_date.data = updt_inv.due_date
             form2.box_number_to.data = updt_inv.box_number_to
-            form2.vat.data = updt_inv.vat  
+            form2.vat.data = updt_inv.vat
+            form2.bank.data = updt_inv.bank
+            form2.bank_branch.data = updt_inv.bank_branch
+            form2.swift_code.data = updt_inv.swift_code
+            form2.account_number.data = updt_inv.account_number  
             form2.professional_amount.data = updt_inv.professional_amount
             for p in item:
                 #print(p.id,p.invoice_id)
@@ -593,6 +643,11 @@ def update_invoice3(inv_id):
             updt_inv.terms = form3.terms.data 
             updt_inv.issue_date = form3.issue_date.data
             updt_inv.due_date = form3.due_date.data 
+            updt_inv.bank = form3.bank.data   
+            updt_inv.bank_branch = form3.bank_branch.data   
+            updt_inv.swift_code = form3.swift_code.data   
+            updt_inv.account_number = form3.account_number.data   
+            updt_inv.professional_amount = form2.professional_amount.data 
             updt_inv.professional_amount = form3.professional_amount.data   
 
             for p in item:
@@ -639,6 +694,10 @@ def update_invoice3(inv_id):
             form3.due_date.data = updt_inv.due_date
             form3.box_number_to.data = updt_inv.box_number_to
             form3.vat.data = updt_inv.vat 
+            form3.bank.data = updt_inv.bank
+            form3.bank_branch.data = updt_inv.bank_branch
+            form3.swift_code.data = updt_inv.swift_code
+            form3.account_number.data = updt_inv.account_number
             form3.professional_amount.data = updt_inv.professional_amount  
             for p in item:
                 if ((item.index(p)) == 0):
@@ -698,7 +757,11 @@ def update_invoice4(inv_id):
             updt_inv.vat = form4.vat.data 
             updt_inv.terms = form4.terms.data 
             updt_inv.issue_date = form4.issue_date.data
-            updt_inv.due_date = form4.due_date.data   
+            updt_inv.due_date = form4.due_date.data 
+            updt_inv.bank = form4.bank.data   
+            updt_inv.bank_branch = form4.bank_branch.data   
+            updt_inv.swift_code = form4.swift_code.data   
+            updt_inv.account_number = form4.account_number.data   
             updt_inv.professional_amount = form4.professional_amount.data   
             for p in item:
                 if ((item.index(p)) == 0):
@@ -750,6 +813,11 @@ def update_invoice4(inv_id):
             form4.due_date.data = updt_inv.due_date
             form4.box_number_to.data = updt_inv.box_number_to
             form4.vat.data = updt_inv.vat 
+            form4.bank.data = updt_inv.bank
+            form4.bank_branch.data = updt_inv.bank_branch
+            form4.swift_code.data = updt_inv.swift_code
+            form4.account_number.data = updt_inv.account_number
+            form4.professional_amount.data = updt_inv.professional_amount
             for p in item:
                 #print(p.id,p.invoice_id)
                 if ((item.index(p)) == 0):
@@ -817,7 +885,11 @@ def update_invoice5(inv_id):
             updt_inv.vat = form5.vat.data  
             updt_inv.terms = form5.terms.data 
             updt_inv.issue_date = form5.issue_date.data
-            updt_inv.due_date = form5.due_date.data   
+            updt_inv.due_date = form5.due_date.data 
+            updt_inv.bank = form5.bank.data   
+            updt_inv.bank_branch = form5.bank_branch.data   
+            updt_inv.swift_code = form5.swift_code.data   
+            updt_inv.account_number = form5.account_number.data   
             updt_inv.professional_amount = form5.professional_amount.data   
             for p in item:
                 #print(p.id,p.invoice_id)
@@ -878,6 +950,11 @@ def update_invoice5(inv_id):
             form5.due_date.data = updt_inv.due_date
             form5.box_number_to.data = updt_inv.box_number_to
             form5.vat.data = updt_inv.vat 
+            form5.bank.data = updt_inv.bank
+            form5.bank_branch.data = updt_inv.bank_branch
+            form5.swift_code.data = updt_inv.swift_code
+            form5.account_number.data = updt_inv.account_number
+            form5.professional_amount.data=updt_inv.professional_amount
             for p in item:
                 if ((item.index(p)) == 0):
                     form5.prof_heading.data = p.prof_heading
