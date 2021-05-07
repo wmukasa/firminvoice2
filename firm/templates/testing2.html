@@ -25,31 +25,36 @@
 			<!--<h1>Recipient</h1>-->
 			<address >
 				<p>{{inv.name_to}}.</p>
-				<p>
-                    {% if inv.company_name == '' %}
+					{% if inv.company_name == '' %}
+					
 					{% else %}
+					<p>
 					{{inv.company_name}}
+					</p>
 					{% endif %}
-                </p>
+                
 				<p>{{inv.address_to}}</p>
-				<p>
+				
                     {% if inv.email_to == '' %}
-                    {% else %}
+					{% else %}
+					<p>
 					Email:&nbsp;&nbsp;&nbsp;{{inv.email_to}}
-					{% endif %}
-                </p>
-                <p>                    
+					</p>
+					{% endif %}   
+
                     {% if inv.telephone_to == '' %}
-                    {% else%}
+					{% else%}
+					<p>  
 					Phone: &nbsp;&nbsp;&nbsp;{{inv.telephone_to}}
+					</p>
 					{% endif %}
-                </p>
-                <p>
+
                     {% if inv.box_number_to == '' %}
-                    {% else%}
-                    P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
+					{% else%}
+					<p>
+					P.0.Box&nbsp;&nbsp;{{inv.box_number_to}}</address>
+					</p>
                     {% endif %}
-                </p>
 			</address>
 			<table class="meta">
 					<th><span >Our Ref:</span></th>
